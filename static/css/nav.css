@@ -1,0 +1,130 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 6vw;
+    height: 100vh;
+    min-height: 465px;
+    padding: 3vh 0 0;
+    background-color: var(--color-menu-orange);
+    box-shadow: var(--left-box-shadow);
+}
+
+.sidebar .navigation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.sidebar #logo {
+    display: flex;
+    justify-content: center;
+}
+
+.sidebar #logo img {
+    width: 4vw;
+    height: 4vw;
+    margin-bottom: 3vh;
+}
+
+.sidebar .menu {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    width: 100%;
+    text-align: center;
+}
+
+.sidebar .menu li {
+    display: flex;
+    flex-direction: column;
+    padding: 1.6vh 0 1.2vh;
+    width: 100%;
+}
+
+.sidebar .menu li.active {
+    box-shadow: var(--left-box-shadow), var(--bottom-box-shadow);
+    z-index: 1;
+    width: 110%;
+}
+
+.sidebar .menu li.active>div i {
+    color: white;
+}
+
+.sidebar .menu li div {
+    color: white;
+    text-transform: uppercase;
+    font-size: 1vw;
+}
+
+.sidebar .menu li i {
+    font-size: 3vw;
+    padding-bottom: 0.4vh;
+}
+
+.sidebar .menu li i.active {
+    color: white;
+}
+
+.sidebar .menu .home {
+    background-color: var(--color-menu-green-olive);
+}
+
+.sidebar .menu .home i {
+    color: var(--color-menu-icon-green-olive);
+}
+
+.sidebar .menu .notes {
+    background-color: var(--color-menu-tobaco);
+}
+
+.sidebar .menu .notes i {
+    color: var(--color-menu-icon-tobaco);
+}
+
+.sidebar .menu .checklists {
+    background-color: var(--color-menu-beige);
+}
+
+.sidebar .menu .checklists i {
+    color: var(--color-menu-icon-beige);
+}
+
+.sidebar .menu .events {
+    background-color: var(--color-menu-green-light);
+}
+
+.sidebar .menu .events i {
+    color: var(--color-menu-icon-green-light);
+}
+
+.sidebar .menu .profile {
+    background-color: var(--color-menu-green-dark);
+}
+
+.sidebar .menu .profile i {
+    color: var(--color-menu-icon-green-dark);
+}
+
+.sidebar .menu li:hover>div>i {
+    color: white;
+}
+
+.sidebar .connect {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+}
+
+.sidebar .connect i {
+    font-size: 1vw;
+    padding: 0.8vh 0;
+    color: var(--color-menu-icon-orange);
+}
+
+.sidebar .connect i:hover {
+    color: var(--color-menu-icon-orange-dark);
+}

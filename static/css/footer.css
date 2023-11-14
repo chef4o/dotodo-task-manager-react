@@ -1,0 +1,23 @@
+.footer {
+    position: absolute;
+    bottom: 0.6vh;
+    right: 18vw;
+    display: flex;
+    width: 60vw;
+    justify-content: space-between;
+}
+
+.footer * {
+    color: white;
+    font-size: 0.9vw;
+}
+
+.footer ul {
+    display: flex;
+    flex-direction: row;
+    gap: 0.8vw;
+}
+
+.footer ul li:hover {
+    text-decoration: underline;
+}
