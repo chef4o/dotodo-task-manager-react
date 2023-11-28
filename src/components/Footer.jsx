@@ -1,10 +1,7 @@
-import { useState } from "react";
 
 export default function Footer() {
-  const [activePage, setActivePage] = useState("home");
 
   const handleNavigationClick = (page) => {
-    setActivePage(page);
     window.history.pushState(null, null, `/${page}`);
   };
 

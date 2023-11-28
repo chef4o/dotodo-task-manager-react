@@ -1,11 +1,9 @@
-import { useState } from "react";
+import { taskTypePropType } from "../utils/propTypes";
 
 export default function TaskType(props) {
-    const [activePage, setActivePage] = useState("home");
 
     const handleNavigationClick = (page) => {
-      setActivePage(page);
-      window.history.pushState(null, null, `/${page}`);
+        window.history.pushState(null, null, `/${page}`);
     };
 
     return (
@@ -17,3 +15,7 @@ export default function TaskType(props) {
         </div>
     )
 }
+
+TaskType.propTypes = {
+    task: taskTypePropType.isRequired,
+};

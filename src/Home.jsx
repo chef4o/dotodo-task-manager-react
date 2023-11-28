@@ -1,5 +1,7 @@
 import "../static/css/style.css";
+import PropTypes from "prop-types";
 import TaskType from "./components/TaskType";
+import { taskTypePropType } from "./utils/propTypes";
 
 export default function Home(props) {
 
@@ -21,14 +23,17 @@ export default function Home(props) {
           already a registered member.
         </p>
       </div>
-    
+
       <div className="featured-img" />
 
       <ul className="options">
-        <TaskType task={props.taskTypes.notes} />
-        <TaskType task={props.taskTypes.checklists} />
-        <TaskType task={props.taskTypes.events} />
+        {props.taskTypes
+          .map(type => <TaskType key={type.name} task={type} />)}
       </ul>
     </div>
   );
 }
+
+Home.propTypes = {
+  taskTypes: PropTypes.arrayOf(taskTypePropType).isRequired,
+};

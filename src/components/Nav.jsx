@@ -2,22 +2,22 @@ import { useState } from "react";
 
 export default function Nav() {
   const [activePage, setActivePage] = useState("home");
-  
+
   const handleNavigationClick = (page) => {
     setActivePage(page);
     window.history.pushState(null, null, `/${page}`);
   };
 
   return (
-    <div className="sidebar"> 
+    <div className="sidebar">
       <div className="navigation">
-        <div id="logo" onClick={() => handleNavigationClick("home")}> 
+        <div id="logo" onClick={() => handleNavigationClick("home")}>
           <img src="/static/images/logo.png" alt="DOTODO" />
         </div>
         <ul className="menu">
-            <li className={activePage === "home" ? "home active" : "home"}>
-              <div onClick={() => handleNavigationClick("home")}><i className="fa-solid fa-house"></i><br />Home</div>
-            </li>
+          <li className={activePage === "home" ? "home active" : "home"}>
+            <div onClick={() => handleNavigationClick("home")}><i className="fa-solid fa-house"></i><br />Home</div>
+          </li>
           <li className={activePage === "notes" ? "notes active" : "notes"}>
             <div onClick={() => handleNavigationClick("notes")}><i className="fa-solid fa-note-sticky"></i><br />Notes</div>
           </li>
