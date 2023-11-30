@@ -3,7 +3,7 @@ import Home from "./Home.jsx";
 import Nav from "./components/Nav.jsx";
 import Footer from "./components/Footer.jsx";
 import taskTypes from "./assets/taskTypes.js";
-import { sideNav, footerNav, connectNav } from "./assets/navElements.js"
+import { topNav, sideNav, bottomNav, connectNav } from "./assets/navElements.js"
 
 const App = () => {
 
@@ -15,9 +15,9 @@ const App = () => {
 
     return (
         <main className={selectedPage}>
-            <Nav sideNav={sideNav} connectNav={connectNav} selectedPage={selectedPage} onNavigationClick={handleNavigationClick} />
+            <Nav topNav={topNav} sideNav={sideNav} connectNav={connectNav} bottomNav={bottomNav} selectedPage={selectedPage} onNavigationClick={handleNavigationClick} />
             <Home taskTypes={taskTypes} onItemClick={handleNavigationClick} />
-            <Footer footerNav={footerNav} onAnchorClick={handleNavigationClick} />
+            <Footer />
         </main>
     );
 }

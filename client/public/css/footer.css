@@ -1,25 +1,15 @@
 .footer {
     position: absolute;
-    bottom: 0.6vh;
-    right: 18vw;
     display: flex;
-    width: 60vw;
-    justify-content: flex-end;
-    gap: 18vw;
+    justify-content: center;
+    align-items: center;
+    width: 82.2vw;
+    height: 3.5vh;
+    bottom: 0;
+    z-index: 0;
 }
 
 .footer * {
     color: white;
     font-size: 0.9vw;
-}
-
-.footer ul {
-    display: flex;
-    flex-direction: row;
-    gap: 0.8vw;
-}
-
-.footer ul li:hover {
-    text-decoration: underline;
-    cursor: pointer;
-}
+}   

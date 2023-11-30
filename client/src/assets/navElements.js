@@ -21,7 +21,19 @@ const sideNav = [
   },
 ];
 
-const footerNav = [
+const topNav = [
+  {
+    name: "login",
+  },
+  {
+    name: "register",
+  },
+  {
+    name: "logout",
+  },
+];
+
+const bottomNav = [
   {
     name: "about",
   },
@@ -56,4 +68,4 @@ const connectNav = [
   },
 ];
 
-export { sideNav, footerNav, connectNav };
+export { topNav, sideNav, bottomNav, connectNav };

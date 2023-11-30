@@ -2,7 +2,7 @@
     width: 60vw;
     height: 93vh;
     min-height: 430px;
-    margin-top: 3vh;
+    margin-top: 3.5vh;
     background-color: var(--color-gray-light);
     box-shadow: var(--left-box-shadow);
 }

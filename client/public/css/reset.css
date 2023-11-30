@@ -149,4 +149,4 @@ button, input[type="submit"], input[type="reset"] {
 /* let's clear some floats */
 .clearfix:before, .clearfix:after { content: "\0020"; display: block; height: 0; overflow: hidden; }
 .clearfix:after { clear: both; }
-.clearfix { zoom: 1; }
+.clearfix { transform: scale(1); }

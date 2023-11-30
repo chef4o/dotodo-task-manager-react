@@ -1,7 +1,8 @@
+import "../../public/css/nav.css"
 import PropTypes from "prop-types";
-import { sideNavPropType, connectNavPropType } from "../util/propTypes";
+import { sideNavPropType, connectNavPropType, bottomNavPropType } from "../util/propTypes";
 
-export default function Nav({ sideNav, connectNav, selectedPage, onNavigationClick }) {
+export default function Nav({ topNav, sideNav, connectNav, bottomNav, selectedPage, onNavigationClick }) {
 
   const handleNavigationClick = (page) => {
     window.history.pushState(null, null, `/${page}`);
@@ -10,25 +11,39 @@ export default function Nav({ sideNav, connectNav, selectedPage, onNavigationCli
   };
 
   return (
-    <div className="sidebar">
-      <div className="navigation">
-        <div id="logo" onClick={() => handleNavigationClick("home")}>
-          <img src="/images/logo.png" alt="DOTODO" />
+    <div className="nav">
+      <ul className="top-bar">
+        {topNav.map(item =>
+          <li key={item.name}><div onClick={() => handleNavigationClick(item.name)}>{item.name}</div></li>
+        )}
+      </ul>
+
+      <div className="sidebar">
+        <div className="navigation">
+          <div id="logo" onClick={() => handleNavigationClick("home")}>
+            <img src="/images/logo.png" alt="DOTODO" />
+          </div>
+          <ul className="menu">
+            {sideNav.map(item =>
+              <li key={item.name} className={selectedPage === item.name ? `${item.name} active` : item.name}>
+                <div onClick={() => handleNavigationClick(item.name)}><i className={item.icon}></i><br />{item.name}</div>
+              </li>
+            )}
+          </ul>
         </div>
-        <ul className="menu">
-          {sideNav.map(item =>
-            <li key={item.name} className={selectedPage===item.name ? `${item.name} active` : item.name}>
-              <div onClick={() => handleNavigationClick(item.name)}><i className={item.icon}></i><br />{item.name}</div>
-            </li>
+
+        <div className="connect">
+          {connectNav.map(item =>
+            <a key={item.id} href={item.url} id={item.id} target="_blank" rel="noreferrer"><i className={item.icon}></i></a>
           )}
-        </ul>
+        </div>
       </div>
 
-      <div className="connect">
-        {connectNav.map(item =>
-          <a key={item.id} href={item.url} id={item.id} target="_blank" rel="noreferrer"><i className={item.icon}></i></a>
+      <ul className="bottom-bar">
+        {bottomNav.map(item =>
+          <li key={item.name}><div onClick={() => handleNavigationClick(item.name)}>{item.name}</div></li>
         )}
-      </div>
+      </ul>
     </div>
   );
 }
@@ -36,6 +51,8 @@ export default function Nav({ sideNav, connectNav, selectedPage, onNavigationCli
 Nav.propTypes = {
   sideNav: PropTypes.arrayOf(sideNavPropType).isRequired,
   connectNav: PropTypes.arrayOf(connectNavPropType).isRequired,
+  bottomNav: PropTypes.arrayOf(bottomNavPropType).isRequired,
+  topNav: PropTypes.arrayOf(bottomNavPropType).isRequired,
   onNavigationClick: PropTypes.func.isRequired,
   selectedPage: PropTypes.string.isRequired,
 };

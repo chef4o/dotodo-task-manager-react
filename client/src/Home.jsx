@@ -1,3 +1,4 @@
+import "../public/css/home.css"
 import PropTypes from "prop-types";
 import TaskType from "./components/TaskType";
 import { taskTypePropType } from "./util/propTypes";

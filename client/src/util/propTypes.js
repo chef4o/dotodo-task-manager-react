@@ -17,7 +17,7 @@ const connectNavPropType = PropTypes.shape({
   icon: PropTypes.string.isRequired,
 });
 
-const footerNavPropType = PropTypes.shape({
+const bottomNavPropType = PropTypes.shape({
   name: PropTypes.string.isRequired,
 });
 
@@ -25,5 +25,5 @@ export {
   taskTypePropType,
   sideNavPropType,
   connectNavPropType,
-  footerNavPropType,
+  bottomNavPropType,
 };
