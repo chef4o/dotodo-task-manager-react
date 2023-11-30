@@ -4,7 +4,8 @@
     right: 18vw;
     display: flex;
     width: 60vw;
-    justify-content: space-between;
+    justify-content: flex-end;
+    gap: 18vw;
 }
 
 .footer * {
@@ -20,4 +21,5 @@
 
 .footer ul li:hover {
     text-decoration: underline;
+    cursor: pointer;
 }

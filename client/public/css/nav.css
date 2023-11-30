@@ -57,7 +57,7 @@
 .sidebar .menu li div {
     color: white;
     text-transform: uppercase;
-    font-size: 1vw;
+    font-size: 0.9vw;
 }
 
 .sidebar .menu li i {
@@ -107,6 +107,10 @@
 
 .sidebar .menu .profile i {
     color: var(--color-menu-icon-green-dark);
+}
+
+.sidebar .menu li:hover {
+    cursor: pointer;
 }
 
 .sidebar .menu li:hover>div>i {

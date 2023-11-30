@@ -37,7 +37,7 @@ body {
   background-color: var(--color-body-background);
 }
 
-#root {
+#main {
   display: flex;
   position: relative;
   flex-wrap: wrap;
@@ -46,4 +46,24 @@ body {
   gap: 5vw;
   padding-right: 10vw;
   background-color: var(--color-menu-green-olive);
+}
+
+#main.home {
+  background-color: var(--color-menu-green-olive);
+}
+
+#main.notes {
+  background-color: var(--color-menu-tobaco);
+}
+
+#main.checklists {
+  background-color: var(--color-menu-beige);
+}
+
+#main.events {
+  background-color: var(--color-menu-green-light);
+}
+
+#main.profile {
+  background-color: var(--color-menu-green-dark);
 }

@@ -1,7 +1,6 @@
-import "../static/css/style.css";
 import PropTypes from "prop-types";
 import TaskType from "./components/TaskType";
-import { taskTypePropType } from "./utils/propTypes";
+import { taskTypePropType } from "./util/propTypes";
 
 export default function Home(props) {
 
@@ -11,7 +10,7 @@ export default function Home(props) {
         <h3>
           Welcome to your very own<span> DOTODO Persoanl assistant </span>! Our aim is to keep you<span> up-to-date </span>
           with your ongoing tasks and keep all your activities
-          <span className> on track</span>.
+          <span> on track</span>.
         </h3>
         <p>
           Our user-friendly task management platform empowers you to create,

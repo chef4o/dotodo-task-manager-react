@@ -1,4 +1,4 @@
-import { taskTypePropType } from "../utils/propTypes";
+import { taskTypePropType } from "../util/propTypes";
 
 export default function TaskType(props) {
 

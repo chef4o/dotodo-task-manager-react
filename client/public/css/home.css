@@ -52,7 +52,7 @@
 }
 
 .content-home .featured-img {
-    background: linear-gradient(to bottom, var(--color-gray-light) 0%, rgba(255, 255, 255, 0) 50%), url('/static/images/featured_img.jpg');
+    background: linear-gradient(to bottom, var(--color-gray-light) 0%, rgba(255, 255, 255, 0) 50%), url('/images/featured_img.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
@@ -87,6 +87,7 @@
 .content-home .options li:hover {
     transform: scale(1.05);
     transition: transform 0.3s ease;
+    cursor: pointer;
 }
 
 .content-home .options li h4 {
@@ -97,7 +98,7 @@
 }
 
 .content-home .options .notes {
-    background-image: url('../images/note.jpg');
+    background-image: url('/images/note.jpg');
 }
 
 .content-home .options .notes h4,
@@ -106,7 +107,7 @@
 }
 
 .content-home .options .checklists {
-    background-image: url('../images/to-do.jpg');
+    background-image: url('/images/to-do.jpg');
 }
 
 .content-home .options .checklists h4,
@@ -115,7 +116,7 @@
 }
 
 .content-home .options .events {
-    background-image: url('../images/calendar.jpg');
+    background-image: url('/images/calendar.jpg');
 }
 
 .content-home .options .events h4,
