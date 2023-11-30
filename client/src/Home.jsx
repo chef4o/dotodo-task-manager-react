@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import TaskType from "./components/TaskType";
 import { taskTypePropType } from "./util/propTypes";
 
-export default function Home(props) {
+export default function Home({ taskTypes, onItemClick }) {
 
   return (
     <div className="content-home">
@@ -26,8 +26,8 @@ export default function Home(props) {
       <div className="featured-img" />
 
       <ul className="options">
-        {props.taskTypes
-          .map(type => <TaskType key={type.name} task={type} />)}
+        {taskTypes
+          .map(type => <TaskType key={type.name} name={type.name} headerText={type.headerText} onItemClick={onItemClick} />)}
       </ul>
     </div>
   );
@@ -35,4 +35,5 @@ export default function Home(props) {
 
 Home.propTypes = {
   taskTypes: PropTypes.arrayOf(taskTypePropType).isRequired,
+  onItemClick: PropTypes.func.isRequired,
 };

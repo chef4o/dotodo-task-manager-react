@@ -37,7 +37,7 @@ body {
   background-color: var(--color-body-background);
 }
 
-#main {
+main {
   display: flex;
   position: relative;
   flex-wrap: wrap;
@@ -48,22 +48,22 @@ body {
   background-color: var(--color-menu-green-olive);
 }
 
-#main.home {
+main.home {
   background-color: var(--color-menu-green-olive);
 }
 
-#main.notes {
+main.notes {
   background-color: var(--color-menu-tobaco);
 }
 
-#main.checklists {
+main.checklists {
   background-color: var(--color-menu-beige);
 }
 
-#main.events {
+main.events {
   background-color: var(--color-menu-green-light);
 }
 
-#main.profile {
+main.profile {
   background-color: var(--color-menu-green-dark);
 }

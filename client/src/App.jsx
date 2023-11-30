@@ -14,11 +14,11 @@ const App = () => {
     };
 
     return (
-        <div id="main" className={selectedPage}>
-            <Nav sideNav={sideNav} connectNav={connectNav} onNavigationClick={handleNavigationClick} />
-            <Home taskTypes={taskTypes} onNavigationClick={handleNavigationClick}/>
-            <Footer footerNav={footerNav} onNavigationClick={handleNavigationClick}/>
-        </div>
+        <main className={selectedPage}>
+            <Nav sideNav={sideNav} connectNav={connectNav} selectedPage={selectedPage} onNavigationClick={handleNavigationClick} />
+            <Home taskTypes={taskTypes} onItemClick={handleNavigationClick} />
+            <Footer footerNav={footerNav} onAnchorClick={handleNavigationClick} />
+        </main>
     );
 }
 

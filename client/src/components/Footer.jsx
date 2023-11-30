@@ -1,10 +1,13 @@
 import PropTypes from "prop-types";
+
 import { footerNavPropType } from "../util/propTypes"
 
-export default function Footer(props) {
+export default function Footer({ footerNav, onAnchorClick }) {
 
   const handleNavigationClick = (page) => {
     window.history.pushState(null, null, `/${page}`);
+
+    onAnchorClick(page);
   };
 
   return (
@@ -12,7 +15,7 @@ export default function Footer(props) {
       <p>&#169; 2023 DOTODO Task Manager</p>
 
       <ul>
-        {props.footerNav.map(item =>
+        {footerNav.map(item =>
           <li key={item.name}><div onClick={() => handleNavigationClick(item.name)}>{item.name}</div></li>
         )}
       </ul>

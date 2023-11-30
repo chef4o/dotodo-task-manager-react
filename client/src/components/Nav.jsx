@@ -1,15 +1,12 @@
-import { useState } from "react";
 import PropTypes from "prop-types";
 import { sideNavPropType, connectNavPropType } from "../util/propTypes";
 
-export default function Nav(props) {
-  const [activePage, setActivePage] = useState("home");
+export default function Nav({ sideNav, connectNav, selectedPage, onNavigationClick }) {
 
   const handleNavigationClick = (page) => {
-    setActivePage(page);
     window.history.pushState(null, null, `/${page}`);
 
-    props.onNavigationClick(page);
+    onNavigationClick(page);
   };
 
   return (
@@ -19,8 +16,8 @@ export default function Nav(props) {
           <img src="/images/logo.png" alt="DOTODO" />
         </div>
         <ul className="menu">
-          {props.sideNav.map(item =>
-            <li key={item.name} className={activePage === item.name ? `${item.name} active` : item.name}>
+          {sideNav.map(item =>
+            <li key={item.name} className={selectedPage===item.name ? `${item.name} active` : item.name}>
               <div onClick={() => handleNavigationClick(item.name)}><i className={item.icon}></i><br />{item.name}</div>
             </li>
           )}
@@ -28,7 +25,7 @@ export default function Nav(props) {
       </div>
 
       <div className="connect">
-        {props.connectNav.map(item =>
+        {connectNav.map(item =>
           <a key={item.id} href={item.url} id={item.id} target="_blank" rel="noreferrer"><i className={item.icon}></i></a>
         )}
       </div>
@@ -39,5 +36,6 @@ export default function Nav(props) {
 Nav.propTypes = {
   sideNav: PropTypes.arrayOf(sideNavPropType).isRequired,
   connectNav: PropTypes.arrayOf(connectNavPropType).isRequired,
-  onNavigationClick: PropTypes.func.isRequired, 
+  onNavigationClick: PropTypes.func.isRequired,
+  selectedPage: PropTypes.string.isRequired,
 };
