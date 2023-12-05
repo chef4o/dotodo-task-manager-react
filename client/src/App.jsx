@@ -8,14 +8,34 @@ import { topNav, sideNav, bottomNav, connectNav } from "./assets/navElements.js"
 const App = () => {
 
     const [selectedPage, setSelectedPage] = useState("home");
+    const [showLoginModal, setShowLoginModal] = useState(false);
+    const [showRegisterModal, setShowRegisterModal] = useState(false);
 
     const handleNavigationClick = (page) => {
-        setSelectedPage(page);
+        !topNav.map(item => item.name).includes(page) && setSelectedPage(page);
+
+        if (page === 'login') {
+            setShowLoginModal(true);
+            setShowRegisterModal(false);
+        } else if (page === 'register') {
+            setShowRegisterModal(true);
+            setShowLoginModal(false);
+        }
     };
+
+    const hideAuthModal = (auth) => {
+        if (auth === 'login') {
+            setShowLoginModal(false);
+        } else if (auth === 'register') {
+            setShowRegisterModal(false);
+        }
+    }
 
     return (
         <main className={selectedPage}>
-            <Nav topNav={topNav} sideNav={sideNav} connectNav={connectNav} bottomNav={bottomNav} selectedPage={selectedPage} onNavigationClick={handleNavigationClick} />
+            <Nav topNav={topNav} sideNav={sideNav} connectNav={connectNav} bottomNav={bottomNav}
+                showLoginModal={showLoginModal} showRegisterModal={showRegisterModal} selectedPage={selectedPage}
+                onNavigationClick={handleNavigationClick} hideAuthModal={hideAuthModal} />
             <Home taskTypes={taskTypes} onItemClick={handleNavigationClick} />
             <Footer />
         </main>

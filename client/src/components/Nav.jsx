@@ -1,8 +1,10 @@
-import "../../public/css/nav.css"
 import PropTypes from "prop-types";
 import { sideNavPropType, connectNavPropType, bottomNavPropType } from "../util/propTypes";
+import LoginModal from "../LoginModal";
+import RegisterModal from "../RegisterModal";
 
-export default function Nav({ topNav, sideNav, connectNav, bottomNav, selectedPage, onNavigationClick }) {
+export default function Nav({ topNav, sideNav, connectNav, bottomNav,
+  showLoginModal, showRegisterModal, selectedPage, onNavigationClick, hideAuthModal }) {
 
   const handleNavigationClick = (page) => {
     window.history.pushState(null, null, `/${page}`);
@@ -12,6 +14,9 @@ export default function Nav({ topNav, sideNav, connectNav, bottomNav, selectedPa
 
   return (
     <div className="nav">
+      {showLoginModal && <LoginModal selectedPage={selectedPage} showLoginModal={showLoginModal} hideAuthModal={hideAuthModal} />}
+      {showRegisterModal && <RegisterModal selectedPage={selectedPage} hideAuthModal={hideAuthModal} />}
+
       <ul className="top-bar">
         {topNav.map(item =>
           <li key={item.name}><div onClick={() => handleNavigationClick(item.name)}>{item.name}</div></li>

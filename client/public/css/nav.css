@@ -107,7 +107,7 @@
     color: white;
 }
 
-.sidebar .menu .home {
+.home {
     background-color: var(--color-menu-green-olive);
 }
 
@@ -115,7 +115,7 @@
     color: var(--color-menu-icon-green-olive);
 }
 
-.sidebar .menu .notes {
+.notes {
     background-color: var(--color-menu-tobaco);
 }
 
@@ -123,7 +123,7 @@
     color: var(--color-menu-icon-tobaco);
 }
 
-.sidebar .menu .checklists {
+.checklists {
     background-color: var(--color-menu-beige);
 }
 
@@ -131,7 +131,7 @@
     color: var(--color-menu-icon-beige);
 }
 
-.sidebar .menu .events {
+.events {
     background-color: var(--color-menu-green-light);
 }
 
@@ -139,7 +139,7 @@
     color: var(--color-menu-icon-green-light);
 }
 
-.sidebar .menu .profile {
+.profile {
     background-color: var(--color-menu-green-dark);
 }
 
