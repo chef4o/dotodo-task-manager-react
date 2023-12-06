@@ -1,3 +1,14 @@
+.backdrop {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: -10vw;
+    width: 98.2vw;
+    height: 100%;
+    backdrop-filter: blur(2px);
+    z-index: 20;
+}
+
 .top-bar,
 .bottom-bar {
     display: flex;
@@ -11,11 +22,12 @@
 
 .top-bar {
     top: 0;
+    z-index: 30;
 }
 
 .bottom-bar {
     bottom: 0;
-    z-index: 1;
+    z-index: 10;
 }
 
 .top-bar *,
@@ -84,7 +96,7 @@
 
 .sidebar .menu li.active {
     box-shadow: var(--left-box-shadow), var(--bottom-box-shadow);
-    z-index: 1;
+    z-index: 10;
     width: 110%;
 }
 

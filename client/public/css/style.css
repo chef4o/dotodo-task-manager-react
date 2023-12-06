@@ -1,8 +1,7 @@
 @import url("./reset.css");
 @import url("./typography.css");
 @import url("./nav.css");
-@import url("./login-form.css");
-@import url("./register-form.css");
+@import url("./auth-form.css");
 @import url("./home.css");
 @import url("./footer.css");
 

@@ -13,9 +13,12 @@ export default function Nav({ topNav, sideNav, connectNav, bottomNav,
   };
 
   return (
+
     <div className="nav">
-      {showLoginModal && <LoginModal selectedPage={selectedPage} showLoginModal={showLoginModal} hideAuthModal={hideAuthModal} />}
-      {showRegisterModal && <RegisterModal selectedPage={selectedPage} hideAuthModal={hideAuthModal} />}
+      {(showLoginModal || showRegisterModal) && <div className="backdrop" onClick={hideAuthModal} />}
+
+      {showLoginModal && <LoginModal modalName="login" selectedPage={selectedPage} showLoginModal={showLoginModal} hideAuthModal={hideAuthModal} />}
+      {showRegisterModal && <RegisterModal modalName="register" selectedPage={selectedPage} hideAuthModal={hideAuthModal} />}
 
       <ul className="top-bar">
         {topNav.map(item =>

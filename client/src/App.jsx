@@ -28,6 +28,9 @@ const App = () => {
             setShowLoginModal(false);
         } else if (auth === 'register') {
             setShowRegisterModal(false);
+        } else {
+            setShowLoginModal(false);
+            setShowRegisterModal(false);
         }
     }
 

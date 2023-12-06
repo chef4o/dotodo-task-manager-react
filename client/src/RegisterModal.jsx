@@ -1,6 +1,6 @@
-export default function RegisterModal({ selectedPage, hideAuthModal }) {
+export default function RegisterModal({ selectedPage, modalName, hideAuthModal }) {
     return (
-        <form method="post" className={`register-form ${selectedPage}`} action="/register">
+        <form method="post" className={`auth-form ${selectedPage} ${modalName}`} action="/register">
             <button className="xmark" onClick={() => hideAuthModal("register")}><i className="fa-solid fa-xmark" /></button>
 
             <div className="user-container">
