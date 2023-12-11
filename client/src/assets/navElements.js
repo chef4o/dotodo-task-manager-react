@@ -41,7 +41,7 @@ const bottomNav = [
     name: "contact",
   },
   {
-    name: "blog",
+    name: "news",
   },
 ];
 

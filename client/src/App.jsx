@@ -36,9 +36,15 @@ const App = () => {
 
     return (
         <main className={selectedPage}>
-            <Nav topNav={topNav} sideNav={sideNav} connectNav={connectNav} bottomNav={bottomNav}
-                showLoginModal={showLoginModal} showRegisterModal={showRegisterModal} selectedPage={selectedPage}
-                onNavigationClick={handleNavigationClick} hideAuthModal={hideAuthModalHandler} />
+            <Nav selectedPage={selectedPage}
+                topNav={topNav}
+                sideNav={sideNav}
+                connectNav={connectNav}
+                bottomNav={bottomNav}
+                showLoginModal={showLoginModal}
+                showRegisterModal={showRegisterModal}
+                hideAuthModal={hideAuthModalHandler}
+                onNavigationClick={handleNavigationClick} />
             <Home taskTypes={taskTypes} onItemClick={handleNavigationClick} />
             <Footer />
         </main>

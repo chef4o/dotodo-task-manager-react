@@ -8,8 +8,8 @@ export default function Home({ taskTypes, onItemClick }) {
     <div className="content-home">
       <div className="intro">
         <h3>
-          Welcome to your very own<span> DOTODO Persoanl assistant </span>! 
-            Our aim is to keep you<span> up-to-date </span>
+          Welcome to your very own<span> DOTODO Persoanl assistant </span>!
+          Our aim is to keep you<span> up-to-date </span>
           with your ongoing tasks and keep all your activities
           <span> on track</span>.
         </h3>
@@ -28,7 +28,11 @@ export default function Home({ taskTypes, onItemClick }) {
 
       <ul className="options">
         {taskTypes
-          .map(type => <TaskType key={type.name} name={type.name} headerText={type.headerText} onItemClick={onItemClick} />)}
+          .map(type => <TaskType
+            key={type.name}
+            name={type.name}
+            headerText={type.headerText}
+            onItemClick={onItemClick} />)}
       </ul>
     </div>
   );

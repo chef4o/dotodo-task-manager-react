@@ -119,7 +119,10 @@
     color: white;
 }
 
-.home {
+.home,
+.about,
+.contact,
+.news {
     background-color: var(--color-menu-green-olive);
 }
 

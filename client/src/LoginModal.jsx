@@ -1,6 +1,9 @@
-export default function LoginModal({ selectedPage, modalName, hideAuthModal }) {
+export default function LoginModal({
+    selectedPage,
+    hideAuthModal }) {
+
     return (
-        <form method="post" className={`auth-form ${selectedPage} ${modalName}`} action="/login">
+        <form method="post" className={`auth-form ${selectedPage} login`} action="/login">
             <button className="xmark" onClick={() => hideAuthModal("login")}><i className="fa-solid fa-xmark" /></button>
 
             <div className="username">

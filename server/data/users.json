@@ -53,8 +53,8 @@
             "note": ""
           },
           {
-            "position": 1,
-            "content": "element 1",
+            "position": 3,
+            "content": "element 3",
             "dueDate": "26/01/2024",
             "status": "Done",
             "note": ""
