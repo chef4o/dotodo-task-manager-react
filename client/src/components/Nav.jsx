@@ -3,8 +3,11 @@ import { sideNavPropType, connectNavPropType, bottomNavPropType } from "../util/
 import LoginModal from "../LoginModal";
 import RegisterModal from "../RegisterModal";
 
-export default function Nav({ topNav, sideNav, connectNav, bottomNav,
-  showLoginModal, showRegisterModal, selectedPage, onNavigationClick, hideAuthModal }) {
+export default function Nav({
+  topNav, sideNav, connectNav, bottomNav,
+  showLoginModal, showRegisterModal, hideAuthModal,
+  selectedPage,
+  onNavigationClick }) {
 
   const handleNavigationClick = (page) => {
     window.history.pushState(null, null, `/${page}`);

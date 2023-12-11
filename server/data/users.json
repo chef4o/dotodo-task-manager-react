@@ -14,6 +14,60 @@
       "street": "",
       "streetNumber": ""
     },
-    "friends": []
+    "friends": [],
+    "notes": [
+      {
+        "_id": 1,
+        "position": 1,
+        "title": "Title",
+        "content": "Some random text like lorem ipsum",
+        "isArchived": true,
+        "startDate": "21/01/2024",
+        "dueDate": "26/01/2024",
+        "completedOn": "",
+        "trackProgress": "",
+        "sharedWith": [
+          "07f260f4-466c-4607-9a33-f7273b24f132",
+          "07f260f4-466c-4607-9a33-f7273b243232"
+        ]
+      }
+    ],
+    "checklists": [
+      {
+        "_id": 1,
+        "type": "General to-do/Shopping list",
+        "title": "Title",
+        "elements": [
+          {
+            "position": 1,
+            "content": "element 1",
+            "dueDate": "26/01/2024",
+            "status": "Not started/Pending",
+            "note": "additional info"
+          },
+          {
+            "position": 2,
+            "content": "element 2",
+            "dueDate": "26/01/2024",
+            "status": "In progress/NA",
+            "note": ""
+          },
+          {
+            "position": 1,
+            "content": "element 1",
+            "dueDate": "26/01/2024",
+            "status": "Done",
+            "note": ""
+          }
+        ],
+        "sharedWith": [
+          "07f260f4-466c-4607-9a33-f7273b24f132",
+          "07f260f4-466c-4607-9a33-f7273b243232"
+        ],
+        "isArchived": true,
+        "dueDate": "26/01/2024"
+      }
+    ],
+    "events": []
   }
 }

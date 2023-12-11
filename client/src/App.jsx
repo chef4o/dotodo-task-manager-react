@@ -23,7 +23,7 @@ const App = () => {
         }
     };
 
-    const hideAuthModal = (auth) => {
+    const hideAuthModalHandler = (auth) => {
         if (auth === 'login') {
             setShowLoginModal(false);
         } else if (auth === 'register') {
@@ -38,7 +38,7 @@ const App = () => {
         <main className={selectedPage}>
             <Nav topNav={topNav} sideNav={sideNav} connectNav={connectNav} bottomNav={bottomNav}
                 showLoginModal={showLoginModal} showRegisterModal={showRegisterModal} selectedPage={selectedPage}
-                onNavigationClick={handleNavigationClick} hideAuthModal={hideAuthModal} />
+                onNavigationClick={handleNavigationClick} hideAuthModal={hideAuthModalHandler} />
             <Home taskTypes={taskTypes} onItemClick={handleNavigationClick} />
             <Footer />
         </main>

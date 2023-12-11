@@ -1,11 +1,11 @@
 .backdrop {
     display: block;
     position: absolute;
-    top: 0;
-    left: -10vw;
-    width: 98.2vw;
+    width: 90vw;
     height: 100%;
-    backdrop-filter: blur(2px);
+    left: 44%;
+    transform: translate(-50%, 0);
+    backdrop-filter: blur(3px);
     z-index: 20;
 }
 
@@ -171,7 +171,7 @@
     display: flex;
     justify-content: space-between;
     width: 80%;
-    z-index: 2;
+    z-index: 15;
 }
 
 .sidebar .connect i {
