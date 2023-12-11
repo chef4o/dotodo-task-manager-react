@@ -1,8 +1,8 @@
 DOTODO TASK MANAGER
 
-# Initial setup via React + Vite
+**Initial setup via React + Vite**
 
-**Concept**
+# Concept #
 
 The DOTODO app aims to provide various functionalities for assistance with our everyday personal tasks in three dimensions: 
 -	free-hand notes 
