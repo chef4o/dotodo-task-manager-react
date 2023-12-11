@@ -1,4 +1,4 @@
-DOTODO TASK MANAGER
+# DOTODO TASK MANAGER
 
 **Initial setup via React + Vite**
 
