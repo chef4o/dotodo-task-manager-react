@@ -8,10 +8,9 @@ export default function Nav({
   sideNav,
   connectNav,
   bottomNav,
-  showLoginModal,
-  showRegisterModal,
+  showAuthModal,
   hideAuthModal,
-  selectedPage,
+  selectedPageBg,
   onNavigationClick }) {
 
   const handleNavigationClick = (page) => {
@@ -23,14 +22,14 @@ export default function Nav({
   return (
 
     <div className="nav">
-      {(showLoginModal || showRegisterModal) && <div className="backdrop" onClick={hideAuthModal} />}
+      {(showAuthModal.login || showAuthModal.register) && <div className="backdrop" onClick={hideAuthModal} />}
 
-      {showLoginModal && <LoginModal
-        selectedPage={selectedPage}
+      {showAuthModal.login && <LoginModal
+        selectedPageBg={selectedPageBg}
         hideAuthModal={hideAuthModal} />}
 
-      {showRegisterModal && <RegisterModal
-        selectedPage={selectedPage}
+      {showAuthModal.register && <RegisterModal
+        selectedPageBg={selectedPageBg}
         hideAuthModal={hideAuthModal} />}
 
       <ul className="top-bar">
@@ -46,7 +45,7 @@ export default function Nav({
           </div>
           <ul className="menu">
             {sideNav.map(item =>
-              <li key={item.name} className={selectedPage === item.name ? `${item.name} active` : item.name}>
+              <li key={item.name} className={selectedPageBg === item.name ? `${item.name} active` : item.name}>
                 <div onClick={() => handleNavigationClick(item.name)}><i className={item.icon}></i><br />{item.name}</div>
               </li>
             )}
@@ -75,5 +74,5 @@ Nav.propTypes = {
   bottomNav: PropTypes.arrayOf(bottomNavPropType).isRequired,
   topNav: PropTypes.arrayOf(bottomNavPropType).isRequired,
   onNavigationClick: PropTypes.func.isRequired,
-  selectedPage: PropTypes.string.isRequired,
+  selectedPageBg: PropTypes.string.isRequired,
 };

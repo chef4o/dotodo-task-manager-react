@@ -1,9 +1,54 @@
+import { useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
+
 export default function RegisterModal({
-    selectedPage,
+    selectedPageBg,
     hideAuthModal }) {
 
+    const [emailValue, setEmailValue] = useState('');
+
+    const emailChangeHandler = (e) => {
+        setEmailValue(e.target.value);
+    }
+
+    const [usernameValue, setUsernameValue] = useState('');
+
+    const usernameChangeHandler = (e) => {
+        setUsernameValue(e.target.value);
+    }
+
+    const [passwordValue, setPasswordValue] = useState('');
+
+    const passwordChangeHandler = (e) => {
+        setPasswordValue(e.target.value);
+    }
+
+    const [repassValue, setRepassValue] = useState('');
+
+    const repassChangeHandler = (e) => {
+        setRepassValue(e.target.value);
+    }
+
+    const submitFormHandler = () => {
+        //todo: check if user exists
+
+        const uuid = uuidv4();
+
+        //todo: check if pass and repass match 
+
+        const user = {
+            _id: uuid,
+            email: emailValue,
+            username: usernameValue,
+            password: passwordValue
+        };
+
+        //add user to users.js
+
+    }
+
     return (
-        <form method="post" className={`auth-form ${selectedPage} register`} action="/register">
+        <form method="post" className={`auth-form ${selectedPageBg} register`} action="/register">
             <button className="xmark" onClick={() => hideAuthModal("register")}><i className="fa-solid fa-xmark" /></button>
 
             <div className="user-container">
@@ -11,7 +56,12 @@ export default function RegisterModal({
                     <label htmlFor="email">Email</label>
                     <div className="form-input">
                         <i className="fa-solid fa-envelope" />
-                        <input id="email" name="email" type="text" />
+                        <input
+                            id="email"
+                            name="email"
+                            type="text"
+                            value={emailValue}
+                            onChange={emailChangeHandler} />
                     </div>
                 </div>
 
@@ -19,7 +69,12 @@ export default function RegisterModal({
                     <label htmlFor="username">Username</label>
                     <div className="form-input">
                         <i className="fa-solid fa-user" />
-                        <input id="username" name="username" type="text" />
+                        <input
+                            id="username"
+                            name="username"
+                            type="text"
+                            value={usernameValue}
+                            onChange={usernameChangeHandler} />
                     </div>
                 </div>
             </div>
@@ -29,7 +84,12 @@ export default function RegisterModal({
                     <label htmlFor="password">Password</label>
                     <div className="form-input">
                         <i className="fa-solid fa-key" />
-                        <input id="password" name="password" type="password" />
+                        <input
+                            id="password"
+                            name="password"
+                            type="password"
+                            value={passwordValue}
+                            onChange={passwordChangeHandler} />
                     </div>
                 </div>
 
@@ -37,12 +97,17 @@ export default function RegisterModal({
                     <label htmlFor="repass">Repeat password</label>
                     <div className="form-input">
                         <i className="fa-solid fa-key" />
-                        <input id="repass" name="repass" type="password" />
+                        <input
+                            id="repass"
+                            name="repass"
+                            type="password"
+                            value={repassValue}
+                            onChange={repassChangeHandler} />
                     </div>
                 </div>
             </div>
 
-            <button className="register">Register</button>
+            <button type="button" className="register" onClick={submitFormHandler}>Register</button>
         </form>
     )
 }

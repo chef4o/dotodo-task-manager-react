@@ -7,42 +7,36 @@ import { topNav, sideNav, bottomNav, connectNav } from "./assets/navElements.js"
 
 const App = () => {
 
-    const [selectedPage, setSelectedPage] = useState("home");
-    const [showLoginModal, setShowLoginModal] = useState(false);
-    const [showRegisterModal, setShowRegisterModal] = useState(false);
+    const [selectedPageBg, setSelectedPageBg] = useState("home");
+    const [showAuthModal, setShowAuthModal] = useState({
+        login: false,
+        register: false
+    });
 
     const handleNavigationClick = (page) => {
-        !topNav.map(item => item.name).includes(page) && setSelectedPage(page);
+        !topNav.map(item => item.name).includes(page) && setSelectedPageBg(page);
 
-        if (page === 'login') {
-            setShowLoginModal(true);
-            setShowRegisterModal(false);
-        } else if (page === 'register') {
-            setShowRegisterModal(true);
-            setShowLoginModal(false);
-        }
+        (page === 'login' || page === 'register') && setShowAuthModal(state => ({
+            ...state,
+            [page]: true
+        }));
     };
 
-    const hideAuthModalHandler = (auth) => {
-        if (auth === 'login') {
-            setShowLoginModal(false);
-        } else if (auth === 'register') {
-            setShowRegisterModal(false);
-        } else {
-            setShowLoginModal(false);
-            setShowRegisterModal(false);
-        }
+    const hideAuthModalHandler = () => {
+        setShowAuthModal({
+            login: false,
+            register: false
+        });
     }
 
     return (
-        <main className={selectedPage}>
-            <Nav selectedPage={selectedPage}
+        <main className={selectedPageBg}>
+            <Nav selectedPageBg={selectedPageBg}
                 topNav={topNav}
                 sideNav={sideNav}
                 connectNav={connectNav}
                 bottomNav={bottomNav}
-                showLoginModal={showLoginModal}
-                showRegisterModal={showRegisterModal}
+                showAuthModal={showAuthModal}
                 hideAuthModal={hideAuthModalHandler}
                 onNavigationClick={handleNavigationClick} />
             <Home taskTypes={taskTypes} onItemClick={handleNavigationClick} />
