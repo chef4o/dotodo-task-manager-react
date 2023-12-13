@@ -16,10 +16,10 @@ const App = () => {
     const handleNavigationClick = (page) => {
         !topNav.map(item => item.name).includes(page) && setSelectedPageBg(page);
 
-        (page === 'login' || page === 'register') && setShowAuthModal(state => ({
-            ...state,
-            [page]: true
-        }));
+        setShowAuthModal({
+            ['login']: page === 'login',
+            ['register']: page === 'register'
+        });
     };
 
     const hideAuthModalHandler = () => {
