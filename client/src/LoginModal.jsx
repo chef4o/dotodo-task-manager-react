@@ -1,9 +1,15 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getUser, validatePassword } from "./controllers/userController";
 
 export default function LoginModal({
     selectedPageBg,
     hideAuthModal }) {
+
+    const usernameInputRef = useRef();
+
+    useEffect(() => {
+        usernameInputRef.current.focus();
+    }, []);
 
     const [formValues, setFormValues] = useState({
         username: '',
@@ -35,6 +41,7 @@ export default function LoginModal({
                 <div className="form-input">
                     <i className="fa-solid fa-user" />
                     <input
+                        ref={usernameInputRef}
                         id="username"
                         name="username"
                         type="text"

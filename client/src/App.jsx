@@ -16,9 +16,12 @@ const App = () => {
     const handleNavigationClick = (page) => {
         !topNav.map(item => item.name).includes(page) && setSelectedPageBg(page);
 
-        setShowAuthModal({
-            ['login']: page === 'login',
-            ['register']: page === 'register'
+        setShowAuthModal((oldShowAuthModalState) => {
+            return Object.keys(oldShowAuthModalState)
+                .reduce((newShowAuthModalState, key) => {
+                    newShowAuthModalState[key] = key === page;
+                    return newShowAuthModalState;
+                }, {});
         });
     };
 

@@ -1,9 +1,15 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 
 export default function RegisterModal({
     selectedPageBg,
     hideAuthModal }) {
+
+    const emailInputRef = useRef();
+
+    useEffect(() => {
+        emailInputRef.current.focus();
+    }, []);
 
     const [emailValue, setEmailValue] = useState('');
 
@@ -57,6 +63,7 @@ export default function RegisterModal({
                     <div className="form-input">
                         <i className="fa-solid fa-envelope" />
                         <input
+                            ref={emailInputRef}
                             id="email"
                             name="email"
                             type="text"
