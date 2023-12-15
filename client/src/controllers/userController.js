@@ -15,16 +15,14 @@ The getUser function checks the type of the param and acts as follows:
 */
 export const getUser = async (param) => {
   const user = validate(param)
-    ? findUserById(param) 
+    ? findUserById(param)
     : validator.isEmail(param)
-        ? findUserByEmail(param)
-        : findUserByUsername(param);
+    ? findUserByEmail(param)
+    : findUserByUsername(param);
 
   return user;
 };
 
-export const validatePassword = async (user, password) => {
-    if (user.password != password) {
-        throw new Error('Invalid username/password');
-    }
+export const isPasswordValid = (user, password) => {
+  return user.password === password;
 };

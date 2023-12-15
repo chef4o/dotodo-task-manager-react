@@ -3,6 +3,7 @@
 @import url("./nav.css");
 @import url("./auth-form.css");
 @import url("./home.css");
+@import url("./error.css");
 @import url("./footer.css");
 
 :root {
@@ -25,6 +26,7 @@
   --color-menu-icon-green-light:#6f7e38;
   --color-menu-green-dark:#4c7443;
   --color-menu-icon-green-dark:#25541b;
+  --color-error-red:#5c0707;
 
   --shadow-base: 1px 4px 4px 1px rgba(0, 0, 0, 0.2);
   --left-box-shadow: -10px 0 10px rgba(0, 0, 0, 0.2);

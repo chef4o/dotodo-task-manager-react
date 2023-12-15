@@ -1,6 +1,4 @@
 .auth-form {
-    display: flex;
-    justify-content: space-between;
     position: absolute;
     top: 0;
     left: 39vw;
@@ -9,9 +7,15 @@
     z-index: 30;
 }
 
+.auth-form .auth-fields  {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
 .auth-form.login {
     height: 10vw;   
-    min-height: 100px;
+    min-height: 110px;
 }
 
 .auth-form.register {
