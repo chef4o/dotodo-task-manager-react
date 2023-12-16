@@ -1,14 +1,15 @@
 import capitalize from "../util/capitalize";
 
-export const formFieldsErrorsHandler = (
+export const formEmptyFieldsHandler = (
   formInitialState,
   formValues,
+  addintionalFields,
   setValidationErrors
 ) => {
   if (emptyField(formValues)) {
     setValidationErrors((state) => ({
       ...state,
-      login: "",
+      ...addintionalFields,
     }));
     emptyFieldsErrorHandler(formValues, setValidationErrors);
   } else {

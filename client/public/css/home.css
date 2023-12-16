@@ -1,57 +1,50 @@
-.content-home {
-    width: 60vw;
-    height: 93vh;
-    min-height: 430px;
-    margin-top: 3.5vh;
-    background-color: var(--color-gray-light);
-    box-shadow: var(--left-box-shadow);
-}
-
-.content-home .intro {
+.home .intro {
     display: flex;
     justify-content: space-between;
     padding: 1.6vw;
 }
 
-.content-home .intro h3,
-.content-home .intro p {
+.home .intro h3,
+.home .intro p {
     text-align: justify;
     color: var(--color-brown);
 }
 
-.content-home .intro h3 {
+.home .intro h3 {
     width: 24.8vw;
     font-size: 1.4vw;
     text-transform: uppercase;
 }
 
-.content-home .intro h3 span:nth-of-type(1) {
+.home .intro h3 span:nth-of-type(1) {
     color: var(--color-sky-blue);
 }
 
-.content-home .intro h3 span:nth-of-type(2) {
+.home .intro h3 span:nth-of-type(2) {
     color: var(--color-light-green);
 }
 
-.content-home .intro h3 span:nth-of-type(3) {
+.home .intro h3 span:nth-of-type(3) {
     color: var(--color-menu-orange);
 }
 
-.content-home .intro p {
+.home .intro p {
     width: 29.6vw;
     font-size: 1.1vw;
     line-height: 1.74vw;
 }
 
-.content-home .intro p .register {
+.home .intro p .register {
+    cursor: pointer;
     color: var(--color-sky-blue);
 }
 
-.content-home .intro p .login {
+.home .intro p .login {
+    cursor: pointer;
     color: var(--color-menu-orange);
 }
 
-.content-home .featured-img {
+.home .featured-img {
     background: linear-gradient(to bottom, var(--color-gray-light) 0%, rgba(255, 255, 255, 0) 50%), url('/images/featured_img.jpg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -59,20 +52,20 @@
     height: 30vh;
 }
 
-.content-home .options {
+.home .options {
     display: flex;
     padding: 1.6vw;
     justify-content: space-between;
 }
 
-.content-home .options li {
+.home .options li {
     display: flex;
     flex-direction: column;
     width: 17.6vw;
     box-shadow: var(--left-box-shadow);
 }
 
-.content-home .options li {
+.home .options li {
     display: flex;
     flex-direction: column;
     position: relative;
@@ -84,47 +77,47 @@
     transition: transform 0.3s ease;
 }
 
-.content-home .options li:hover {
+.home .options li:hover {
     transform: scale(1.05);
     transition: transform 0.3s ease;
     cursor: pointer;
 }
 
-.content-home .options li h4 {
+.home .options li h4 {
     text-align: right;
     font-weight: bold;
     padding: 0.4vw 0.8vw;
     color: white;
 }
 
-.content-home .options .notes {
+.home .options .notes {
     background-image: url('/images/note.jpg');
 }
 
-.content-home .options .notes h4,
-.content-home .options .notes .header-text {
+.home .options .notes h4,
+.home .options .notes .header-text {
     background: linear-gradient(to right, transparent, var(--color-menu-tobaco) 80%);
 }
 
-.content-home .options .checklists {
+.home .options .checklists {
     background-image: url('/images/to-do.jpg');
 }
 
-.content-home .options .checklists h4,
-.content-home .options .checklists .header-text {
+.home .options .checklists h4,
+.home .options .checklists .header-text {
     background: linear-gradient(to right, transparent, var(--color-menu-beige) 80%);
 }
 
-.content-home .options .events {
+.home .options .events {
     background-image: url('/images/calendar.jpg');
 }
 
-.content-home .options .events h4,
-.content-home .options .events .header-text {
+.home .options .events h4,
+.home .options .events .header-text {
     background: linear-gradient(to right, transparent, var(--color-menu-green-light) 80%);
 }
 
-.content-home .options .header-text {
+.home .options .header-text {
     display: none;
     position: absolute;
     width: 100%;
@@ -136,8 +129,8 @@
     padding: 0.4vw 0.8vw;
 }
 
-.content-home .options .notes:hover .header-text,
-.content-home .options .checklists:hover .header-text,
-.content-home .options .events:hover .header-text {
+.home .options .notes:hover .header-text,
+.home .options .checklists:hover .header-text,
+.home .options .events:hover .header-text {
     display: block;
 }

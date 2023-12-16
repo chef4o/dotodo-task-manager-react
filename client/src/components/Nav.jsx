@@ -1,7 +1,6 @@
-import PropTypes from "prop-types";
-import { sideNavPropType, connectNavPropType, bottomNavPropType } from "../util/propTypes";
-import LoginModal from "../LoginModal";
-import RegisterModal from "../RegisterModal";
+import LoginModal from "./LoginModal";
+import RegisterModal from "./RegisterModal";
+import { Link } from 'react-router-dom'
 
 export default function Nav({
   topNav,
@@ -17,7 +16,6 @@ export default function Nav({
 }) {
 
   const handleNavigationClick = (page) => {
-    window.history.pushState(null, null, `/${page}`);
     onNavigationClick(page);
   };
 
@@ -48,13 +46,13 @@ export default function Nav({
 
       <div className="sidebar">
         <div className="navigation">
-          <div id="logo" onClick={() => handleNavigationClick("home")}>
+          <Link to="/" id="logo" onClick={() => handleNavigationClick("home")}>
             <img src="/images/logo.png" alt="DOTODO" />
-          </div>
+          </Link>
           <ul className="menu">
             {sideNavElements.map(item =>
               <li key={item.name} className={selectedPageBg === item.name ? `${item.name} active` : item.name}>
-                <div onClick={() => handleNavigationClick(item.name)}><i className={item.icon}></i><br />{item.name}</div>
+                <Link to={item.name === 'profile' ? `${item.href}/${user._id}` : item.href} onClick={() => handleNavigationClick(item.name)}><i className={item.icon}></i><br />{item.name}</Link>
               </li>
             )}
           </ul>
@@ -69,18 +67,9 @@ export default function Nav({
 
       <ul className="bottom-bar">
         {bottomNav.map(item =>
-          <li key={item.name}><div onClick={() => handleNavigationClick(item.name)}>{item.name}</div></li>
+          <li key={item.name}><Link to={item.name} onClick={() => handleNavigationClick(item.name)}>{item.name}</Link></li>
         )}
       </ul>
     </div>
   );
 }
-
-Nav.propTypes = {
-  sideNavElements: PropTypes.arrayOf(sideNavPropType).isRequired,
-  connectNav: PropTypes.arrayOf(connectNavPropType).isRequired,
-  bottomNav: PropTypes.arrayOf(bottomNavPropType).isRequired,
-  topNav: PropTypes.arrayOf(bottomNavPropType).isRequired,
-  onNavigationClick: PropTypes.func.isRequired,
-  selectedPageBg: PropTypes.string.isRequired,
-};

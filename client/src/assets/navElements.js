@@ -2,22 +2,27 @@ const sideNav = [
   {
     name: "home",
     icon: "fa-solid fa-house",
+    href: "/"
   },
   {
     name: "notes",
     icon: "fa-solid fa-note-sticky",
+    href: "/notes"
   },
   {
     name: "checklists",
     icon: "fa-solid fa-list-check",
+    href: "/checklists"
   },
   {
     name: "events",
     icon: "fa-regular fa-calendar-check",
+    href: "/events"
   },
   {
     name: "profile",
     icon: "fa-solid fa-user",
+    href: "/profile"
   },
 ];
 
@@ -38,7 +43,7 @@ const bottomNav = [
     name: "about",
   },
   {
-    name: "contact",
+    name: "contacts",
   },
   {
     name: "news",

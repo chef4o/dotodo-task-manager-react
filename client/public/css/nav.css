@@ -111,11 +111,11 @@
     width: 110%;
 }
 
-.sidebar .menu li.active>div i {
+.sidebar .menu li.active>a i {
     color: white;
 }
 
-.sidebar .menu li div {
+.sidebar .menu li a {
     color: white;
     text-transform: uppercase;
     font-size: 0.9vw;
@@ -132,7 +132,7 @@
 
 .home,
 .about,
-.contact,
+.contacts,
 .news {
     background-color: var(--color-menu-green-olive);
 }

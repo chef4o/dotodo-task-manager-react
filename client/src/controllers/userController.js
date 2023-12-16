@@ -1,4 +1,4 @@
-import validator from "validator";
+import { isEmail } from "validator";
 import { validate } from "uuid";
 import {
   findUserByEmail,
@@ -18,7 +18,7 @@ The getUser function checks the type of the param and acts as follows:
 export const getUser = async (param) => {
   const user = validate(param)
     ? findUserById(param)
-    : validator.isEmail(param)
+    : isEmail(param)
     ? findUserByEmail(param)
     : findUserByUsername(param);
 
@@ -30,7 +30,6 @@ export const isPasswordValid = (userPass, password) => {
 };
 
 export const getFreeUuid = async (ids, id) => {
-
   const userIds = ids.length ? ids : Object.keys(await getAllUsers());
 
   let uuId = id || uuidv4();

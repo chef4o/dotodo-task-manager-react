@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { isPasswordValid } from "./controllers/userController";
-import { formFieldsErrorsHandler, emptyField } from "./controllers/errorController";
-import { getUser } from "./controllers/userController";
+import { isPasswordValid } from "../controllers/userController";
+import { formEmptyFieldsHandler, emptyField } from "../controllers/errorController";
+import { getUser } from "../controllers/userController";
 
 export default function LoginModal({
     selectedPageBg,
@@ -26,7 +26,7 @@ export default function LoginModal({
 
     const validateLogin = async () => {
 
-        formFieldsErrorsHandler(formInitialState, formValues, setValidationErrors);
+        formEmptyFieldsHandler(formInitialState, formValues, ['login'], setValidationErrors);
 
         const currentUser = await getUser(formValues.username);
 

@@ -1,11 +1,9 @@
-import PropTypes from "prop-types";
-import TaskType from "./components/TaskType";
-import { taskTypePropType } from "./util/propTypes";
+import TaskType from "./TaskType";
 
 export default function Home({ taskTypes, onItemClick }) {
-
+  
   return (
-    <div className="content-home">
+    <div className="content home">
       <div className="intro">
         <h3>
           Welcome to your very own<span> DOTODO Persoanl assistant </span>!
@@ -18,8 +16,8 @@ export default function Home({ taskTypes, onItemClick }) {
           prioritize, and track tasks effortlessly, ensuring you never forget
           a thing or miss a deadline again. To unlock the full potential of our
           task management platform and enjoy personalized features, we invite you
-          to<a className="register" href="register"> create an account </a>or
-          simply<a className="login" href="login"> log in </a>if you&apos;re
+          to<a className="register" onClick={() => onItemClick('register')}> create an account </a>or
+          simply<a className="login" onClick={() => onItemClick('login')}> log in </a>if you&apos;re
           already a registered member.
         </p>
       </div>
@@ -37,8 +35,3 @@ export default function Home({ taskTypes, onItemClick }) {
     </div>
   );
 }
-
-Home.propTypes = {
-  taskTypes: PropTypes.arrayOf(taskTypePropType).isRequired,
-  onItemClick: PropTypes.func.isRequired,
-};

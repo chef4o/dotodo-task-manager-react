@@ -7,26 +7,26 @@
 @import url("./footer.css");
 
 :root {
-  --color-gray-light: #fafafa;
+  --color-gray-light: rgba(250, 250, 250, 0.6);
   --color-blue-gray: #505970;
-  --color-sky-blue: #26bcb3;
-  --color-light-green: #b6c066;
+  --color-sky-blue: #209a92;
+  --color-light-green: #878f4a;
   --color-brown: #55372c;
   --color-body-background: #ca5830;
-  --color-menu-orange:#dd8514;
-  --color-menu-icon-orange:#a55d00;
-  --color-menu-icon-orange-dark:#5d3500;
-  --color-menu-tobaco:#bca02f;
-  --color-menu-icon-tobaco:#806700;
-  --color-menu-beige:#c0ac66;
-  --color-menu-icon-beige:#83713a;
-  --color-menu-green-olive:#7b8846;
-  --color-menu-icon-green-olive:#4a541d;
-  --color-menu-green-light:#aec066;
-  --color-menu-icon-green-light:#6f7e38;
-  --color-menu-green-dark:#4c7443;
-  --color-menu-icon-green-dark:#25541b;
-  --color-error-red:#5c0707;
+  --color-menu-orange: #dd8514;
+  --color-menu-icon-orange: #a55d00;
+  --color-menu-icon-orange-dark: #5d3500;
+  --color-menu-tobaco: #bca02f;
+  --color-menu-icon-tobaco: #806700;
+  --color-menu-beige: #c0ac66;
+  --color-menu-icon-beige: #83713a;
+  --color-menu-green-olive: #7b8846;
+  --color-menu-icon-green-olive: #4a541d;
+  --color-menu-green-light: #aec066;
+  --color-menu-icon-green-light: #6f7e38;
+  --color-menu-green-dark: #4c7443;
+  --color-menu-icon-green-dark: #25541b;
+  --color-error-red: #5c0707;
 
   --shadow-base: 1px 4px 4px 1px rgba(0, 0, 0, 0.2);
   --left-box-shadow: -10px 0 10px rgba(0, 0, 0, 0.2);
@@ -48,6 +48,15 @@ main {
   gap: 5vw;
   padding-right: 10vw;
   background-color: var(--color-menu-green-olive);
+}
+
+.content {
+  width: 60vw;
+  height: 93vh;
+  min-height: 430px;
+  margin-top: 3.5vh;
+  background-color: var(--color-gray-light);
+  box-shadow: var(--left-box-shadow);
 }
 
 main.home {

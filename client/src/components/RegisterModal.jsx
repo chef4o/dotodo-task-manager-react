@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { formFieldsErrorsHandler, emptyField } from "./controllers/errorController";
-import { addUser, userExists } from "./services/userService";
-import { getFreeUuid } from "./controllers/userController";
+import { formEmptyFieldsHandler } from "../controllers/errorController";
+import { addUser, userExists } from "../services/userService";
+import { getFreeUuid } from "../controllers/userController";
+import { isEmail } from "validator";
+
 
 export default function RegisterModal({
     selectedPageBg,
@@ -23,17 +25,13 @@ export default function RegisterModal({
     const validationIsEmpty = Object.values(validationErrors).every(value => !value);
 
     const [formReadyForSubmit, isFormReadyForSubmit] = useState(false);
+    const [focusedField, setFocusedField] = useState(null);
 
     const validateRegisterFields = () => {
-        formFieldsErrorsHandler(formInitialState, formValues, setValidationErrors);
-
-        if (formValues.password.trim() && formValues.repass.trim()
-            && formValues.password.trim() != formValues.repass.trim()) {
-            setValidationErrors(state => ({
-                ...state,
-                repass: 'The passwords should match'
-            }));
-        }
+        formEmptyFieldsHandler(formInitialState, formValues, [], setValidationErrors);
+        validateEmail();
+        validatePassword();
+        validatePasswordsMatch();
     }
 
     const validateNewUser = async () => {
@@ -54,12 +52,98 @@ export default function RegisterModal({
         }
     }
 
+    const validateEmail = () => {
+        if (formValues.email && !isEmail(formValues.email.trim())) {
+            setValidationErrors(state => ({
+                ...state,
+                email: 'The email should be valid'
+            }));
+        } else if (formValues.email) {
+            setValidationErrors(state => ({
+                ...state,
+                email: ''
+            }));
+        }
+    }
+
+    const validateUsername = () => {
+        if (formValues.username && formValues.username.trim().length < 3) {
+            setValidationErrors(state => ({
+                ...state,
+                username: 'Minimum length: 3 characters'
+            }));
+        } else if (formValues.username) {
+            setValidationErrors(state => ({
+                ...state,
+                username: ''
+            }));
+        }
+    }
+
+    const validatePassword = () => {
+        if (formValues.password && formValues.password.trim().length < 4) {
+            setValidationErrors(state => ({
+                ...state,
+                password: 'Minimum length: 4 characters'
+            }));
+        } else if (formValues.password) {
+            setValidationErrors(state => ({
+                ...state,
+                password: ''
+            }));
+        }
+    }
+
+    const validatePasswordsMatch = () => {
+        if (formValues.password.trim() && formValues.repass.trim()
+            && formValues.password.trim() != formValues.repass.trim()) {
+            setValidationErrors(state => ({
+                ...state,
+                repass: 'The passwords should match'
+            }));
+        } else if (formValues.repass) {
+            setValidationErrors(state => ({
+                ...state,
+                repass: ''
+            }));
+        }
+    }
+
     const changeHandler = (e) => {
+        const { name, value } = e.target;
         setFormValues(state => ({
             ...state,
-            [e.target.name]: e.target.value,
+            [name]: value,
         }));
     }
+
+
+    const focusHandler = (fieldName) => {
+        setFocusedField(fieldName);
+    };
+
+    useEffect(() => {
+        switch (focusedField) {
+            case 'email':
+                validateEmail();
+                break;
+            case 'username':
+                validateUsername();
+                break;
+            case 'password':
+                validatePassword();
+                break;
+            case 'repass':
+                validatePasswordsMatch();
+                break;
+            default:
+                break;
+        }
+
+        setFocusedField(null);
+    }, [focusedField, formValues.email, formValues.username, formValues.password, formValues.repass]);
+
+    const emailInputRef = useRef();
 
     const submitFormHandler = async () => {
         validateRegisterFields();
@@ -67,22 +151,20 @@ export default function RegisterModal({
         isFormReadyForSubmit(true);
     }
 
-    const createUser = async () => {
-        return {
-            _id: await getFreeUuid([], ''),
-            email: formValues.email,
-            username: formValues.username,
-            password: formValues.password
-        };
-    }
-
-    const emailInputRef = useRef();
-
     useEffect(() => {
         emailInputRef.current.focus();
     }, []);
 
     useEffect(() => {
+        const createUser = async () => {
+            return {
+                _id: await getFreeUuid([], ''),
+                email: formValues.email,
+                username: formValues.username,
+                password: formValues.password
+            };
+        }
+
         const attemptAddUser = async () => {
             if (formReadyForSubmit && validationIsEmpty) {
                 const user = await createUser();
@@ -102,7 +184,7 @@ export default function RegisterModal({
         };
 
         attemptAddUser();
-    }, [validationIsEmpty, formReadyForSubmit, validationErrors, formValues.email, formValues.password, formValues.username, hideAuthModal, setUser]);
+    }, [validationIsEmpty, setUser, formReadyForSubmit, hideAuthModal, formValues.email, formValues.username, formValues.password]);
 
 
     return (
@@ -122,6 +204,7 @@ export default function RegisterModal({
                                 type="text"
                                 value={formValues.email}
                                 onChange={changeHandler}
+                                onBlur={() => focusHandler(FORM_FIELDS.email)}
                                 className={validationErrors.email && "error-field"} />
                         </div>
 
@@ -138,13 +221,13 @@ export default function RegisterModal({
                                 type="text"
                                 value={formValues.username}
                                 onChange={changeHandler}
+                                onBlur={() => focusHandler(FORM_FIELDS.username)}
                                 className={validationErrors.username && "error-field"} />
                         </div>
 
                         <div className={`error auth`}>{validationErrors.username}</div>
                     </div>
                 </div>
-
 
                 <div className="password-container">
                     <div className={FORM_FIELDS.password}>
@@ -157,6 +240,7 @@ export default function RegisterModal({
                                 type={FORM_FIELDS.password}
                                 value={formValues.password}
                                 onChange={changeHandler}
+                                onBlur={() => focusHandler(FORM_FIELDS.password)}
                                 className={validationErrors.password && "error-field"} />
                         </div>
 
@@ -173,6 +257,7 @@ export default function RegisterModal({
                                 type={FORM_FIELDS.password}
                                 value={formValues.repass}
                                 onChange={changeHandler}
+                                onBlur={() => focusHandler(FORM_FIELDS.repass)}
                                 className={validationErrors.repass && "error-field"} />
                         </div>
 
