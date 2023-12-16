@@ -15,12 +15,12 @@
 
 .auth-form.login {
     height: 10vw;   
-    min-height: 110px;
+    min-height: 120px;
 }
 
 .auth-form.register {
-    height: 14vw;
-    min-height: 150px;
+    height: 16vw;
+    min-height: 180px;
 }
 
 .auth-form button {

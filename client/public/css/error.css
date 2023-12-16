@@ -10,3 +10,7 @@
     width: 31vw;
     text-align: right;
 }
+
+.error-field {
+    border-color: var(--color-error-red);
+}

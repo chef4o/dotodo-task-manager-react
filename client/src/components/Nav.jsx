@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import { sideNavPropType, connectNavPropType, bottomNavPropType } from "../util/propTypes";
 import LoginModal from "../LoginModal";
 import RegisterModal from "../RegisterModal";
-import { useEffect } from "react";
 
 export default function Nav({
   topNav,
@@ -37,11 +36,15 @@ export default function Nav({
         hideAuthModal={hideAuthModal}
         setUser={setUser} />}
 
-      <ul className="top-bar">
-        {topNav.map(item =>
-          <li key={item.name}><div onClick={() => handleNavigationClick(item.name)}>{item.name}</div></li>
-        )}
-      </ul>
+      <div className="top-bar">
+        {user.username && <p className="greeting">Hello, {user.username}</p>}
+
+        <ul className="top-bar-controls">
+          {topNav.map(item =>
+            <li key={item.name}><div onClick={() => handleNavigationClick(item.name)}>{item.name}</div></li>
+          )}
+        </ul>
+      </div>
 
       <div className="sidebar">
         <div className="navigation">

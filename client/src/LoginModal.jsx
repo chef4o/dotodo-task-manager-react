@@ -72,7 +72,8 @@ export default function LoginModal({
                             name={FORM_FIELDS.username}
                             type="text"
                             value={formValues.username}
-                            onChange={changeHandler} />
+                            onChange={changeHandler}
+                            className={validationErrors.username && "error-field"} />
                     </div>
                     {validationErrors.username && <div className={`error auth ${FORM_FIELDS.username}`}>{validationErrors.username}</div>}
                 </div>
@@ -86,7 +87,8 @@ export default function LoginModal({
                             name={FORM_FIELDS.password}
                             type={FORM_FIELDS.password}
                             value={formValues.password}
-                            onChange={changeHandler} />
+                            onChange={changeHandler}
+                            className={validationErrors.password && "error-field"} />
                     </div>
                     {validationErrors.password && <div className={`error auth ${FORM_FIELDS.password}`}>{validationErrors.password}</div>}
                 </div>

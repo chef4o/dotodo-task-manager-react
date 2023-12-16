@@ -22,7 +22,9 @@ export default function RegisterModal({
     const [validationErrors, setValidationErrors] = useState(validationInitialState);
     const validationIsEmpty = Object.values(validationErrors).every(value => !value);
 
-    const validateRegister = async () => {
+    const [formReadyForSubmit, isFormReadyForSubmit] = useState(false);
+
+    const validateRegisterFields = () => {
         formFieldsErrorsHandler(formInitialState, formValues, setValidationErrors);
 
         if (formValues.password.trim() && formValues.repass.trim()
@@ -32,7 +34,9 @@ export default function RegisterModal({
                 repass: 'The passwords should match'
             }));
         }
+    }
 
+    const validateNewUser = async () => {
         const currentUserExists = await userExists(formValues.username.trim(), formValues.email.trim());
 
         if (formValues.username.trim() && currentUserExists.withUsername) {
@@ -57,28 +61,49 @@ export default function RegisterModal({
         }));
     }
 
+    const submitFormHandler = async () => {
+        validateRegisterFields();
+        await validateNewUser();
+        isFormReadyForSubmit(true);
+    }
+
+    const createUser = async () => {
+        return {
+            _id: await getFreeUuid([], ''),
+            email: formValues.email,
+            username: formValues.username,
+            password: formValues.password
+        };
+    }
+
     const emailInputRef = useRef();
 
     useEffect(() => {
         emailInputRef.current.focus();
     }, []);
 
-    const submitFormHandler = async () => {
-        await validateRegister();
+    useEffect(() => {
+        const attemptAddUser = async () => {
+            if (formReadyForSubmit && validationIsEmpty) {
+                const user = await createUser();
 
-        if (validationIsEmpty) {
-            const user = {
-                _id: await getFreeUuid([], ''),
-                email: formValues.email,
-                username: formValues.username,
-                password: formValues.password
-            };
+                try {
+                    await addUser(user);
+                    setUser(user);
+                    hideAuthModal();
+                } catch (error) {
+                    console.error('Error adding user:', error);
+                }
 
-            await addUser(user);
-            hideAuthModal();
-            setUser(user);
-        }
-    }
+                isFormReadyForSubmit(false);
+            } else {
+                isFormReadyForSubmit(false);
+            }
+        };
+
+        attemptAddUser();
+    }, [validationIsEmpty, formReadyForSubmit, validationErrors, formValues.email, formValues.password, formValues.username, hideAuthModal, setUser]);
+
 
     return (
         <form method="post" className={`auth-form ${selectedPageBg} register`} action="/register">
@@ -96,7 +121,8 @@ export default function RegisterModal({
                                 name={FORM_FIELDS.email}
                                 type="text"
                                 value={formValues.email}
-                                onChange={changeHandler} />
+                                onChange={changeHandler}
+                                className={validationErrors.email && "error-field"} />
                         </div>
 
                         <div className={`error auth`}>{validationErrors.email}</div>
@@ -111,7 +137,8 @@ export default function RegisterModal({
                                 name={FORM_FIELDS.username}
                                 type="text"
                                 value={formValues.username}
-                                onChange={changeHandler} />
+                                onChange={changeHandler}
+                                className={validationErrors.username && "error-field"} />
                         </div>
 
                         <div className={`error auth`}>{validationErrors.username}</div>
@@ -129,7 +156,8 @@ export default function RegisterModal({
                                 name={FORM_FIELDS.password}
                                 type={FORM_FIELDS.password}
                                 value={formValues.password}
-                                onChange={changeHandler} />
+                                onChange={changeHandler}
+                                className={validationErrors.password && "error-field"} />
                         </div>
 
                         <div className={`error auth`}>{validationErrors.password}</div>
@@ -144,7 +172,8 @@ export default function RegisterModal({
                                 name={FORM_FIELDS.repass}
                                 type={FORM_FIELDS.password}
                                 value={formValues.repass}
-                                onChange={changeHandler} />
+                                onChange={changeHandler}
+                                className={validationErrors.repass && "error-field"} />
                         </div>
 
                         <div className={`error auth`}>{validationErrors.repass}</div>
