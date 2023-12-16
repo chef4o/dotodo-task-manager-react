@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import { v4 as uuidv4 } from 'uuid';
+import { formFieldsErrorsHandler, emptyField } from "./controllers/errorController";
+import { addUser, userExists } from "./services/userService";
+import { getFreeUuid } from "./controllers/userController";
 
 export default function RegisterModal({
     selectedPageBg,
-    hideAuthModal }) {
+    hideAuthModal,
+    setUser }) {
 
     const FORM_FIELDS = {
         email: 'email',
@@ -12,11 +15,40 @@ export default function RegisterModal({
         repass: 'repass'
     }
 
-    const formInitialState = Object.fromEntries(
-        Object.keys(FORM_FIELDS).map(key => [key, ''])
-    );
-
+    const formInitialState = Object.fromEntries(Object.keys(FORM_FIELDS).map(key => [key, '']));
     const [formValues, setFormValues] = useState(formInitialState);
+
+    const validationInitialState = Object.fromEntries(Object.keys(FORM_FIELDS).map(key => [key, '']));
+    const [validationErrors, setValidationErrors] = useState(validationInitialState);
+    const validationIsEmpty = Object.values(validationErrors).every(value => !value);
+
+    const validateRegister = async () => {
+        formFieldsErrorsHandler(formInitialState, formValues, setValidationErrors);
+
+        if (formValues.password.trim() && formValues.repass.trim()
+            && formValues.password.trim() != formValues.repass.trim()) {
+            setValidationErrors(state => ({
+                ...state,
+                repass: 'The passwords should match'
+            }));
+        }
+
+        const currentUserExists = await userExists(formValues.username.trim(), formValues.email.trim());
+
+        if (formValues.username.trim() && currentUserExists.withUsername) {
+            setValidationErrors(state => ({
+                ...state,
+                username: 'This username is alreay registered'
+            }));
+        }
+
+        if (formValues.email.trim() && currentUserExists.withEmail) {
+            setValidationErrors(state => ({
+                ...state,
+                email: 'This email is alreay registered'
+            }));
+        }
+    }
 
     const changeHandler = (e) => {
         setFormValues(state => ({
@@ -25,40 +57,27 @@ export default function RegisterModal({
         }));
     }
 
-    const [validation, setValidation] = useState(
-        Object.fromEntries(
-            Object.keys(FORM_FIELDS).map(key => [key, ''])
-        )
-    );
-
-    const usernameValidation = () => {
-        // if (formValues.username)
-    }
-
     const emailInputRef = useRef();
 
     useEffect(() => {
         emailInputRef.current.focus();
     }, []);
 
-    const resetForm = () => { setFormValues(formInitialState) };
+    const submitFormHandler = async () => {
+        await validateRegister();
 
-    const submitFormHandler = () => {
-        //todo: check if user exists
+        if (validationIsEmpty) {
+            const user = {
+                _id: await getFreeUuid([], ''),
+                email: formValues.email,
+                username: formValues.username,
+                password: formValues.password
+            };
 
-        const uuid = uuidv4();
-
-        //todo: check if pass and repass match 
-
-        const user = {
-            _id: uuid,
-            email: formValues.email,
-            username: formValues.username,
-            password: formValues.password
-        };
-
-        //add user to users.js
-
+            await addUser(user);
+            hideAuthModal();
+            setUser(user);
+        }
     }
 
     return (
@@ -79,6 +98,8 @@ export default function RegisterModal({
                                 value={formValues.email}
                                 onChange={changeHandler} />
                         </div>
+
+                        <div className={`error auth`}>{validationErrors.email}</div>
                     </div>
 
                     <div className={FORM_FIELDS.username}>
@@ -92,6 +113,8 @@ export default function RegisterModal({
                                 value={formValues.username}
                                 onChange={changeHandler} />
                         </div>
+
+                        <div className={`error auth`}>{validationErrors.username}</div>
                     </div>
                 </div>
 
@@ -108,6 +131,8 @@ export default function RegisterModal({
                                 value={formValues.password}
                                 onChange={changeHandler} />
                         </div>
+
+                        <div className={`error auth`}>{validationErrors.password}</div>
                     </div>
 
                     <div className={FORM_FIELDS.repass}>
@@ -117,14 +142,16 @@ export default function RegisterModal({
                             <input
                                 id={FORM_FIELDS.repass}
                                 name={FORM_FIELDS.repass}
-                                type={FORM_FIELDS.repass}
+                                type={FORM_FIELDS.password}
                                 value={formValues.repass}
                                 onChange={changeHandler} />
                         </div>
+
+                        <div className={`error auth`}>{validationErrors.repass}</div>
                     </div>
                 </div>
             </div>
-            
+
             <button type="button" className="register" onClick={submitFormHandler}>Register</button>
         </form>
     )

@@ -31,3 +31,25 @@ export const deleteUser = async (userId) => {
 
   return response.json();
 };
+
+export const addUser = async (body) => {
+  const response = await fetch(baseUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+
+  return response;
+};
+
+export const userExists = async (username, email) => {
+  const existingUsername = await findUserByUsername(username);
+  const existingEmail = await findUserByEmail(email);
+
+  return {
+    withUsername: !!existingUsername,
+    withEmail: !!existingEmail,
+  };
+};

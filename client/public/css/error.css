@@ -2,6 +2,7 @@
     color: var(--color-error-red);
     font-size: 1vw;
     padding-top: 0.1vw;
+    height: 1vw;
 }
 
 .error.auth.login {

@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import { getUser, isPasswordValid } from "./controllers/userController";
+import { isPasswordValid } from "./controllers/userController";
 import { formFieldsErrorsHandler, emptyField } from "./controllers/errorController";
+import { getUser } from "./controllers/userController";
 
 export default function LoginModal({
     selectedPageBg,
-    hideAuthModal }) {
+    hideAuthModal,
+    setUser }) {
 
     const FORM_FIELDS = {
         username: 'username',
@@ -22,6 +24,24 @@ export default function LoginModal({
     const validationInitialState = Object.fromEntries(Object.keys(ERROR_FIELDS).map(key => [key, '']));
     const [validationErrors, setValidationErrors] = useState(validationInitialState);
 
+    const validateLogin = async () => {
+
+        formFieldsErrorsHandler(formInitialState, formValues, setValidationErrors);
+
+        const currentUser = await getUser(formValues.username);
+
+        if (currentUser && isPasswordValid(currentUser.password, formValues.password)) {
+            setValidationErrors(formInitialState);
+            hideAuthModal();
+            setUser(currentUser);
+        } else {
+            !emptyField(formValues) && !validationErrors.login && setValidationErrors(state => ({
+                ...state,
+                login: 'Username or password is wrong'
+            }));
+        }
+    }
+
     const usernameInputRef = useRef();
 
     useEffect(() => { usernameInputRef.current.focus(); }, []);
@@ -33,31 +53,13 @@ export default function LoginModal({
         }));
     }
 
-    const validateLogin = async () => {
-        formFieldsErrorsHandler(formInitialState, formValues, setValidationErrors);
-
-        const user = await getUser(formValues.username);
-
-        if (user && isPasswordValid(user, formValues.password)) {
-            validationErrors.login && setValidationErrors(state => ({
-                ...state,
-                login: ''
-            }));
-        } else {
-            !emptyField(formValues) && !validationErrors.login && setValidationErrors(state => ({
-                ...state,
-                login: 'Username or password is wrong'
-            }));
-        }
-    }
-
-    const submitFormHandler = async () => {
+    const submitFormHandler = () => {
         validateLogin();
     }
 
     return (
         <form method="post" className={`auth-form ${selectedPageBg} login`} action="/login">
-            <button className="xmark" onClick={() => hideAuthModal("login")}><i className="fa-solid fa-xmark" /></button>
+            <button className="xmark" onClick={() => hideAuthModal()}><i className="fa-solid fa-xmark" /></button>
 
             <div className="auth-fields">
                 <div className={FORM_FIELDS.username}>
@@ -92,7 +94,7 @@ export default function LoginModal({
 
             {validationErrors.login && <div className="error auth login">{validationErrors.login}</div>}
 
-            <button type="button" className="login" onClick={submitFormHandler}>Login</button>
+            <button type="button" className="login" onClick={() => submitFormHandler()}>Login</button>
         </form>
     )
 }
