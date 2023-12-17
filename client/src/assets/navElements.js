@@ -2,27 +2,27 @@ const sideNav = [
   {
     name: "home",
     icon: "fa-solid fa-house",
-    href: "/"
+    href: "/",
   },
   {
     name: "notes",
     icon: "fa-solid fa-note-sticky",
-    href: "/notes"
+    href: "/notes",
   },
   {
     name: "checklists",
     icon: "fa-solid fa-list-check",
-    href: "/checklists"
+    href: "/checklists",
   },
   {
     name: "events",
     icon: "fa-regular fa-calendar-check",
-    href: "/events"
+    href: "/events",
   },
   {
     name: "profile",
     icon: "fa-solid fa-user",
-    href: "/profile"
+    href: "/profile",
   },
 ];
 

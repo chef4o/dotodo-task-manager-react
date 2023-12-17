@@ -52,7 +52,10 @@ export default function Nav({
           <ul className="menu">
             {sideNavElements.map(item =>
               <li key={item.name} className={selectedPageBg === item.name ? `${item.name} active` : item.name}>
-                <Link to={item.name === 'profile' ? `${item.href}/${user._id}` : item.href} onClick={() => handleNavigationClick(item.name)}><i className={item.icon}></i><br />{item.name}</Link>
+                <Link to={item.name === 'profile' ? `${item.href}/${user._id}` : item.href}
+                  onClick={() => handleNavigationClick(item.name)}>
+                  <i className={item.icon}></i><br />{item.name}
+                </Link>
               </li>
             )}
           </ul>
@@ -67,7 +70,9 @@ export default function Nav({
 
       <ul className="bottom-bar">
         {bottomNav.map(item =>
-          <li key={item.name}><Link to={item.name} onClick={() => handleNavigationClick(item.name)}>{item.name}</Link></li>
+          <li key={item.name}>
+            <Link to={item.name} onClick={() => handleNavigationClick(item.name)}>{item.name}</Link>
+          </li>
         )}
       </ul>
     </div>

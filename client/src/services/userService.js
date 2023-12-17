@@ -1,45 +1,40 @@
+import * as request from "../lib/request";
+
 const baseUrl = "http://localhost:3030/jsonstore/users";
 
 export const getAllUsers = async () => {
-  const response = await fetch(`${baseUrl}`);
+  const response = await request.get(baseUrl);
+  console.log(response)
+  console.log("all users: " + Object.values(response))
 
-  return response.json();
+  return Object.values(response);
 };
 
 export const findUserById = async (id) => {
-  const response = await fetch(`${baseUrl}/${id}`);
+  const response = await request.get(`${baseUrl}/${id}`);
 
   return response.json();
 };
 
 export const findUserByEmail = async (email) => {
-  return Object.values(await getAllUsers()).find(
-    (user) => user.email === email
-  );
+  const user = await getAllUsers();
+  return user.find((user) => user.email === email);
 };
 
 export const findUserByUsername = async (username) => {
-  return Object.values(await getAllUsers()).find(
-    (user) => user.username === username
-  );
+  const user = await getAllUsers();
+
+  return user.find((user) => user.username === username);
 };
 
 export const deleteUser = async (userId) => {
-  const response = await fetch(`${baseUrl}/${userId}`, {
-    method: "DELETE",
-  });
+  const response = await request.remove(`${baseUrl}/${userId}`);
 
   return response.json();
 };
 
 export const addUser = async (body) => {
-  const response = await fetch(baseUrl, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(body),
-  });
+  const response = request.post(baseUrl, body);
 
   return response;
 };
