@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { formEmptyFieldsHandler } from "../controllers/errorController";
 import { addUser, userExists } from "../services/userService";
-import { getFreeUuid } from "../controllers/userController";
+import { getFreeUuid, getUser } from "../controllers/userController";
 import { isEmail } from "validator";
 
 
@@ -30,26 +30,9 @@ export default function RegisterModal({
     const validateRegisterFields = () => {
         formEmptyFieldsHandler(formInitialState, formValues, [], setValidationErrors);
         validateEmail();
+        validateUsername();
         validatePassword();
         validatePasswordsMatch();
-    }
-
-    const validateNewUser = async () => {
-        const currentUserExists = await userExists(formValues.username.trim(), formValues.email.trim());
-
-        if (formValues.username.trim() && currentUserExists.withUsername) {
-            setValidationErrors(state => ({
-                ...state,
-                username: 'This username is alreay registered'
-            }));
-        }
-
-        if (formValues.email.trim() && currentUserExists.withEmail) {
-            setValidationErrors(state => ({
-                ...state,
-                email: 'This email is alreay registered'
-            }));
-        }
     }
 
     const validateEmail = () => {
@@ -109,6 +92,24 @@ export default function RegisterModal({
         }
     }
 
+    const validateNewUser = async () => {
+        const currentUserExists = await userExists(formValues.username.trim(), formValues.email.trim());
+
+        if (formValues.username.trim() && currentUserExists.withUsername) {
+            setValidationErrors(state => ({
+                ...state,
+                username: 'This username is alreay registered'
+            }));
+        }
+
+        if (formValues.email.trim() && currentUserExists.withEmail) {
+            setValidationErrors(state => ({
+                ...state,
+                email: 'This email is alreay registered'
+            }));
+        }
+    }
+
     const changeHandler = (e) => {
         const { name, value } = e.target;
         setFormValues(state => ({
@@ -116,7 +117,6 @@ export default function RegisterModal({
             [name]: value,
         }));
     }
-
 
     const focusHandler = (fieldName) => {
         setFocusedField(fieldName);
@@ -152,26 +152,18 @@ export default function RegisterModal({
     }
 
     useEffect(() => {
-        emailInputRef.current.focus();
-    }, []);
-
-    useEffect(() => {
-        const createUser = async () => {
-            return {
-                _id: await getFreeUuid([], ''),
-                email: formValues.email,
-                username: formValues.username,
-                password: formValues.password
-            };
-        }
-
         const attemptAddUser = async () => {
             if (formReadyForSubmit && validationIsEmpty) {
-                const user = await createUser();
+                const user = {
+                    email: formValues.email,
+                    username: formValues.username,
+                    password: formValues.password
+                }
 
                 try {
                     await addUser(user);
-                    setUser(user);
+                    const addedUser = await getUser(user.username);
+                    setUser(addedUser);
                     hideAuthModal();
                 } catch (error) {
                     console.error('Error adding user:', error);
@@ -185,7 +177,6 @@ export default function RegisterModal({
 
         attemptAddUser();
     }, [validationIsEmpty, setUser, formReadyForSubmit, hideAuthModal, formValues.email, formValues.username, formValues.password]);
-
 
     return (
         <form method="post" className={`auth-form ${selectedPageBg} register`} action="/register">

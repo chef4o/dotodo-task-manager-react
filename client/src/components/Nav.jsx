@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import LoginModal from "./LoginModal";
 import RegisterModal from "./RegisterModal";
 import { Link } from 'react-router-dom'

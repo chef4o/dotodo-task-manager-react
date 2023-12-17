@@ -4,8 +4,6 @@ const baseUrl = "http://localhost:3030/jsonstore/users";
 
 export const getAllUsers = async () => {
   const response = await request.get(baseUrl);
-  console.log(response)
-  console.log("all users: " + Object.values(response))
 
   return Object.values(response);
 };
