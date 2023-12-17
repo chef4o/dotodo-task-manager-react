@@ -140,7 +140,9 @@ export default function RegisterModal({
                 break;
         }
 
-        setFocusedField(null);
+        if (focusedField) {
+            setFocusedField(null);
+        }
     }, [focusedField, formValues.email, formValues.username, formValues.password, formValues.repass]);
 
     const emailInputRef = useRef();
@@ -148,35 +150,42 @@ export default function RegisterModal({
     const submitFormHandler = async () => {
         validateRegisterFields();
         await validateNewUser();
-        isFormReadyForSubmit(true);
+
+        if (validationIsEmpty) {
+            isFormReadyForSubmit(true);
+        }
     }
 
     useEffect(() => {
         const attemptAddUser = async () => {
-            if (formReadyForSubmit && validationIsEmpty) {
-                const user = {
-                    email: formValues.email,
-                    username: formValues.username,
-                    password: formValues.password
-                }
-
-                try {
-                    await addUser(user);
-                    const addedUser = await getUser(user.username);
-                    setUser(addedUser);
-                    hideAuthModal();
-                } catch (error) {
-                    console.error('Error adding user:', error);
-                }
-
+            if (!formReadyForSubmit || !validationIsEmpty) {
                 isFormReadyForSubmit(false);
-            } else {
-                isFormReadyForSubmit(false);
+                return;
             }
+
+            const user = {
+                email: formValues.email,
+                username: formValues.username,
+                password: formValues.password
+            }
+
+            try {
+                await addUser(user);
+                const currentUser = await getUser(user.username);
+                setUser({
+                    _id: currentUser._id,
+                    username: currentUser.username
+                });
+                hideAuthModal();
+            } catch (error) {
+                console.error('Error adding user:', error);
+            }
+
+            isFormReadyForSubmit(false);
         };
 
         attemptAddUser();
-    }, [validationIsEmpty, setUser, formReadyForSubmit, hideAuthModal, formValues.email, formValues.username, formValues.password]);
+    }, [formReadyForSubmit, validationIsEmpty, setUser, hideAuthModal, formValues]);
 
     return (
         <form method="post" className={`auth-form ${selectedPageBg} register`} action="/register">

@@ -47,16 +47,6 @@ const App = () => {
         });
     };
 
-    const navigationUpdateHandler = () => {
-        if (user._id) {
-            setTopNavElements(loggedAuthNavElements);
-            setSideNavElements(sideNav);
-        } else {
-            setTopNavElements(guestAuthNavElements);
-            setSideNavElements(guestSideNavElements);
-        }
-    }
-
     const hideAuthModalHandler = () => {
         setShowAuthModal({
             login: false,
@@ -65,7 +55,13 @@ const App = () => {
     }
 
     useEffect(() => {
-        navigationUpdateHandler();
+        if (user._id) {
+            setTopNavElements(loggedAuthNavElements);
+            setSideNavElements(sideNav);
+        } else {
+            setTopNavElements(guestAuthNavElements);
+            setSideNavElements(guestSideNavElements);
+        }
     }, [user]);
 
     return (
@@ -76,10 +72,10 @@ const App = () => {
                 connectNav={connectNav}
                 bottomNav={bottomNav}
                 user={user}
+                setUser={setUser}
                 showAuthModal={showAuthModal}
                 hideAuthModal={hideAuthModalHandler}
-                onNavigationClick={handleNavigationClick}
-                setUser={setUser} />
+                onNavigationClick={handleNavigationClick} />
 
             <Routes>
                 <Route path='/' element={<Home
@@ -88,7 +84,7 @@ const App = () => {
                 <Route path='/notes' element={<Notes user={user} />} />
                 <Route path='/checklists' element={<Checklists user={user} />} />
                 <Route path='/events' element={<Events user={user} />} />
-                <Route path='/profile/:id' element={<Profile user={user} setUser={setUser}/>} />
+                <Route path='/profile/:id' element={<Profile user={user} setUser={setUser} />} />
                 <Route path='/about' element={<AboutUs />} />
                 <Route path='/contacts' element={<Contacts />} />
                 <Route path='/news' element={<News />} />

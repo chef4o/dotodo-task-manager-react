@@ -33,7 +33,7 @@ export default function LoginModal({
         if (currentUser && isPasswordValid(currentUser.password, formValues.password)) {
             setValidationErrors(formInitialState);
             hideAuthModal();
-            setUser(currentUser);
+            setUser({ _id: currentUser._id, username: currentUser.username });
         } else {
             !emptyField(formValues) && !validationErrors.login && setValidationErrors(state => ({
                 ...state,
