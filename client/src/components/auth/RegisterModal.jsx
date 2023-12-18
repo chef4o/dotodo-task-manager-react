@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { formEmptyFieldsHandler } from "../controllers/errorController";
-import { addUser, userExists } from "../services/userService";
-import { getFreeUuid, getUser } from "../controllers/userController";
+import { formEmptyFieldsHandler } from "../../controllers/errorController";
+import { addUser, userExists } from "../../services/userService";
+import { getUser } from "../../controllers/userController";
 import { isEmail } from "validator";
 
 

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { isPasswordValid } from "../controllers/userController";
-import { formEmptyFieldsHandler, emptyField } from "../controllers/errorController";
-import { getUser } from "../controllers/userController";
+import { isPasswordValid } from "../../controllers/userController";
+import { formEmptyFieldsHandler, emptyField } from "../../controllers/errorController";
+import { getUser } from "../../controllers/userController";
 
 export default function LoginModal({
     selectedPageBg,

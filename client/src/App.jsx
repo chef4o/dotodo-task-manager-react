@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react";
 import { Routes, Route } from 'react-router-dom'
-import Home from "./components/Home.jsx";
+import Home from "./components/home/Home.jsx";
 import AboutUs from "./components/AboutUs.jsx";
 import News from "./components/News.jsx";
-import Events from "./components/Events.jsx";
-import Checklists from "./components/Checklists.jsx";
-import Notes from "./components/Notes.jsx";
+import Events from "./components/events/Events.jsx";
+import Checklists from "./components/checklists/Checklists.jsx";
+import Notes from "./components/notes/Notes.jsx";
 import Nav from "./components/Nav.jsx";
-import NotFound from "./components/NotFound.jsx";
-import NoAccess from "./components/NoAccess.jsx";
+import NotFound from "./components/error/NotFound.jsx";
 import Footer from "./components/Footer.jsx";
 import taskTypes from "./assets/taskTypes.js";
 import { topNav, sideNav, bottomNav, connectNav } from "./assets/navElements.js"
 import Contacts from "./components/Contacts.jsx";
-import Profile from "./components/Profile.jsx";
+import Profile from "./components/profile/Profile.jsx";
 
 const App = () => {
 
@@ -79,17 +78,14 @@ const App = () => {
                 onNavigationClick={handleNavigationClick} />
 
             <Routes>
-                <Route path='/' element={<Home
-                    taskTypes={taskTypes}
-                    onItemClick={handleNavigationClick} />} />
-                <Route path='/notes' element={<Notes user={user} />} />
-                <Route path='/checklists' element={<Checklists user={user} />} />
-                <Route path='/events' element={<Events user={user} />} />
-                <Route path='/profile/:id' element={<Profile user={user} />} />
+                <Route path='/' element={<Home taskTypes={taskTypes} onItemClick={handleNavigationClick} />} />
+                <Route path='/notes' element={<Notes user={user} onItemClick={handleNavigationClick} />} />
+                <Route path='/checklists' element={<Checklists user={user} onItemClick={handleNavigationClick} />} />
+                <Route path='/events' element={<Events user={user} onItemClick={handleNavigationClick} />} />
+                <Route path='/profile/:id' element={<Profile user={user} onItemClick={handleNavigationClick} />} />
                 <Route path='/about' element={<AboutUs />} />
                 <Route path='/contacts' element={<Contacts />} />
                 <Route path='/news' element={<News />} />
-                <Route path='/403' element={<NoAccess />} />
                 <Route path='*' element={<NotFound />} />
             </Routes>
 

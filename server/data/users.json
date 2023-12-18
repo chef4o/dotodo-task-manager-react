@@ -319,349 +319,194 @@
           "8186cbfa-fff3-4af9-a685-85c3b07c3298"
         ]
       }
-    }
-  },
-  "checklists": {
-    "c4864ad0-6ebd-445e-ae46-22af623ba74d": {
-      "_id": "c4864ad0-6ebd-445e-ae46-22af623ba74d",
-      "type": "General to-do/Shopping list",
-      "title": "Title 1",
-      "elements": [
-        {
-          "position": 1,
-          "content": "element 1 of checklist 1",
-          "dueDate": "22/05/2025",
-          "status": "Not started/Pending",
-          "note": "additional info"
-        },
-        {
-          "position": 2,
-          "content": "element 2 of checklist 1",
-          "dueDate": "14/10/2024",
-          "status": "In progress/NA",
-          "note": ""
-        },
-        {
-          "position": 3,
-          "content": "element 3 of checklist 1",
-          "dueDate": "27/08/2025",
-          "status": "Done",
-          "note": ""
-        }
-      ],
-      "sharedWith": [
-        "fb3277e2-979b-4587-b9c1-da0ffbd0c9fa",
-        "5f126aa9-aa43-4e6c-9b04-c85776ff3b83"
-      ],
-      "isArchived": true,
-      "dueDate": "21/02/2024"
     },
-    "d1afcfe3-3c5e-4085-a923-1ad46499e36e": {
-      "_id": "d1afcfe3-3c5e-4085-a923-1ad46499e36e",
-      "type": "General to-do/Shopping list",
-      "title": "Title 2",
-      "elements": [
-        {
-          "position": 1,
-          "content": "element 1 of checklist 2",
-          "dueDate": "31/08/2024",
-          "status": "Not started/Pending",
-          "note": "additional info"
+    "checklists": {
+      "c4864ad0-6ebd-445e-ae46-22af623ba76d": {
+        "_id": "c4864ad0-6ebd-445e-ae46-22af623ba76d",
+        "type": "General to-do/Shopping list",
+        "title": "Title 1",
+        "elements": {
+          "c3865ad0-6cbd-445e-ae46-22ag624ba74d": {
+            "_id": "c3865ad0-6cbd-445e-ae46-22ag624ba74d",
+            "position": 1,
+            "content": "element 1 of checklist 1",
+            "dueDate": "22/05/2025",
+            "status": "Not started/Pending",
+            "note": "additional info"
+          },
+          "c3664bd0-6cbd-445e-ac46-22bg624ba74c": {
+            "_id": "c3664bd0-6cbd-445e-ac46-22bg624ba74c",
+            "position": 2,
+            "content": "element 2 of checklist 1",
+            "dueDate": "14/10/2024",
+            "status": "In progress/NA",
+            "note": ""
+          },
+          "c3864ad0-6cbd-445e-ae46-22ah624ba74a": {
+            "_id": "c3864ad0-6cbd-445e-ae46-22ah624ba74a",
+            "position": 3,
+            "content": "element 3 of checklist 1",
+            "dueDate": "27/08/2025",
+            "status": "Done",
+            "note": ""
+          }
         },
-        {
-          "position": 2,
-          "content": "element 2 of checklist 2",
-          "dueDate": "11/10/2024",
-          "status": "In progress/NA",
-          "note": ""
+        "sharedWith": [
+          "fb3277e2-979b-4587-b9c1-da0ffbd0c9fa",
+          "5f126aa9-aa43-4e6c-9b04-c85776ff3b83"
+        ],
+        "isArchived": true,
+        "dueDate": "21/02/2024"
+      },
+      "d1afcfe3-3c5e-4085-a923-1ad46499e36e": {
+        "_id": "d1afcfe3-3c5e-4085-a923-1ad46499e36e",
+        "type": "General to-do/Shopping list",
+        "title": "Title 2",
+        "elements": {
+          "c3865ad0-6cbd-445e-ae46-22ag624ba74d": {
+            "_id": "c3865ad0-6cbd-445e-ae46-22ag624ba74d",
+            "position": 1,
+            "content": "element 1 of checklist 1",
+            "dueDate": "22/05/2025",
+            "status": "Not started/Pending",
+            "note": "additional info"
+          },
+          "c3664bd0-6cbd-445e-ac46-22bg624ba74c": {
+            "_id": "c3664bd0-6cbd-445e-ac46-22bg624ba74c",
+            "position": 2,
+            "content": "element 2 of checklist 1",
+            "dueDate": "14/10/2024",
+            "status": "In progress/NA",
+            "note": ""
+          },
+          "c3864ad0-6cbd-445e-ae46-22ah624ba74a": {
+            "_id": "c3864ad0-6cbd-445e-ae46-22ah624ba74a",
+            "position": 3,
+            "content": "element 3 of checklist 1",
+            "dueDate": "27/08/2025",
+            "status": "Done",
+            "note": ""
+          }
         },
-        {
-          "position": 3,
-          "content": "element 3 of checklist 2",
-          "dueDate": "17/08/2024",
-          "status": "Done",
-          "note": ""
-        }
-      ],
-      "sharedWith": [
-        "8b877604-22f3-4926-8a8e-718ed434d929",
-        "18a74e46-bf1d-4304-b4b4-30ab9f85be9f"
-      ],
-      "isArchived": true,
-      "dueDate": "27/04/2025"
+        "sharedWith": [
+          "8b877604-22f3-4926-8a8e-718ed434d929",
+          "18a74e46-bf1d-4304-b4b4-30ab9f85be9f"
+        ],
+        "isArchived": true,
+        "dueDate": "27/04/2025"
+      },
+      "f15f8cb3-4f48-4896-b1c4-040b4ddd8cb4": {
+        "_id": "f15f8cb3-4f48-4896-b1c4-040b4ddd8cb4",
+        "type": "General to-do/Shopping list",
+        "title": "Title 3",
+        "elements": {
+          "c3864ad0-6cbd-445e-ae46-22ag624ba74d": {
+            "_id": "c3864ad0-6cbd-445e-ae46-22ag624ba74d",
+            "position": 1,
+            "content": "element 1 of checklist 3",
+            "dueDate": "16/04/2024",
+            "status": "Not started/Pending",
+            "note": "additional info"
+          },
+          "c3664ad0-6cbd-445e-ae46-22bg624ba74c": {
+            "_id": "c3664ad0-6cbd-445e-ae46-22bg624ba74c",
+            "position": 2,
+            "content": "element 2 of checklist 3",
+            "dueDate": "16/04/2024",
+            "status": "In progress/NA",
+            "note": ""
+          },
+          "c3864ad0-6cbd-445e-ae46-22ah624ba74a": {
+            "_id": "c3864ad0-6cbd-445e-ae46-22ah624ba74a",
+            "position": 3,
+            "content": "element 3 of checklist 3",
+            "dueDate": "27/03/2024",
+            "status": "Done",
+            "note": ""
+          }
+        },
+        "sharedWith": [
+          "2e9f8cb7-139c-4798-bb05-b307ccb1999c",
+          "50466695-cefd-4f66-80bf-b5d01d3a0f61"
+        ],
+        "isArchived": true,
+        "dueDate": "22/01/2024"
+      },
+      "c4864bd0-6ebd-442e-ae46-28af623ba74d": {
+        "_id": "c4864bd0-6ebd-442e-ae46-28af623ba74d",
+        "type": "General to-do/Shopping list",
+        "title": "Title 1",
+        "elements": {
+          "c3862ad0-6cbd-445e-ae46-22ag624ba74d": {
+            "_id": "c3862ad0-6cbd-445e-ae46-22ag624ba74d",
+            "position": 1,
+            "content": "element 1 of checklist 1",
+            "dueDate": "22/05/2025",
+            "status": "Not started/Pending",
+            "note": "additional info"
+          },
+          "c3664ad0-6ccd-445e-ae46-22bg624ba74c": {
+            "_id": "c3664ad0-6ccd-445e-ae46-22bg624ba74c",
+            "position": 2,
+            "content": "element 2 of checklist 1",
+            "dueDate": "14/10/2024",
+            "status": "In progress/NA",
+            "note": ""
+          },
+          "c3864ad0-6cad-445e-ae46-22ah624ba74a": {
+            "_id": "c3864ad0-6cad-445e-ae46-22ah624ba74a",
+            "position": 3,
+            "content": "element 3 of checklist 1",
+            "dueDate": "27/08/2025",
+            "status": "Done",
+            "note": ""
+          }
+        },
+        "sharedWith": [
+          "fb3277e2-979b-4587-b9c1-da0ffbd0c9fa",
+          "5f126aa9-aa43-4e6c-9b04-c85776ff3b83"
+        ],
+        "isArchived": true,
+        "dueDate": "21/02/2024"
+      },
+      "d1afafe3-3c5e-4065-a923-1ad42499e36e": {
+        "_id": "d1afafe3-3c5e-4065-a923-1ad42499e36e",
+        "type": "General to-do/Shopping list",
+        "title": "Title 2",
+        "elements": {
+          "c3861ad0-6cbd-445e-ae46-22ah624ba74a": {
+            "_id": "c3861ad0-6cbd-445e-ae46-22ah624ba74a",
+            "position": 1,
+            "content": "element 1 of checklist 2",
+            "dueDate": "31/08/2024",
+            "status": "Not started/Pending",
+            "note": "additional info"
+          },
+          "c3664ad0-6cbd-441e-ae46-22bg624ba74c": {
+            "_id": "c3664ad0-6cbd-441e-ae46-22bg624ba74c",
+            "position": 2,
+            "content": "element 2 of checklist 2",
+            "dueDate": "11/10/2024",
+            "status": "In progress/NA",
+            "note": ""
+          },
+          "c3824ad0-6cbd-445e-ae46-22ag624ba74d": {
+            "_id": "c3824ad0-6cbd-445e-ae46-22ag624ba74d",
+            "position": 3,
+            "content": "element 3 of checklist 2",
+            "dueDate": "17/08/2024",
+            "status": "Done",
+            "note": ""
+          }
+        },
+        "sharedWith": [
+          "8b877604-22f3-4926-8a8e-718ed434d929",
+          "18a74e46-bf1d-4304-b4b4-30ab9f85be9f"
+        ],
+        "isArchived": true,
+        "dueDate": "27/04/2025"
+      }
     },
-    "f15f8cb3-4f48-4896-b1c4-040b4ddd8cb4": {
-      "_id": "f15f8cb3-4f48-4896-b1c4-040b4ddd8cb4",
-      "type": "General to-do/Shopping list",
-      "title": "Title 3",
-      "elements": [
-        {
-          "position": 1,
-          "content": "element 1 of checklist 3",
-          "dueDate": "16/04/2024",
-          "status": "Not started/Pending",
-          "note": "additional info"
-        },
-        {
-          "position": 2,
-          "content": "element 2 of checklist 3",
-          "dueDate": "16/04/2024",
-          "status": "In progress/NA",
-          "note": ""
-        },
-        {
-          "position": 3,
-          "content": "element 3 of checklist 3",
-          "dueDate": "27/03/2024",
-          "status": "Done",
-          "note": ""
-        }
-      ],
-      "sharedWith": [
-        "2e9f8cb7-139c-4798-bb05-b307ccb1999c",
-        "50466695-cefd-4f66-80bf-b5d01d3a0f61"
-      ],
-      "isArchived": true,
-      "dueDate": "22/01/2024"
-    },
-    "f5ba6b3c-6493-4fcb-98d8-a2205b8b3190": {
-      "_id": "f5ba6b3c-6493-4fcb-98d8-a2205b8b3190",
-      "type": "General to-do/Shopping list",
-      "title": "Title 4",
-      "elements": [
-        {
-          "position": 1,
-          "content": "element 1 of checklist 4",
-          "dueDate": "08/08/2024",
-          "status": "Not started/Pending",
-          "note": "additional info"
-        },
-        {
-          "position": 2,
-          "content": "element 2 of checklist 4",
-          "dueDate": "22/02/2024",
-          "status": "In progress/NA",
-          "note": ""
-        },
-        {
-          "position": 3,
-          "content": "element 3 of checklist 4",
-          "dueDate": "27/12/2024",
-          "status": "Done",
-          "note": ""
-        }
-      ],
-      "sharedWith": [
-        "d023ba04-475a-4723-a75e-8e8e803e6bd3",
-        "230e5606-0d03-463b-a053-81088fafdfd0"
-      ],
-      "isArchived": true,
-      "dueDate": "09/08/2025"
-    },
-    "d4c68203-136a-496c-a09e-72cbadb554b6": {
-      "_id": "d4c68203-136a-496c-a09e-72cbadb554b6",
-      "type": "General to-do/Shopping list",
-      "title": "Title 5",
-      "elements": [
-        {
-          "position": 1,
-          "content": "element 1 of checklist 5",
-          "dueDate": "21/03/2025",
-          "status": "Not started/Pending",
-          "note": "additional info"
-        },
-        {
-          "position": 2,
-          "content": "element 2 of checklist 5",
-          "dueDate": "25/09/2025",
-          "status": "In progress/NA",
-          "note": ""
-        },
-        {
-          "position": 3,
-          "content": "element 3 of checklist 5",
-          "dueDate": "06/12/2024",
-          "status": "Done",
-          "note": ""
-        }
-      ],
-      "sharedWith": [
-        "7dfb1926-e649-4f5e-9994-59c408a726e3",
-        "2c6fb151-4262-40f6-85c6-55d99d0f0082"
-      ],
-      "isArchived": true,
-      "dueDate": "05/05/2025"
-    },
-    "7d0efd6b-c514-4fb0-b259-e20d7090dd6e": {
-      "_id": "7d0efd6b-c514-4fb0-b259-e20d7090dd6e",
-      "type": "General to-do/Shopping list",
-      "title": "Title 6",
-      "elements": [
-        {
-          "position": 1,
-          "content": "element 1 of checklist 6",
-          "dueDate": "09/07/2025",
-          "status": "Not started/Pending",
-          "note": "additional info"
-        },
-        {
-          "position": 2,
-          "content": "element 2 of checklist 6",
-          "dueDate": "14/09/2024",
-          "status": "In progress/NA",
-          "note": ""
-        },
-        {
-          "position": 3,
-          "content": "element 3 of checklist 6",
-          "dueDate": "20/10/2025",
-          "status": "Done",
-          "note": ""
-        }
-      ],
-      "sharedWith": [
-        "290d2595-2db4-4bcb-9a7d-9cba950e6924",
-        "462abe56-c8d2-4efd-bed8-b4ca0dbf982c"
-      ],
-      "isArchived": true,
-      "dueDate": "04/03/2025"
-    },
-    "96d22c8f-7a22-49ce-a98c-d27e989b4253": {
-      "_id": "96d22c8f-7a22-49ce-a98c-d27e989b4253",
-      "type": "General to-do/Shopping list",
-      "title": "Title 7",
-      "elements": [
-        {
-          "position": 1,
-          "content": "element 1 of checklist 7",
-          "dueDate": "25/06/2024",
-          "status": "Not started/Pending",
-          "note": "additional info"
-        },
-        {
-          "position": 2,
-          "content": "element 2 of checklist 7",
-          "dueDate": "01/01/2024",
-          "status": "In progress/NA",
-          "note": ""
-        },
-        {
-          "position": 3,
-          "content": "element 3 of checklist 7",
-          "dueDate": "30/08/2024",
-          "status": "Done",
-          "note": ""
-        }
-      ],
-      "sharedWith": [
-        "184b0afa-2b63-4c30-a267-b862b4c73a32",
-        "ca0b09ac-568a-4abc-87ea-75ac2daddf5d"
-      ],
-      "isArchived": true,
-      "dueDate": "10/04/2025"
-    },
-    "8cbfcd4a-4616-4cbd-bd47-7f2f502ff109": {
-      "_id": "8cbfcd4a-4616-4cbd-bd47-7f2f502ff109",
-      "type": "General to-do/Shopping list",
-      "title": "Title 8",
-      "elements": [
-        {
-          "position": 1,
-          "content": "element 1 of checklist 8",
-          "dueDate": "14/01/2024",
-          "status": "Not started/Pending",
-          "note": "additional info"
-        },
-        {
-          "position": 2,
-          "content": "element 2 of checklist 8",
-          "dueDate": "26/11/2025",
-          "status": "In progress/NA",
-          "note": ""
-        },
-        {
-          "position": 3,
-          "content": "element 3 of checklist 8",
-          "dueDate": "21/08/2025",
-          "status": "Done",
-          "note": ""
-        }
-      ],
-      "sharedWith": [
-        "2ed71bc5-ff2c-4689-9191-262c93b8518f",
-        "2b6fc40b-b06a-4b25-b8ae-36804772ae7e"
-      ],
-      "isArchived": true,
-      "dueDate": "01/02/2024"
-    },
-    "224aa4cd-6389-4ff9-9ded-610221c26bea": {
-      "_id": "224aa4cd-6389-4ff9-9ded-610221c26bea",
-      "type": "General to-do/Shopping list",
-      "title": "Title 9",
-      "elements": [
-        {
-          "position": 1,
-          "content": "element 1 of checklist 9",
-          "dueDate": "02/07/2024",
-          "status": "Not started/Pending",
-          "note": "additional info"
-        },
-        {
-          "position": 2,
-          "content": "element 2 of checklist 9",
-          "dueDate": "28/03/2024",
-          "status": "In progress/NA",
-          "note": ""
-        },
-        {
-          "position": 3,
-          "content": "element 3 of checklist 9",
-          "dueDate": "10/12/2025",
-          "status": "Done",
-          "note": ""
-        }
-      ],
-      "sharedWith": [
-        "49ba0c3c-beb2-4888-a403-8fb948881896",
-        "9e641ce2-1784-46de-84e8-3b55c90ab57d"
-      ],
-      "isArchived": true,
-      "dueDate": "03/05/2025"
-    },
-    "437a59f0-df4d-46fe-8758-5dd3859c1ef0": {
-      "_id": "437a59f0-df4d-46fe-8758-5dd3859c1ef0",
-      "type": "General to-do/Shopping list",
-      "title": "Title 10",
-      "elements": [
-        {
-          "position": 1,
-          "content": "element 1 of checklist 10",
-          "dueDate": "12/11/2024",
-          "status": "Not started/Pending",
-          "note": "additional info"
-        },
-        {
-          "position": 2,
-          "content": "element 2 of checklist 10",
-          "dueDate": "29/06/2025",
-          "status": "In progress/NA",
-          "note": ""
-        },
-        {
-          "position": 3,
-          "content": "element 3 of checklist 10",
-          "dueDate": "09/08/2025",
-          "status": "Done",
-          "note": ""
-        }
-      ],
-      "sharedWith": [
-        "2074dc80-c44b-44bd-82f6-e0492f5ec991",
-        "f4620094-5ed2-4445-bbad-28f47574d997"
-      ],
-      "isArchived": true,
-      "dueDate": "11/03/2025"
-    }
-  },
-  "events": {}
+    "events": {}
+  }
 }

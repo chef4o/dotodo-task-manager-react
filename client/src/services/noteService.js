@@ -6,3 +6,11 @@ export const getAllNotes = async (userID) => {
 
   return Object.values(response);
 };
+
+export const getSomeNotesByDueDateDesc = async (userId, numberOfResults) => {
+  const response = await getAllNotes(userId);
+
+  const sortedNotes = Object.values(response).sort((a, b) => new Date(b.dueDate) - new Date(a.dueDate));
+
+  return sortedNotes.slice(-numberOfResults);
+}

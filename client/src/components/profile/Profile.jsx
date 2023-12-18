@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"
-import { findUserById } from "../services/userService";
+import { findUserById } from "../../services/userService";
+import { getSomeNotesByDueDateDesc } from "../../services/noteService";
 
 export default function Profile({ user }) {
     const { id } = useParams();
     const navigate = useNavigate();
 
     const [profileDetails, setProfileDetails] = useState({});
+    const [expiringNotes, setExpiringNotes] = useState([]);
 
     async function loadUser() {
         const userData = await findUserById(id);
@@ -24,6 +26,14 @@ export default function Profile({ user }) {
             })
         } else {
             navigate('/404');
+        }
+    }
+
+    async function getExpiringEvents() {
+        if (user._id === id ) {
+            const expiringEvents = await getSomeNotesByDueDateDesc(user._id, 4);
+
+            setExpiringNotes(expiringEvents);
         }
     }
 
@@ -62,6 +72,12 @@ export default function Profile({ user }) {
                     </div>
                 </div>
             </div>
+
+            <div className="expiring-notes">
+                            
+            </div>
+
+            <div className="latest-checklists"></div>
         </div>
 
     )

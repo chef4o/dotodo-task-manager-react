@@ -8,7 +8,7 @@
 
 .content.notes .note {
     position: relative;
-    width: 18%;
+    width: 17.8%;
     height: 16vw;
     background-color: var(--color-notes-bckgd);
     box-shadow: var(--shadow-base);

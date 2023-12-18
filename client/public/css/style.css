@@ -4,6 +4,7 @@
 @import url("./auth-form.css");
 @import url("./home.css");
 @import url("./notes.css");
+@import url("./checklists.css");
 @import url("./profile.css");
 @import url("./error.css");
 @import url("./footer.css");
@@ -30,6 +31,8 @@
   --color-menu-icon-green-dark: #25541b;
   --color-error-red: #5c0707;
   --color-notes-bckgd: #f7e971;
+  --color-checklists-bckgd: #c7b97e;
+  --color-checklist-new-bckgd: #e5d79c;
   --color-notes-border: #9d954b;
 
   --shadow-base: 1px 4px 4px 1px rgba(0, 0, 0, 0.2);

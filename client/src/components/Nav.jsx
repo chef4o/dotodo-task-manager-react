@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import LoginModal from "./LoginModal";
-import RegisterModal from "./RegisterModal";
+import LoginModal from "./auth/LoginModal";
+import RegisterModal from "./auth/RegisterModal";
 import { Link } from 'react-router-dom'
 
 export default function Nav({
