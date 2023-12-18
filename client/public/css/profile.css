@@ -1,0 +1,39 @@
+.content.profile .user-details {
+    display: flex;
+    height: 24vw;
+}
+
+.content.profile .user-details .profile-image,
+.content.profile .user-details .profile-details {
+    padding: 2vw;
+}
+
+.content.profile .user-details .profile-details {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.content.profile .user-details .profile-image {
+    width: 30%;
+    text-align: center;
+}
+
+.content.profile .user-details .profile-image img {
+    height: 12vw;
+    border-radius: 50%;
+}
+
+.content.profile .user-details .profile-details .personal,
+.content.profile .user-details .profile-details .contact {
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+    width: 35%;
+    font-size: 1.6vw;
+}
+
+.content.profile .user-details .profile-details .contact {
+    text-align: right;
+}

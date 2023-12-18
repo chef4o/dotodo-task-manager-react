@@ -36,7 +36,9 @@ export default function Nav({
         setUser={setUser} />}
 
       <div className="top-bar">
-        {user.username && <p className="greeting">Hello, {user.username}</p>}
+        {user.firstName
+          ? <p className="greeting">Hello, {user.firstName}</p>
+          : user.username && <p className="greeting">Hello, {user.username}</p>}
 
         <ul className="top-bar-controls">
           {topNav.map(item =>

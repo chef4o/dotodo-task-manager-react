@@ -3,6 +3,8 @@
 @import url("./nav.css");
 @import url("./auth-form.css");
 @import url("./home.css");
+@import url("./notes.css");
+@import url("./profile.css");
 @import url("./error.css");
 @import url("./footer.css");
 
@@ -27,6 +29,8 @@
   --color-menu-green-dark: #4c7443;
   --color-menu-icon-green-dark: #25541b;
   --color-error-red: #5c0707;
+  --color-notes-bckgd: #f7e971;
+  --color-notes-border: #9d954b;
 
   --shadow-base: 1px 4px 4px 1px rgba(0, 0, 0, 0.2);
   --left-box-shadow: -10px 0 10px rgba(0, 0, 0, 0.2);
@@ -52,11 +56,12 @@ main {
 
 .content {
   width: 60vw;
-  height: 93vh;
+  height: 93.1vh;
   min-height: 430px;
   margin-top: 3.5vh;
   background-color: var(--color-gray-light);
   box-shadow: var(--left-box-shadow);
+  overflow-y: auto;
 }
 
 main.home {

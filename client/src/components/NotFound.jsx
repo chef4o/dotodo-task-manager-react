@@ -1,4 +1,4 @@
-export default function Events() {
+export default function NotFound() {
     return (
         <div className="content not-found">
             <h1>404 not found</h1>

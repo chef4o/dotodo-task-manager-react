@@ -8,6 +8,7 @@ import Checklists from "./components/Checklists.jsx";
 import Notes from "./components/Notes.jsx";
 import Nav from "./components/Nav.jsx";
 import NotFound from "./components/NotFound.jsx";
+import NoAccess from "./components/NoAccess.jsx";
 import Footer from "./components/Footer.jsx";
 import taskTypes from "./assets/taskTypes.js";
 import { topNav, sideNav, bottomNav, connectNav } from "./assets/navElements.js"
@@ -84,10 +85,11 @@ const App = () => {
                 <Route path='/notes' element={<Notes user={user} />} />
                 <Route path='/checklists' element={<Checklists user={user} />} />
                 <Route path='/events' element={<Events user={user} />} />
-                <Route path='/profile/:id' element={<Profile user={user} setUser={setUser} />} />
+                <Route path='/profile/:id' element={<Profile user={user} />} />
                 <Route path='/about' element={<AboutUs />} />
                 <Route path='/contacts' element={<Contacts />} />
                 <Route path='/news' element={<News />} />
+                <Route path='/403' element={<NoAccess />} />
                 <Route path='*' element={<NotFound />} />
             </Routes>
 

@@ -1,6 +1,7 @@
 import * as request from "../lib/request";
 
 const baseUrl = "http://localhost:3030/jsonstore/users";
+const testUserid = "07f260f4-466c-4607-9a33-f7273b24f1b4";
 
 export const getAllUsers = async () => {
   const response = await request.get(baseUrl);
@@ -11,7 +12,7 @@ export const getAllUsers = async () => {
 export const findUserById = async (id) => {
   const response = await request.get(`${baseUrl}/${id}`);
 
-  return response.json();
+  return response;
 };
 
 export const findUserByEmail = async (email) => {
@@ -28,11 +29,17 @@ export const findUserByUsername = async (username) => {
 export const deleteUser = async (userId) => {
   const response = await request.remove(`${baseUrl}/${userId}`);
 
-  return response.json();
+  return response;
 };
 
 export const addUser = async (body) => {
   const response = request.post(baseUrl, body);
+
+  return response;
+};
+
+export const editUser = async (body) => {
+  const response = request.put(baseUrl, body);
 
   return response;
 };

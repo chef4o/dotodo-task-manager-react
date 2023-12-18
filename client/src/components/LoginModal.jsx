@@ -33,7 +33,7 @@ export default function LoginModal({
         if (currentUser && isPasswordValid(currentUser.password, formValues.password)) {
             setValidationErrors(formInitialState);
             hideAuthModal();
-            setUser({ _id: currentUser._id, username: currentUser.username });
+            setUser({ _id: currentUser._id, username: currentUser.username, firstName:currentUser.firstName });
         } else {
             !emptyField(formValues) && !validationErrors.login && setValidationErrors(state => ({
                 ...state,
@@ -43,7 +43,6 @@ export default function LoginModal({
     }
 
     const usernameInputRef = useRef();
-
     useEffect(() => { usernameInputRef.current.focus(); }, []);
 
     const changeHandler = (e) => {
