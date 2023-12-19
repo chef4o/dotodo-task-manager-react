@@ -1,9 +1,14 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { getAllNotes } from "../../services/noteService";
 import NoteItem from "./NoteItem";
 import NoAccess from "../error/NoAccess";
+import NavContext from "../../contexts/navContext";
+import AuthContext from "../../contexts/authContext";
 
-export default function Notes({ user, onItemClick }) {
+export default function Notes() {
+    
+    const { handleNavigationClick } = useContext(NavContext);
+    const { user } = useContext(AuthContext);
 
     const [notes, setNotes] = useState([]);
     const [activeNoteId, setActiveNoteId] = useState('');
@@ -21,7 +26,7 @@ export default function Notes({ user, onItemClick }) {
         <div className="content notes">
 
             {!user._id
-                ? <NoAccess onItemClick={onItemClick} />
+                ? <NoAccess onItemClick={handleNavigationClick} />
                 : notes
                     ? <ul className="notes-list">
                         {notes.map(item =>

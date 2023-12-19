@@ -1,7 +1,11 @@
+import { useContext } from "react";
 import TaskType from "./TaskType";
+import NavContext from "../../contexts/navContext";
 
-export default function Home({ taskTypes, onItemClick }) {
-  
+export default function Home({ taskTypes }) {
+
+  const { handleNavigationClick } = useContext(NavContext);
+
   return (
     <div className="content home">
       <div className="intro">
@@ -16,8 +20,8 @@ export default function Home({ taskTypes, onItemClick }) {
           prioritize, and track tasks effortlessly, ensuring you never forget
           a thing or miss a deadline again. To unlock the full potential of our
           task management platform and enjoy personalized features, we invite you
-          to<a className="register" onClick={() => onItemClick('register')}> create an account </a>or
-          simply<a className="login" onClick={() => onItemClick('login')}> log in </a>if you&apos;re
+          to<a className="register" onClick={() => handleNavigationClick('register')}> create an account </a>or
+          simply<a className="login" onClick={() => handleNavigationClick('login')}> log in </a>if you&apos;re
           already a registered member.
         </p>
       </div>
@@ -29,8 +33,7 @@ export default function Home({ taskTypes, onItemClick }) {
           .map(type => <TaskType
             key={type.name}
             name={type.name}
-            headerText={type.headerText}
-            onItemClick={onItemClick} />)}
+            headerText={type.headerText} />)}
       </ul>
     </div>
   );

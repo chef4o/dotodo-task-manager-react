@@ -13,6 +13,8 @@ import taskTypes from "./assets/taskTypes.js";
 import { topNav, sideNav, bottomNav, connectNav } from "./assets/navElements.js"
 import Contacts from "./components/Contacts.jsx";
 import Profile from "./components/profile/Profile.jsx";
+import NavContext from "./contexts/navContext.js";
+import AuthContext from "./contexts/authContext.js";
 
 const App = () => {
 
@@ -65,32 +67,30 @@ const App = () => {
     }, [user]);
 
     return (
-        <main className={selectedPageBg}>
-            <Nav selectedPageBg={selectedPageBg}
-                topNav={topNavElements}
-                sideNavElements={sideNavElements}
-                connectNav={connectNav}
-                bottomNav={bottomNav}
-                user={user}
-                setUser={setUser}
-                showAuthModal={showAuthModal}
-                hideAuthModal={hideAuthModalHandler}
-                onNavigationClick={handleNavigationClick} />
+        <NavContext.Provider value={{ handleNavigationClick, selectedPageBg }}>
+            <AuthContext.Provider value={{ user, setUser, showAuthModal, hideAuthModal: hideAuthModalHandler }}>
+                <main className={selectedPageBg}>
+                    <Nav topNav={topNavElements}
+                        sideNavElements={sideNavElements}
+                        connectNav={connectNav}
+                        bottomNav={bottomNav} />
 
-            <Routes>
-                <Route path='/' element={<Home taskTypes={taskTypes} onItemClick={handleNavigationClick} />} />
-                <Route path='/notes' element={<Notes user={user} onItemClick={handleNavigationClick} />} />
-                <Route path='/checklists' element={<Checklists user={user} onItemClick={handleNavigationClick} />} />
-                <Route path='/events' element={<Events user={user} onItemClick={handleNavigationClick} />} />
-                <Route path='/profile/:id' element={<Profile user={user} onItemClick={handleNavigationClick} />} />
-                <Route path='/about' element={<AboutUs />} />
-                <Route path='/contacts' element={<Contacts />} />
-                <Route path='/news' element={<News />} />
-                <Route path='*' element={<NotFound />} />
-            </Routes>
+                    <Routes>
+                        <Route path='/' element={<Home taskTypes={taskTypes} />} />
+                        <Route path='/notes' element={<Notes />} />
+                        <Route path='/checklists' element={<Checklists />} />
+                        <Route path='/events' element={<Events />} />
+                        <Route path='/profile/:id' element={<Profile />} />
+                        <Route path='/about' element={<AboutUs />} />
+                        <Route path='/contacts' element={<Contacts />} />
+                        <Route path='/news' element={<News />} />
+                        <Route path='*' element={<NotFound />} />
+                    </Routes>
 
-            <Footer />
-        </main>
+                    <Footer />
+                </main>
+            </AuthContext.Provider>
+        </NavContext.Provider>
     );
 }
 

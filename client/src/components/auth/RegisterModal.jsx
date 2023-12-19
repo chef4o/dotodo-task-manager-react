@@ -1,14 +1,15 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { formEmptyFieldsHandler } from "../../controllers/errorController";
 import { addUser, userExists } from "../../services/userService";
 import { getUser } from "../../controllers/userController";
 import { isEmail } from "validator";
+import NavContext from "../../contexts/navContext";
+import AuthContext from "../../contexts/authContext";
 
+export default function RegisterModal() {
 
-export default function RegisterModal({
-    selectedPageBg,
-    hideAuthModal,
-    setUser }) {
+    const { selectedPageBg } = useContext(NavContext);
+    const { setUser, hideAuthModal } = useContext(AuthContext);
 
     const FORM_FIELDS = {
         email: 'email',

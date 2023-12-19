@@ -1,11 +1,16 @@
 import { addChecklist, deleteChecklist, getAllChecklists } from "../../services/checklistService";
 import Checklist from "./Checklist";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import NoAccess from "../error/NoAccess";
 import NoContent from "../error/NoContent";
 import EmptyChecklist from "./EmptyChecklist";
+import NavContext from "../../contexts/navContext";
+import AuthContext from "../../contexts/authContext";
 
-export default function Checklists({ user, onItemClick }) {
+export default function Checklists() {
+
+    const { handleNavigationClick } = useContext(NavContext);
+    const { user } = useContext(AuthContext);
 
     const [checklists, setChecklists] = useState([]);
     const [activeChecklistId, setActiveChecklistId] = useState('');
@@ -28,7 +33,7 @@ export default function Checklists({ user, onItemClick }) {
     }
 
     const deleteChecklistHandler = async (id) => {
-        await deleteChecklist(user_id, id);
+        await deleteChecklist(user._id, id);
 
         setChecklists(checklists.filter(checklist => checklist._id !== id));
     }
@@ -45,15 +50,15 @@ export default function Checklists({ user, onItemClick }) {
     return (
         <div className="content checklists">
             {!user._id
-                ? <NoAccess onItemClick={onItemClick} />
+                ? <NoAccess onItemClick={handleNavigationClick} />
                 : checklists.length > 0
                     ? <ul className="checklists-list">
                         {checklists.map(item =>
-                            <Checklist key={item._id} checklist={item} user={user}
+                            <Checklist key={item._id} checklist={item}
                                 activeChecklistId={activeChecklistId} setActiveChecklistId={setActiveChecklistId}
                                 deleteChecklist={deleteChecklistHandler} />
                         )}
-                        <EmptyChecklist user={user} setChecklists={setChecklists}></EmptyChecklist>
+                        <EmptyChecklist setChecklists={setChecklists}></EmptyChecklist>
                     </ul>
                     : <div className="no-items">
 

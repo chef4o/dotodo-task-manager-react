@@ -1,12 +1,14 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { isPasswordValid } from "../../controllers/userController";
 import { formEmptyFieldsHandler, emptyField } from "../../controllers/errorController";
 import { getUser } from "../../controllers/userController";
+import AuthContext from "../../contexts/authContext";
+import NavContext from "../../contexts/navContext";
 
-export default function LoginModal({
-    selectedPageBg,
-    hideAuthModal,
-    setUser }) {
+export default function LoginModal() {
+
+    const { selectedPageBg } = useContext(NavContext);
+    const { setUser, hideAuthModal } = useContext(AuthContext);
 
     const FORM_FIELDS = {
         username: 'username',
@@ -33,7 +35,7 @@ export default function LoginModal({
         if (currentUser && isPasswordValid(currentUser.password, formValues.password)) {
             setValidationErrors(formInitialState);
             hideAuthModal();
-            setUser({ _id: currentUser._id, username: currentUser.username, firstName:currentUser.firstName });
+            setUser({ _id: currentUser._id, username: currentUser.username, firstName: currentUser.firstName });
         } else {
             !emptyField(formValues) && !validationErrors.login && setValidationErrors(state => ({
                 ...state,

@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import NavContext from "../../contexts/navContext";
 
-export default function TaskType({ name, headerText, onItemClick }) {
+export default function TaskType({ name, headerText }) {
 
-    const handleNavigationClick = (page) => {
-        onItemClick(page);
-    };
+  const { handleNavigationClick } = useContext(NavContext);
 
     return (
         <Link to={name} onClick={() => handleNavigationClick(name.toLocaleLowerCase())}>

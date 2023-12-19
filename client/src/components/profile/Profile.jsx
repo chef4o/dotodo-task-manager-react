@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"
 import { findUserById } from "../../services/userService";
 import { getSomeNotesByDueDateDesc } from "../../services/noteService";
 import ProfileDetails from "./ProfileDetails";
 import ProfileNotes from "./ProfileNotes";
+import AuthContext from "../../contexts/authContext";
 
-export default function Profile({ user }) {
+export default function Profile() {
+
+    const { user } = useContext(AuthContext);
     const { id } = useParams();
     const navigate = useNavigate();
 

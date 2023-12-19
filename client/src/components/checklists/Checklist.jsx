@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ChecklistItem from "./ChecklistItem";
 import { deleteChecklistItem } from "../../services/checklistService";
+import AuthContext from "../../contexts/authContext";
 
-export default function Checklist({ user, checklist, activeChecklistId, setActiveChecklistId, deleteChecklist }) {
+export default function Checklist({ checklist, activeChecklistId, setActiveChecklistId, deleteChecklist }) {
     const [tasks, setTasks] = useState([]);
     const [text, setText] = useState('');
     const [title, setTitle] = useState(checklist.title);
+
+    const { user } = useContext(AuthContext);
 
     function addTask(text) {
         if (text) {

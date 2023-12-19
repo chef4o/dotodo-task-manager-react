@@ -1,39 +1,23 @@
-import { useEffect } from "react";
+import { useContext } from "react";
 import LoginModal from "./auth/LoginModal";
 import RegisterModal from "./auth/RegisterModal";
 import { Link } from 'react-router-dom'
+import NavContext from "../contexts/navContext";
+import AuthContext from "../contexts/authContext";
 
-export default function Nav({
-  topNav,
-  sideNavElements,
-  connectNav,
-  bottomNav,
-  showAuthModal,
-  hideAuthModal,
-  selectedPageBg,
-  onNavigationClick,
-  user,
-  setUser,
-}) {
+export default function Nav({ topNav, sideNavElements, connectNav, bottomNav }) {
 
-  const handleNavigationClick = (page) => {
-    onNavigationClick(page);
-  };
+  const { handleNavigationClick, selectedPageBg } = useContext(NavContext);
+  const { user, showAuthModal, hideAuthModal } = useContext(AuthContext);
 
   return (
 
     <div className="nav">
       {(showAuthModal.login || showAuthModal.register) && <div className="backdrop" onClick={hideAuthModal} />}
 
-      {showAuthModal.login && <LoginModal
-        selectedPageBg={selectedPageBg}
-        hideAuthModal={hideAuthModal}
-        setUser={setUser} />}
+      {showAuthModal.login && <LoginModal />}
 
-      {showAuthModal.register && <RegisterModal
-        selectedPageBg={selectedPageBg}
-        hideAuthModal={hideAuthModal}
-        setUser={setUser} />}
+      {showAuthModal.register && <RegisterModal />}
 
       <div className="top-bar">
         {user.firstName
