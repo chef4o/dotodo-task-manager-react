@@ -14,12 +14,6 @@ import { topNav, sideNav, bottomNav, connectNav } from "./assets/navElements.js"
 import Contacts from "./components/Contacts.jsx";
 import Profile from "./components/profile/Profile.jsx";
 
-const testUser = {
-    _id: '07f260f4-466c-4607-9a33-f7273b24f1b4',
-    username: 'test',
-    firstName: "Stefan"
-}
-
 const App = () => {
 
     const [selectedPageBg, setSelectedPageBg] = useState("home");
@@ -28,7 +22,7 @@ const App = () => {
         login: false,
         register: false
     });
-    const [user, setUser] = useState(testUser); //to replace with {}
+    const [user, setUser] = useState({});
 
     const guestAuthNavElements = topNav.filter(item => item.name != "logout");
     const loggedAuthNavElements = topNav.filter(item => item.name === "logout");
