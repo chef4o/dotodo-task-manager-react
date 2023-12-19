@@ -9,8 +9,8 @@ export default function Notes({ user, onItemClick }) {
     const [activeNoteId, setActiveNoteId] = useState('');
 
     useEffect(() => {
-        if (testUserid) { //replace with actual userId
-            getAllNotes(testUserid)
+        if (user._id) {
+            getAllNotes(user._id)
                 .then(data => {
                     setNotes(data);
                 });

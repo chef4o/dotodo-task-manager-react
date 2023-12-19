@@ -37,8 +37,6 @@
     overflow-y: auto;
 }
 
-.content.checklists .checklist.new input {}
-
 .content.checklists .checklist .delete-checklist {
     position: absolute;
     right: 1vw;
@@ -99,10 +97,11 @@
     width: 1vw;
     height: 1vw;
     cursor: pointer;
-    margin-right: 1vw;
+    margin-right: 0.6vw;
 }
 
-.checklist .todo-item .text {
+.checklist .todo-item-text {
+    font-size: 1vw;
     margin-right: 1vw;
 }
 

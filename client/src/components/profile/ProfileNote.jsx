@@ -1,4 +1,4 @@
-export default function NoteItem({ note, activeNoteId, setActiveNoteId }) {
+export default function ProfileNote({ note, activeNoteId, setActiveNoteId }) {
 
     const handleXmarkClick = (event) => {
         event.stopPropagation();

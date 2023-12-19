@@ -1,17 +1,19 @@
 export default function AboutUs() {
 	return (
 		<div className="content about">
-			<h3>About</h3>
+			<h3>About me</h3>
 			<div>
-				<h1>We Have Free Templates for Everyone</h1>
 				<p>
-					Our website templates are created with inspiration, checked for quality and originality and meticulously sliced and coded. What’s more, they're absolutely free! You can do a lot with them. You can modify them. You can use them to design websites for clients, so long as you agree with the <a href="http://www.freewebsitetemplates.com/about/terms">Terms of Use</a>. You can even remove all our links if you want to.
+					I'm passionate about technology and programming, a journey that led me to create this task management website.
+					Inspired by my learning at SoftUni, this platform is designed to help people manage their time more effectively.
+					It's an evolving space, constantly improving to meet user needs. My goal is to offer a practical and straightforward
+					tool for everyone who seeks better organization in their daily routine. This website reflects my dedication to making
+					time management easier and more accessible for all.
 				</p>
-
-				<h1>We Have More Templates for You</h1>
-
-				<h1>Template details</h1>
-		
+				<br />
+				<h1>I hope you will like it and shape it alongside with me!</h1>
+				<br />
+				<h1>Thanks for your time and support!</h1>
 			</div>
 		</div>
 	);

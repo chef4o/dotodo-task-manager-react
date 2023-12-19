@@ -5,6 +5,12 @@
     height: 1vw;
 }
 
+.error.contact {
+    color: var(--color-error-red);
+    font-size: 1.6vw;
+    padding-top: 0.1vw;
+}
+
 .error.auth.login {
     font-size: 1vw;
     width: 31vw;
@@ -19,6 +25,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
     margin-top: 5vw;
 }
 
@@ -35,9 +42,11 @@
 }
 
 .error-page a {
+    font-weight: bold;
     cursor: pointer;
 }
 
 .error-page p {
     font-size: 2vw;
+    width: 30vw;
 }

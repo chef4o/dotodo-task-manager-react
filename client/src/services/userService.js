@@ -1,7 +1,5 @@
 import * as request from "../lib/request";
-
 const baseUrl = "http://localhost:3030/jsonstore/users";
-const testUserid = "07f260f4-466c-4607-9a33-f7273b24f1b4";
 
 export const getAllUsers = async () => {
   const response = await request.get(baseUrl);
