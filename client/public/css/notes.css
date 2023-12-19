@@ -38,6 +38,10 @@
     right: 5%;
 }
 
+.content.notes .note.new {
+    background-color: var(--color-checklist-new-bckgd);
+}
+
 .content.notes .note.new input {
     width: 8vw;
     border: none;
