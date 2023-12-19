@@ -2,40 +2,42 @@ export default function News() {
     return (
         <div className="content news">
             <div>
-                <h3>Blog With Sidebar Overview</h3>
+                <h3>Latest news and updates</h3>
                 <ul>
-                    <li>
-                        <a href="blog-single-with-image.html"><img src="images/girl-and-boy.jpg" alt="" /></a>
-                        <h4><a href="blog-single-with-image.html">Blog Post With Image</a></h4>
+                    <li className="news-article">
+                        <h4><a href="blog-single-with-image.html">New Feature Alert: Notes and Checklists Now Available</a></h4>
                         <div>
-                            <span>Posted on <a href="#">June 14, 2023</a> in <a href="#">Furniture Management</a></span>
-                            <span><a href="#">1 Comments</a></span>
+                            <span>Posted on <a href="#">19 Dec 2023</a> in <a href="#">Features</a></span>
+                            <span><a href="#">   1 Comments</a></span>
                         </div>
                         <p>
-                            This website template has been designed by Free Website Templates for you, for free. You can
-                            replace all this text with your own text. You can remove any link to our website from this
-                            website template...
+                        Our task management app just got better! We're thrilled to introduce two new features: Notes and Checklists. 
+                        These additions are crafted to provide you with more flexibility and control over your daily tasks. 
+                        The Notes feature allows for quick jotting down of ideas and thoughts, while Checklists offer a structured 
+                        format for task completion. These features are designed to cater to the diverse needs of our users, making 
+                        task management more efficient and personalized.
                         </p>
                         <a href="blog-single-with-image.html">Read More</a>
                     </li>
-                    <li>
-                        <a href="blog-single-with-video.html"><img src="images/video-image.jpg" alt="" /></a>
-                        <h4><a href="blog-single-with-video.html">Blog Post With Video</a></h4>
+                    <li className="news-article">
+                        <h4><a href="blog-single-with-video.html">Launch of Revolutionary Task Management App</a></h4>
                         <div>
-                            <span>Posted on <a href="#">June 14, 2023</a> in <a href="#">Maintenance and Cleaning</a></span>
-                            <span><a href="#">0 Comments</a></span>
+                            <span>Posted on <a href="#">17 Dec 2023</a> in <a href="#">Maintenance</a></span>
+                            <span><a href="#">  0 Comments</a></span>
                         </div>
                         <p>
-                            This website template has been designed by Free Website Templates for you, for free. You can
-                            replace all this text with your own text. You can remove any link to our website from this
-                            website template...
+                            We are excited to announce the launch of our innovative task management app, designed to streamline 
+                            your daily tasks and boost productivity. Our platform offers a user-friendly interface, making it 
+                            easier for you to organize and prioritize your to-do lists, notes, and schedules. With the goal of 
+                            enhancing personal and professional efficiency, this app is the result of extensive research and 
+                            commitment to improving time management for everyone.
                         </p>
                         <a href="blog-single-with-video.html">Read More</a>
                     </li>
                 </ul>
-                <div class="paging">
+                <div className="paging">
                     <ul>
-                        <li class="selected">
+                        <li className="selected">
                             <a href="#">1</a>
                         </li>
                         <li>

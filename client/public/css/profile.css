@@ -46,6 +46,7 @@
 .content.profile .expiring-notes .notes-list .note {
     padding: 1vw;
     margin: 1vw;
+    overflow: hidden;
 }
 
 .content.profile .expiring-notes .notes-list .note-details.active {
