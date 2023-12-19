@@ -175,7 +175,9 @@ export default function RegisterModal() {
                 const currentUser = await getUser(user.username);
                 setUser({
                     _id: currentUser._id,
-                    username: currentUser.username
+                    username: currentUser.username,
+                    firstName: currentUser.firstName,
+                    email: currentUser.email
                 });
                 hideAuthModal();
             } catch (error) {

@@ -1,10 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { createContact } from '../services/contactService';
+import AuthContext from '../contexts/authContext';
 
 export default function Contacts() {
+
+    const { user } = useContext(AuthContext);
+
     const [error, setError] = useState('');
     const [messageSent, setMessageSent] = useState(false);
     const [formData, setFormData] = useState({ name: '', email: '', phone: '', comment: '' });
+
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -26,6 +31,18 @@ export default function Contacts() {
             setError('Name, email, and message are mandatory.');
         }
     }
+
+    useEffect(() => {
+        console.log(user)
+        if (user) {
+            setFormData({
+                name: user.firstName || '',
+                email: user.email || '',
+                phone: user.phoneNumber || '',
+                comment: ''
+            })
+        }
+    }, [])
 
     useEffect(() => {
         if (messageSent) {
