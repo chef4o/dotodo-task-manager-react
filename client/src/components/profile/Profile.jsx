@@ -19,16 +19,7 @@ export default function Profile() {
         const userData = await findUserById(id);
 
         if (user._id === id && userData) {
-            setProfileDetails({
-                firstName: userData.firstName,
-                lastName: userData.lastName,
-                email: userData.email,
-                username: userData.username,
-                dateOfBirth: userData.dateOfBirth,
-                phoneNumber: userData.phoneNumber,
-                imageUrl: userData.imageUrl,
-                address: Object.values(userData.address),
-            })
+            setProfileDetails({...userData})
 
             await getExpiringEvents(userData._id, 4)
 
