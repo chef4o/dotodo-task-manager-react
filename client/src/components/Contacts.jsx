@@ -10,7 +10,6 @@ export default function Contacts() {
     const [messageSent, setMessageSent] = useState(false);
     const [formData, setFormData] = useState({ name: '', email: '', phone: '', comment: '' });
 
-
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     }
@@ -24,8 +23,6 @@ export default function Contacts() {
         if (isFormValid()) {
             setMessageSent(true);
             setError('');
-            console.log(messageSent);
-            // Here you can add your logic to handle form submission
         } else {
             setMessageSent(false);
             setError('Name, email, and message are mandatory.');
@@ -36,7 +33,7 @@ export default function Contacts() {
         console.log(user)
         if (user) {
             setFormData({
-                name: user.firstName || '',
+                name: user.firstName || '', 
                 email: user.email || '',
                 phone: user.phoneNumber || '',
                 comment: ''
