@@ -10,7 +10,7 @@ export default function ProfileNotes({ expiringNotes }) {
     return (
         <div className="expiring-notes">
             <h1>Notes close to expiry</h1>
-            {expiringNotes
+            {expiringNotes.length > 0
                 ? <ul className="notes-list">
                     {expiringNotes.map(item => item._id === activeNoteId
                         ? <ProfileNoteDetails key={item._id} note={item}
@@ -19,7 +19,8 @@ export default function ProfileNotes({ expiringNotes }) {
                             activeNoteId={activeNoteId} setActiveNoteId={setActiveNoteId} />
                     )}
                 </ul>
-                : <div>Looks like you don't have any notes yet. You can start from <Link to="/notes">here.</Link></div>
+                : <div className="error-page no-content">Looks like you don't have any notes yet. <br />
+                    You can start from <Link to="/notes">here.</Link></div>
             }
         </div>
     )

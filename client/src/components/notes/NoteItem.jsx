@@ -1,4 +1,4 @@
-export default function NoteItem({ note, activeNoteId, setActiveNoteId }) {
+export default function NoteItem({ note, activeNoteId, setActiveNoteId, deleteNote }) {
 
     const handleXmarkClick = (event) => {
         event.stopPropagation();
@@ -13,6 +13,7 @@ export default function NoteItem({ note, activeNoteId, setActiveNoteId }) {
                 </button>}
             <h3>{note.title}</h3>
             <p>{note.content}</p>
+            <button className="delete-btn" onClick={() => deleteNote(note._id)}>Delete</button>
         </div>
     );
 }

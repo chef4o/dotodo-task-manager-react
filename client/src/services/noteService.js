@@ -14,3 +14,17 @@ export const getSomeNotesByDueDateDesc = async (userId, numberOfResults) => {
 
   return sortedNotes.slice(-numberOfResults);
 }
+
+export const deleteNote = async (userID, id) => {
+  const response = await request.remove(
+    `${baseUrl}/${userID}/notes/${id}`
+  );
+
+  return response;
+};
+
+export const addNote = async (userID, body) => {
+  const response = request.post(`${baseUrl}/${userID}/notes/`, body);
+
+  return response;
+};

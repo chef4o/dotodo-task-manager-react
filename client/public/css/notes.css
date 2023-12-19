@@ -17,6 +17,11 @@
     overflow: hidden;
 }
 
+.content.notes .note .delete-btn {
+    position: absolute;
+    bottom: -11vw;
+}
+
 .content.notes .note.active {
     width: 38.5%;
     overflow-y: auto;
@@ -31,4 +36,25 @@
     position: absolute;
     top: 5%;
     right: 5%;
+}
+
+.content.notes .note.new input {
+    width: 8vw;
+    border: none;
+}
+
+.content.notes .note.new input.title {
+    background: none;
+    padding-bottom: 0.6vw;
+    border-bottom: 1px solid var(--color-notes-border);
+}
+
+.content.notes .note.new input.note-text {
+    margin-top: 1vw;
+}
+
+.content.notes .note.new button {
+    position: absolute;
+    bottom: -11vw;
+    right: 0.6vw;
 }
