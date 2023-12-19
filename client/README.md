@@ -47,3 +47,17 @@ Functionalities
    - date
    - sharedWith
    - isArchived
+
+
+## Installation
+To install the app, clone the repository and run npm install to install the necessary dependencies.
+
+``git clone <repository-url>
+cd <repository-folder>
+npm install``
+
+## Usage
+Start the app using:
+
+``npm start
+Navigate to localhost:3000 in your browser to interact with the app.``
