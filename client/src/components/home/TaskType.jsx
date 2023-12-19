@@ -20,5 +20,4 @@ export default function TaskType({ name, headerText }) {
 TaskType.propTypes = {
     name: PropTypes.string.isRequired,
     headerText: PropTypes.string.isRequired,
-    onItemClick: PropTypes.func.isRequired,
 };
