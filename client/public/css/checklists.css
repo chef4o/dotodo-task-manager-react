@@ -61,6 +61,10 @@
     align-items: center;
 }
 
+.content.checklists .checklists-list .checklist .new-todo-item {
+    display: flex;
+}
+
 .content.checklists .checklists-list .checklist .new-todo-item-text,
 .content.checklists .checklists-list .checklist .todo-item-text {
     font-size: 1vw;
@@ -99,7 +103,6 @@
 /* active checklist override */
 .content.checklists .checklists-list .checklist.active {
     display: flex;
-    align-items: center;
     width: 65.5%;
     height: auto;
     overflow-y: auto;
