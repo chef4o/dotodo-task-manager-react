@@ -98,13 +98,16 @@
 
 /* active checklist override */
 .content.checklists .checklists-list .checklist.active {
+    display: flex;
+    align-items: center;
     width: 65.5%;
     height: auto;
     overflow-y: auto;
 }
 
 .content.checklists .checklists-list .checklist.active .todo-item-text {
-    max-width: 26.2vw;
+    max-width: 29.4vw;
+    width: auto;
 }
 
 .content.checklists .checklists-list .checklist button.xmark {
@@ -154,4 +157,3 @@
     height: 4vw;
     background-color: var(--color-checklists-bckgd);
 }
-
