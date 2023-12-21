@@ -33,6 +33,28 @@ export const editChecklist = async (userID, body) => {
   return response;
 };
 
+export const getCheckListData = async (userID, checklistId, elementId) => {
+  const response = await request.get(
+    `${baseUrl}/${userID}/checklists/${checklistId}/elements/${elementId}`
+  );
+
+  return response;
+};
+
+export const editChecklistItem = async (
+  userID,
+  checklistId,
+  elementId,
+  body
+) => {
+  const response = await request.put(
+    `${baseUrl}/${userID}/checklists/${checklistId}/elements/${elementId}`,
+    body
+  );
+
+  return response;
+};
+
 export const addChecklistItem = async (
   userID,
   checklistId,
@@ -55,8 +77,11 @@ export const deleteChecklistItem = async (userID, checklistId, elementId) => {
   return response;
 };
 
-export const getSomeChecklistsByDueDateDesc = async (userId, numberOfResults) => {
+export const getSomeChecklistsByDueDateDesc = async (
+  userId,
+  numberOfResults
+) => {
   const response = await getAllChecklists(userId);
 
   return response.slice(-numberOfResults);
-}
+};

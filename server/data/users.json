@@ -342,8 +342,8 @@
             "status": "In progress/NA",
             "note": ""
           },
-          "c3864ad0-6cbd-445e-ae46-22ah624ba74a": {
-            "_id": "c3864ad0-6cbd-445e-ae46-22ah624ba74a",
+          "c3874ad0-6cbd-445e-ae46-22ah624ba74a": {
+            "_id": "c3874ad0-6cbd-445e-ae46-22ah624ba74a",
             "position": 3,
             "content": "element 3 of checklist 1",
             "dueDate": "27/08/2025",
@@ -363,24 +363,24 @@
         "type": "General to-do/Shopping list",
         "title": "Title 2",
         "elements": {
-          "c3865ad0-6cbd-445e-ae46-22ag624ba74d": {
-            "_id": "c3865ad0-6cbd-445e-ae46-22ag624ba74d",
+          "c3865ad0-6cbd-445e-ae46-22ag624ca74d": {
+            "_id": "c3865ad0-6ccd-445e-ae46-22ag624ba74d",
             "position": 1,
             "content": "element 1 of checklist 1",
             "dueDate": "22/05/2025",
             "status": "Not started/Pending",
             "note": "additional info"
           },
-          "c3664bd0-6cbd-445e-ac46-22bg624ba74c": {
-            "_id": "c3664bd0-6cbd-445e-ac46-22bg624ba74c",
+          "c3664bc0-6cbd-445e-ac46-22bg624ba74c": {
+            "_id": "c3664bc0-6cbd-445e-ac46-22bg624ba74c",
             "position": 2,
             "content": "element 2 of checklist 1",
             "dueDate": "14/10/2024",
             "status": "In progress/NA",
             "note": ""
           },
-          "c3864ad0-6cbd-445e-ae46-22ah624ba74a": {
-            "_id": "c3864ad0-6cbd-445e-ae46-22ah624ba74a",
+          "c3864bd0-6cbd-445e-ae46-22ah624ba74a": {
+            "_id": "c3864bd0-6cbd-445e-ae46-22ah624ba74a",
             "position": 3,
             "content": "element 3 of checklist 1",
             "dueDate": "27/08/2025",

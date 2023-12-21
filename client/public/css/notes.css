@@ -62,3 +62,17 @@
     bottom: -11vw;
     right: 0.6vw;
 }
+
+.new-note {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.new-note button {
+    font-size: 2vw;
+    padding: 0.2vw 2vw;
+    height: 4vw;
+    background-color: var(--color-checklists-bckgd);
+}

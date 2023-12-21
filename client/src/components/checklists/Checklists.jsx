@@ -43,8 +43,6 @@ export default function Checklists() {
             getAllChecklists(user._id)
                 .then(setChecklists);
         }
-
-        console.log(checklists.length)
     }, [user]);
 
     return (
@@ -65,9 +63,9 @@ export default function Checklists() {
                         <NoContent />
 
                         {!makeNew
-                            ? <button className="add-checklist" onClick={() => setMakeNew(true)}>Add</button>
-                            : <div className="new-note">
-                                <input value={text} placeholder="Checkbox title" onChange={e => setText(e.target.value)} />
+                            ? <button className="add-checklist" onClick={() => setMakeNew(true)}>Create</button>
+                            : <div className="new-checklist">
+                                <input className="new-checklist-title" value={text} placeholder="Checklist title" onChange={e => setText(e.target.value)} />
                                 <button className="add-checklist" onClick={() => addTask(text)}>Add</button>
                             </div>
                         }

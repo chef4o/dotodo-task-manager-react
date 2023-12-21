@@ -26,16 +26,6 @@ export default function Checklist({ checklist, activeChecklistId, setActiveCheck
         setTasks(tasks.filter(task => task._id !== taskId));
     }
 
-    function toggleCompleted(id) {
-        setTasks(tasks.map(task => {
-            if (task._id === id) {
-                return { ...task, status: task.status !== 'Done' ? 'Done' : 'In progress' };
-            } else {
-                return task;
-            }
-        }));
-    }
-
     useEffect(() => {
         if (checklist.elements) {
             setTasks(Object.values(checklist.elements));
@@ -69,18 +59,17 @@ export default function Checklist({ checklist, activeChecklistId, setActiveCheck
 
             <input className="title" value={title} onChange={handleTitleChange} onBlur={handleTitleBlur} />
 
-            <div className="new-note">
-                <input value={text} onChange={e => setText(e.target.value)} />
-                <button onClick={() => addTask(text)}>Add</button>
+            <div className="new-todo-item">
+                <input className="new-todo-item-text" value={text} onChange={e => setText(e.target.value)} />
+                <button onClick={() => addTask(text)}><i className="fa-solid fa-square-plus" /></button>
             </div>
 
             {tasks.map(task => (
                 <ChecklistItem
                     key={task._id}
                     task={task}
-                    deleteTask={deleteTask}
-                    toggleCompleted={toggleCompleted}
-                />
+                    checklist={checklist}
+                    deleteTask={deleteTask} />
             ))}
         </div>
     );

@@ -34,21 +34,19 @@ export default function EmptyChecklist({ setChecklists }) {
             setTasks((state) => [...state, newTask]);
             setText('');
         }
-
-        console.log(tasks)
     }
 
     const handleTitleChange = (e) => {
         setTitle(e.target.value);
-    };
+    };  
 
     return (
         <div className="checklist new">
-            <input className="title" value={title} placeholder="Create new checklist" onChange={handleTitleChange} />
+            <input className="title" value={title} placeholder="Add title" onChange={handleTitleChange} />
 
-            <div className="new-note">
-                <input value={text} onChange={e => setText(e.target.value)} />
-                <button onClick={() => addTask(text)}>Add</button>
+            <div className="new-todo-item">
+                <input className="new-todo-item-text" value={text} onChange={e => setText(e.target.value)} />
+                <button onClick={() => addTask(text)}><i className="fa-solid fa-square-plus" /></button>
             </div>
 
             {Object.values(tasks).map(task =>

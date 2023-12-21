@@ -91,7 +91,7 @@ export default function LoginModal() {
                         <input
                             id={FORM_FIELDS.password}
                             name={FORM_FIELDS.password}
-                            type={FORM_FIELDS.password}
+                            type="password"
                             value={formValues.password}
                             onChange={changeHandler}
                             className={validationErrors.password && "error-field"} />
