@@ -1,23 +1,25 @@
 import { useContext, useEffect, useState } from "react";
 import ChecklistItem from "./ChecklistItem";
-import { deleteChecklistItem } from "../../services/checklistService";
+import { addChecklistItem, deleteChecklistItem } from "../../services/checklistService";
 import AuthContext from "../../contexts/authContext";
 
-export default function Checklist({ checklist, activeChecklistId, setActiveChecklistId, deleteChecklist }) {
-    const [tasks, setTasks] = useState([]);
-    const [text, setText] = useState('');
+export default function Checklist({ checklist, deleteChecklist }) {
+
+    const [activeChecklistId, setActiveChecklistId] = useState('');
+    const [tasks, setTasks] = useState(checklist.tasks || []);
+    const [newTodoItem, setNewTodoItem] = useState('');
     const [title, setTitle] = useState(checklist.title);
 
     const { user } = useContext(AuthContext);
 
-    function addTask(text) {
+    async function addTask(text) {
         if (text) {
             const newTask = {
                 content: text,
                 status: "Not started",
             };
             setTasks([...tasks, newTask]);
-            setText('');
+            setNewTodoItem('');
         }
     }
 
@@ -41,8 +43,15 @@ export default function Checklist({ checklist, activeChecklistId, setActiveCheck
         setTitle(e.target.value);
     };
 
+    useEffect(() => {
+        if (title) {
+            checklist[title] = title;
+        }
+
+    }, [])
+
     const handleTitleBlur = () => {
-        //todo add to backend
+
     };
 
     return (
@@ -60,8 +69,8 @@ export default function Checklist({ checklist, activeChecklistId, setActiveCheck
             <input className="title" value={title} onChange={handleTitleChange} onBlur={handleTitleBlur} />
 
             <div className="new-todo-item">
-                <input className="new-todo-item-text" value={text} onChange={e => setText(e.target.value)} />
-                <button onClick={() => addTask(text)}><i className="fa-solid fa-square-plus" /></button>
+                <input className="new-todo-item-text" value={newTodoItem} onChange={e => setNewTodoItem(e.target.value)} />
+                <button onClick={() => addTask(newTodoItem)}><i className="fa-solid fa-square-plus" /></button>
             </div>
 
             {tasks.map(task => (

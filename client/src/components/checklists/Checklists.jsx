@@ -13,21 +13,20 @@ export default function Checklists() {
     const { user } = useContext(AuthContext);
 
     const [checklists, setChecklists] = useState([]);
-    const [activeChecklistId, setActiveChecklistId] = useState('');
     const [makeNew, setMakeNew] = useState(false);
 
     const [text, setText] = useState('');
 
-    async function addTask(title) {
+    async function createChecklist(title) {
         if (text) {
-            const newTask = {
+            const newChecklist = {
                 title: title,
                 status: "Not started",
                 events: {}
             };
 
-            await addChecklist(user._id, newTask);
-            setChecklists([...checklists, newTask]);
+            await addChecklist(user._id, newChecklist);
+            setChecklists([...checklists, newChecklist]);
             setText('');
         }
     }
@@ -43,7 +42,7 @@ export default function Checklists() {
             getAllChecklists(user._id)
                 .then(setChecklists);
         }
-    }, [user]);
+    }, [user, checklists]);
 
     return (
         <div className="content checklists">
@@ -51,10 +50,12 @@ export default function Checklists() {
                 ? <NoAccess onItemClick={handleNavigationClick} />
                 : checklists.length > 0
                     ? <ul className="checklists-list">
-                        {checklists.map(item =>
-                            <Checklist key={item._id} checklist={item}
-                                activeChecklistId={activeChecklistId} setActiveChecklistId={setActiveChecklistId}
-                                deleteChecklist={deleteChecklistHandler} />
+                        {checklists.map(checklist =>
+                            <Checklist 
+                            key={checklist._id} 
+                            checklist={checklist}
+                            setChecklists={setChecklists}
+                            deleteChecklist={deleteChecklistHandler} />
                         )}
                         <EmptyChecklist setChecklists={setChecklists}></EmptyChecklist>
                     </ul>
@@ -65,8 +66,11 @@ export default function Checklists() {
                         {!makeNew
                             ? <button className="add-checklist" onClick={() => setMakeNew(true)}>Create</button>
                             : <div className="new-checklist">
-                                <input className="new-checklist-title" value={text} placeholder="Checklist title" onChange={e => setText(e.target.value)} />
-                                <button className="add-checklist" onClick={() => addTask(text)}>Add</button>
+                                <input
+                                    className="new-checklist-title"
+                                    value={text} placeholder="Checklist title"
+                                    onChange={e => setText(e.target.value)} />
+                                <button className="add-checklist" onClick={() => createChecklist(text)}>Add</button>
                             </div>
                         }
                     </div>

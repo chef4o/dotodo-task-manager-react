@@ -11,6 +11,7 @@ export default function EmptyChecklist({ setChecklists }) {
 
     async function createChecklist() {
         if (title) {
+
             const newChecklist = {
                 title: title,
                 status: "Not started",

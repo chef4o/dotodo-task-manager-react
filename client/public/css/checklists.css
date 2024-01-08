@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    width: 31.5%;
+    width: 17.6vw;
     height: 16vw;
     box-shadow: var(--shadow-base);
     padding: 1vw;
@@ -27,15 +27,18 @@
     background-color: var(--color-checklist-new-bckgd);
 }
 
-.content.checklists .checklist.active>.delete-checklist {
-    right: 3.4vw;
-}
-
 .content.checklists .checklist .delete-checklist {
     position: absolute;
     right: 1vw;
     top: 0.8vw;
+}
+
+.content.checklists .checklist .delete-checklist .fa-trash-can {
     color: rgba(94, 64, 12, 0.8);
+}
+
+.content.checklists .checklist.active>.delete-checklist {
+    right: 3.4vw;
 }
 
 .content.checklists .checklists-list .checklist .title {
@@ -53,31 +56,32 @@
     font-size: 2vw;
 }
 
-.content.checklists .checklists-list .checklist .new-todo-item,
+.content.checklists .checklists-list .checklist .new-todo-item-text,
 .content.checklists .checklists-list .checklist .todo-item-text {
     outline: none;
     border: none;
+    font-size: 1vw;
+    margin-right: 0.4;
+}
+
+.content.checklists .checklists-list .checklist .todo-item,
+.content.checklists .checklists-list .checklist .new-todo-item {
     display: flex;
     align-items: center;
 }
 
 .content.checklists .checklists-list .checklist .new-todo-item {
-    display: flex;
-}
-
-.content.checklists .checklists-list .checklist .new-todo-item-text,
-.content.checklists .checklists-list .checklist .todo-item-text {
-    font-size: 1vw;
-}
-
-.content.checklists .checklists-list .checklist .todo-item-text {
+    width: 12vw;
     margin-right: 1vw;
-    background: none;
-    max-width: 10.4vw;
 }
 
-.content.checklists .checklist.new .todo-item-text {
-    max-width: 14.5vw;
+.content.checklists .checklists-list .checklist .todo-item-text {
+    background: none;
+    width: 11.4vw;
+}
+
+.content.checklists .checklists-list .checklist.new .todo-item-text {
+    width: 14.5vw;
 }
 
 .content.checklists .checklists-list .checklist .todo-item-text.done {
@@ -92,31 +96,39 @@
     margin-right: 0.6vw;
 }
 
-.content.checklists .checklists-list .checklist .todo-item-text .fa-square-plus {
+.content.checklists .checklists-list .checklist .new-todo-item .fa-square-plus {
     color: rgb(81, 132, 87);
 }
 
-.content.checklists .checklists-list .checklist .todo-item-text .fa-square-minus {
+.content.checklists .checklists-list .checklist .todo-item .fa-square-minus {
     color: rgb(160, 81, 81);
 }
 
 /* active checklist override */
 .content.checklists .checklists-list .checklist.active {
     display: flex;
-    width: 65.5%;
+    width: 36.7vw;
     height: auto;
     overflow-y: auto;
 }
 
+.content.checklists .checklists-list .checklist.active .title {
+    width: 29vw;
+}
+
+.content.checklists .checklists-list .checklist.active .new-todo-item-text {
+    width: 32wv;
+    margin-right: auto;
+}
+
 .content.checklists .checklists-list .checklist.active .todo-item-text {
-    max-width: 29.4vw;
-    width: auto;
+    width: 34vw;
 }
 
 .content.checklists .checklists-list .checklist button.xmark {
     position: absolute;
-    top: 5%;
-    right: 5%;
+    top: 0.85vw;
+    right: 1.2vw;
 }
 
 /* no available checklists screen */
