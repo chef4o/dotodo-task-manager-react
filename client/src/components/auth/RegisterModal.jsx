@@ -1,7 +1,6 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState, useCallback } from "react";
 import { formEmptyFieldsHandler } from "../../controllers/errorController";
-import { registerAuthUser } from "../../../../server/services/authService";
-import { validateNewUser } from "../../services/userService";
+import { registerAuthUser, validateNewUser } from "../../services/userService";
 import { isEmail } from "validator";
 import NavContext from "../../contexts/navContext";
 import AuthContext from "../../contexts/authContext";
@@ -48,7 +47,7 @@ export default function RegisterModal() {
     validatePasswordsMatch();
   };
 
-  const validateEmail = () => {
+  const validateEmail = useCallback(() => {
     if (formValues.email && !isEmail(formValues.email.trim())) {
       setValidationErrors((state) => ({
         ...state,
@@ -60,9 +59,9 @@ export default function RegisterModal() {
         email: "",
       }));
     }
-  };
+  }, [formValues.email]);
 
-  const validateUsername = () => {
+  const validateUsername = useCallback(() => {
     if (formValues.username && formValues.username.trim().length < 3) {
       setValidationErrors((state) => ({
         ...state,
@@ -74,9 +73,9 @@ export default function RegisterModal() {
         username: "",
       }));
     }
-  };
+  }, [formValues.username]);
 
-  const validatePassword = () => {
+  const validatePassword = useCallback(() => {
     if (formValues.password && formValues.password.trim().length < 4) {
       setValidationErrors((state) => ({
         ...state,
@@ -88,13 +87,13 @@ export default function RegisterModal() {
         password: "",
       }));
     }
-  };
+  }, [formValues.password]);
 
-  const validatePasswordsMatch = () => {
+  const validatePasswordsMatch = useCallback(() => {
     if (
       formValues.password.trim() &&
       formValues.repass.trim() &&
-      formValues.password.trim() != formValues.repass.trim()
+      formValues.password.trim() !== formValues.repass.trim()
     ) {
       setValidationErrors((state) => ({
         ...state,
@@ -106,7 +105,7 @@ export default function RegisterModal() {
         repass: "",
       }));
     }
-  };
+  }, [formValues.password, formValues.repass]);
 
   const changeHandler = (e) => {
     const { name, value } = e.target;
@@ -147,13 +146,21 @@ export default function RegisterModal() {
     formValues.username,
     formValues.password,
     formValues.repass,
+    validateEmail,
+    validateUsername,
+    validatePassword,
+    validatePasswordsMatch,
   ]);
 
   const emailInputRef = useRef();
 
   const submitFormHandler = async () => {
     validateRegisterFields();
-    await validateNewUser(formValues.username.trim(), formValues.email.trim());
+    await validateNewUser(
+      formValues.username.trim(),
+      formValues.email.trim(),
+      setValidationErrors
+    );
 
     if (validationIsEmpty) {
       isFormReadyForSubmit(true);
@@ -168,16 +175,15 @@ export default function RegisterModal() {
       }
 
       try {
-        await registerAuthUser(
+        const currentUser = await registerAuthUser(
           formValues.email,
           formValues.username,
           formValues.password
         );
-        const currentUser = await getUserByEmailFromFirestore(formValues.email);
+
         setUser({
           _id: currentUser.id,
           username: currentUser.username,
-          firstName: currentUser.firstName,
           email: currentUser.email,
         });
         hideAuthModal();

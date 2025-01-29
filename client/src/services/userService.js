@@ -30,10 +30,24 @@ export const deleteUser = async (userId) => {
   return response;
 };
 
-export const addUser = async (body) => {
-  const response = request.post(baseUrl, body);
+export const registerAuthUser = async (email, username, password) => {
+  try {
+    const response = await fetch("http://localhost:5000/api/auth/register/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: email,
+        username: username,
+        password: password,
+      }),
+    });
 
-  return response;
+    const registeredUser = await response.json();
+
+    return registeredUser;
+  } catch (error) {
+    console.error("Error validating new user:", error);
+  }
 };
 
 export const editUser = async (body) => {
@@ -42,19 +56,9 @@ export const editUser = async (body) => {
   return response;
 };
 
-export const userExists = async (username, email) => {
-  const existingUsername = await findUserByUsername(username);
-  const existingEmail = await findUserByEmail(email);
-
-  return {
-    withUsername: !!existingUsername,
-    withEmail: !!existingEmail,
-  };
-};
-
-export const validateNewUser = async (username, email) => {
+export const validateNewUser = async (username, email, setValidationErrors) => {
   try {
-    const response = await fetch("http://localhost:5000/api/auth/check-user-existence/", {
+    const response = await fetch("http://localhost:5000/api/auth/validate-existing-user/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -72,7 +76,7 @@ export const validateNewUser = async (username, email) => {
       }));
     }
 
-    if (formValues.email.trim() && currentUserExists.emailExists) {
+    if (email.trim() && currentUserExists.emailExists) {
       setValidationErrors((state) => ({
         ...state,
         email: "This email is already registered",

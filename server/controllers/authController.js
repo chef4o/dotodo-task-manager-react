@@ -8,6 +8,8 @@ export const registerUser = async (req, res) => {
 
     if (userAlreadyExists.withUsername || userAlreadyExists.withEmail) {
       return res.status(400).json({
+        usernameExists: userAlreadyExists.withUsername,
+        emailExists: userAlreadyExists.withEmail,
         error: "Username or email already exists",
       });
     }
@@ -17,5 +19,28 @@ export const registerUser = async (req, res) => {
   } catch (error) {
     console.error("Error during registration", error);
     res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+export const checkUserExistence = async (req, res) => {
+  const { username, email } = req.body;
+
+  try {
+    const { withUsername, withEmail } = await userExists(username, email);
+
+    if (withUsername || withEmail) {
+      return res
+        .status(400)
+        .json({
+          usernameExists: withUsername,
+          emailExists: withEmail,
+          message: "User already exists",
+        });
+    }
+
+    return res.status(200).json({ message: "User can be registered" });
+  } catch (error) {
+    console.error("Error in checkUserExistence:", error);
+    res.status(500).json({ message: "Server error" });
   }
 };
