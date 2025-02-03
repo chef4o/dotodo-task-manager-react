@@ -6,7 +6,9 @@
 To install the app, clone the repository and run npm install to load the necessary dependencies.
 
 `git clone <repository-url>`
+
 `cd <repository-folder>`
+
 `npm install`*
 
 *This will install the dependencies from the root, the client and the server folders. 
