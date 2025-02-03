@@ -1,4 +1,4 @@
-import { getUserByEmail, getUserByUsername } from "../controllers/firebaseController.js";
+import { getUserByEmail, getUserByUsername } from "../controllers/userController.js";
 
 export const checkExistingUserInFirestore = async (username, email) => {
   try {

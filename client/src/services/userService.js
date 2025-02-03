@@ -1,73 +1,66 @@
-import * as request from "../lib/request";
-const baseUrl = "http://localhost:3030/jsonstore/users";
+import * as request from "../api/request";
+import { url } from "../api/url";
 
 export const getAllUsers = async () => {
-  const response = await request.get(baseUrl);
-
+  const response = await request.get(url.users);
   return Object.values(response);
 };
 
 export const findUserById = async (id) => {
-  const response = await request.get(`${baseUrl}/${id}`);
-
+  const response = await request.get(`${url.users}/${id}`);
   return response;
 };
 
 export const findUserByEmail = async (email) => {
-  const user = await getAllUsers();
-  return user.find((user) => user.email === email);
+  const response = await request.get(`${url.userByEmail}/${email}`);
+  return response;
 };
 
 export const findUserByUsername = async (username) => {
-  const user = await getAllUsers();
-
-  return user.find((user) => user.username === username);
+  const response = await request.get(`${url.userByUsername}/${username}`);
+  return response;
 };
 
 export const deleteUser = async (userId) => {
-  const response = await request.remove(`${baseUrl}/${userId}`);
+  if (!userId) {
+    console.error("User ID is required for deleting a user.");
+    return { error: "User ID is required." };
+  }
 
+  const response = await request.remove(`${url.users}/${userId}`);
   return response;
 };
 
 export const registerAuthUser = async (email, username, password) => {
   try {
-    const response = await fetch("http://localhost:5000/api/auth/register/", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email: email,
-        username: username,
-        password: password,
-      }),
+    const response = await request.post(url.register, {
+      email,
+      username,
+      password,
     });
 
-    const registeredUser = await response.json();
-
-    return registeredUser;
+    return response;
   } catch (error) {
     console.error("Error validating new user:", error);
   }
 };
 
-export const editUser = async (body) => {
-  const response = request.put(baseUrl, body);
+export const editUser = async (id, body) => {
+  if (!id) {
+    console.error("User ID is required for updating a user.");
+    return { error: "User ID is required." };
+  }
 
+  const response = await request.put(`${url.users}/${id}`, body);
   return response;
 };
 
 export const validateNewUser = async (username, email, setValidationErrors) => {
   try {
-    const response = await fetch("http://localhost:5000/api/auth/validate-existing-user/", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        username: username,
-        email: email,
-      }),
+    const currentUserExists = await request.post(url.validateIfExists, {
+      username,
+      email,
     });
-
-    const currentUserExists = await response.json();
 
     if (username && currentUserExists.usernameExists) {
       setValidationErrors((state) => ({

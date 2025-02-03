@@ -1,6 +1,6 @@
 import { db, auth } from "../configuration/firebaseConfig.js";
 import { dbTables } from "../configuration/firebaseDb.js";
-import { checkExistingUserInFirestore } from "./firebaseService.js";
+import { checkExistingUserInFirestore } from "./userService.js";
 
 export const registerAuthUser = async (email, username, password) => {
   try {

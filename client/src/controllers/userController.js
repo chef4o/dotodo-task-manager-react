@@ -25,10 +25,6 @@ export const getUser = async (param) => {
   return user;
 };
 
-export const isPasswordValid = (userPass, password) => {
-  return userPass === password;
-};
-
 export const getFreeUuid = async (ids, id) => {
   const userIds = ids.length ? ids : Object.keys(await getAllUsers());
 

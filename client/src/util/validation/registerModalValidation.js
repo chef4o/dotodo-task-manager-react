@@ -1,32 +1,92 @@
+import { formEmptyFieldsHandler } from "../../controllers/errorController";
 import { isEmail } from "validator";
+import { formInitialState } from "./commonValidation";
 
-export const validateRegisterFields = (formValues, setValidationErrors) => {
-  const errors = {};
+const FORM_FIELDS = {
+  email: "email",
+  username: "username",
+  password: "password",
+  repass: "repass",
+};
 
-  if (!formValues.email.trim()) {
-    errors.email = "Email is required";
-  } else if (!isEmail(formValues.email.trim())) {
-    errors.email = "The email should be valid";
+const validateRegisterFields = (formValues, setValidationErrors) => {
+  formEmptyFieldsHandler(
+    formInitialState(FORM_FIELDS),
+    formValues,
+    [],
+    setValidationErrors
+  );
+  validateEmail(setValidationErrors, formValues.email);
+  validateUsername(setValidationErrors, formValues.username);
+  validatePassword(setValidationErrors, formValues.password);
+  validatePasswordsMatch(
+    setValidationErrors,
+    formValues.password,
+    formValues.repass
+  );
+};
+
+const validateEmail = (setValidationErrors, email) => {
+  if (email && !isEmail(email.trim())) {
+    setValidationErrors((state) => ({
+      ...state,
+      email: "The email should be valid",
+    }));
+  } else if (email) {
+    setValidationErrors((state) => ({
+      ...state,
+      email: "",
+    }));
   }
+};
 
-  if (!formValues.username.trim()) {
-    errors.username = "Username is required";
-  } else if (formValues.username.trim().length < 3) {
-    errors.username = "Minimum length: 3 characters";
+const validateUsername = (setValidationErrors, username) => {
+  if (username && username.trim().length < 3) {
+    setValidationErrors((state) => ({
+      ...state,
+      username: "Minimum length: 3 characters",
+    }));
+  } else if (username) {
+    setValidationErrors((state) => ({
+      ...state,
+      username: "",
+    }));
   }
+};
 
-  if (!formValues.password.trim()) {
-    errors.password = "Password is required";
-  } else if (formValues.password.trim().length < 4) {
-    errors.password = "Minimum length: 4 characters";
+const validatePassword = (setValidationErrors, password) => {
+  if (password && password.trim().length < 4) {
+    setValidationErrors((state) => ({
+      ...state,
+      password: "Minimum length: 4 characters",
+    }));
+  } else if (password) {
+    setValidationErrors((state) => ({
+      ...state,
+      password: "",
+    }));
   }
+};
 
-  if (!formValues.repass.trim()) {
-    errors.repass = "Please confirm your password";
-  } else if (formValues.password.trim() !== formValues.repass.trim()) {
-    errors.repass = "The passwords should match";
+const validatePasswordsMatch = (setValidationErrors, password, repass) => {
+  if (password.trim() && repass.trim() && password.trim() !== repass.trim()) {
+    setValidationErrors((state) => ({
+      ...state,
+      repass: "The passwords should match",
+    }));
+  } else if (repass) {
+    setValidationErrors((state) => ({
+      ...state,
+      repass: "",
+    }));
   }
+};
 
-  setValidationErrors(errors);
-  return Object.values(errors).every((value) => !value);
+export const registerValidation = {
+  FORM_FIELDS,
+  validateEmail,
+  validatePassword,
+  validatePasswordsMatch,
+  validateRegisterFields,
+  validateUsername,
 };
