@@ -13,15 +13,15 @@ This will install the dependencies from the root, the client and the server fold
 
 ## Server setup
 To be able to run the Firebase API server, you have to add .env file inside the /server folder and set following variables with your own firebase profile: 
-``FIREBASE_PROJECT_ID
-FIREBASE_PRIVATE_KEY_ID
-FIREBASE_PRIVATE_KEY
-FIREBASE_CLIENT_EMAIL
-FIREBASE_CLIENT_ID
-FIREBASE_AUTH_URI
-FIREBASE_TOKEN_URI
-FIREBASE_AUTH_PROVIDER_CERT_URL
-FIREBASE_CLIENT_CERT_URL``
+- `FIREBASE_PROJECT_ID`
+- `FIREBASE_PRIVATE_KEY_ID`
+- `FIREBASE_PRIVATE_KEY`
+- `FIREBASE_CLIENT_EMAIL`
+- `FIREBASE_CLIENT_ID`
+- `FIREBASE_AUTH_URI`
+- `FIREBASE_TOKEN_URI`
+- `FIREBASE_AUTH_PROVIDER_CERT_URL`
+- `FIREBASE_CLIENT_CERT_URL`
 
 Your Firestore database shuld have all collections from server/configuration/firebaseDb.
 

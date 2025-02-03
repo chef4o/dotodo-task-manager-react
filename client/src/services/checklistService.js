@@ -1,4 +1,4 @@
-import * as request from "../lib/request";
+import * as request from "../api/request";
 const baseUrl = "http://localhost:3030/jsonstore/users";
 
 export const getAllChecklists = async (userID) => {
