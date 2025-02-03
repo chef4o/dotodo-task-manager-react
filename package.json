@@ -7,7 +7,6 @@
     "server"
   ],
   "scripts": {
-    "install-all": "npm install",
     "project": "concurrently \"npm run dev --prefix client\" \"npm start --prefix server\""
   },
   "dependencies": {
