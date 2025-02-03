@@ -5,11 +5,11 @@
 ## Installation
 To install the app, clone the repository and run npm install to load the necessary dependencies.
 
-``git clone <repository-url>
-cd <repository-folder>
-npm install``
+`git clone <repository-url>`
+`cd <repository-folder>`
+`npm install`*
 
-This will install the dependencies from the root, the client and the server folders. 
+*This will install the dependencies from the root, the client and the server folders. 
 
 ## Server setup
 To be able to run the Firebase API server, you have to add .env file inside the /server folder and set following variables with your own firebase profile: 
@@ -23,13 +23,15 @@ To be able to run the Firebase API server, you have to add .env file inside the 
 - `FIREBASE_AUTH_PROVIDER_CERT_URL`
 - `FIREBASE_CLIENT_CERT_URL`
 
-Your Firestore database shuld have all collections from server/configuration/firebaseDb.
+Your Firestore database shuld have all collections from `server/configuration/firebaseDb`.
 
 ## Usage
 Start the app from the root folder using:
 
-``npm run project
+`npm run project` 
+
 > The client app will be available at [localhost:5173](http://localhost:5173/)
+
 > The API calls will be accessible at [localhost:5000](http://localhost:5000/)
 
 ## Concept
