@@ -13,7 +13,7 @@ This will install the dependencies from the root, the client and the server fold
 
 ## Server setup
 To be able to run the Firebase API server, you have to add .env file inside the /server folder and set following variables with your own firebase profile: 
-``FIREBASE_PROJECT_ID
+``FIREBASE_PROJECT_ID \n
 FIREBASE_PRIVATE_KEY_ID
 FIREBASE_PRIVATE_KEY
 FIREBASE_CLIENT_EMAIL
