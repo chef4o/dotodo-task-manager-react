@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get("/", getAllUsers);
 router.get("/:id", getUserById);
-router.delete("/:id", deleteUserById)
+router.delete("/delete/:id", deleteUserById)
 router.get("/username/:username", getUserByUsername);
 router.get("/email/:email", getUserByEmail);
 

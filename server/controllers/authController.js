@@ -1,4 +1,4 @@
-import { registerAuthUser, userExists } from "../services/authService.js";
+import { registerAuthUser, setRole, userExists } from "../services/authService.js";
 
 export const registerUser = async (req, res) => {
   const { email, username, password } = req.body;
@@ -14,7 +14,7 @@ export const registerUser = async (req, res) => {
       });
     }
 
-    const newUser = await registerAuthUser(email, username, password);
+    const newUser = await registerAuthUser(email, username, password, await setRole());
     res.status(201).json(newUser);
   } catch (error) {
     console.error("Error during registration", error);
@@ -29,13 +29,11 @@ export const checkUserExistence = async (req, res) => {
     const { withUsername, withEmail } = await userExists(username, email);
 
     if (withUsername || withEmail) {
-      return res
-        .status(400)
-        .json({
-          usernameExists: withUsername,
-          emailExists: withEmail,
-          message: "User already exists",
-        });
+      return res.status(400).json({
+        usernameExists: withUsername,
+        emailExists: withEmail,
+        message: "User already exists",
+      });
     }
 
     return res.status(200).json({ message: "User can be registered" });
@@ -44,3 +42,5 @@ export const checkUserExistence = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
+

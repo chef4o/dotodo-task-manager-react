@@ -1,4 +1,5 @@
-const baseUrl = "http://localhost:5000/";
+const baseUrl = "http://localhost:5000";
+
 const users = `${baseUrl}/users`;
 const userByEmail = `${baseUrl}/users/email`;
 const userByUsername = `${baseUrl}/users/username`;
