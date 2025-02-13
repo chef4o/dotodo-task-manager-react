@@ -41,14 +41,14 @@ export default function LoginModal() {
       </button>
 
       <div className="auth-fields">
-        <div className={FORM_FIELDS.username}>
-          <label htmlFor={FORM_FIELDS.username}>Username/Email</label>
+        <div className={loginValidation.FORM_FIELDS.username}>
+          <label htmlFor={loginValidation.FORM_FIELDS.username}>Username/Email</label>
           <div className="form-input">
             <i className="fa-solid fa-user" />
             <input
               ref={usernameInputRef}
-              id={FORM_FIELDS.username}
-              name={FORM_FIELDS.username}
+              id={loginValidation.FORM_FIELDS.username}
+              name={loginValidation.FORM_FIELDS.username}
               type="text"
               value={formValues.username}
               onChange={changeHandler}
@@ -56,19 +56,19 @@ export default function LoginModal() {
             />
           </div>
           {validationErrors.username && (
-            <div className={`error auth ${FORM_FIELDS.username}`}>
+            <div className={`error auth ${loginValidation.FORM_FIELDS.username}`}>
               {validationErrors.username}
             </div>
           )}
         </div>
 
-        <div className={FORM_FIELDS.password}>
-          <label htmlFor={FORM_FIELDS.password}>Password</label>
+        <div className={loginValidation.FORM_FIELDS.password}>
+          <label htmlFor={loginValidation.FORM_FIELDS.password}>Password</label>
           <div className="form-input">
             <i className="fa-solid fa-key" />
             <input
-              id={FORM_FIELDS.password}
-              name={FORM_FIELDS.password}
+              id={loginValidation.FORM_FIELDS.password}
+              name={loginValidation.FORM_FIELDS.password}
               type="password"
               value={formValues.password}
               onChange={changeHandler}
@@ -76,7 +76,7 @@ export default function LoginModal() {
             />
           </div>
           {validationErrors.password && (
-            <div className={`error auth ${FORM_FIELDS.password}`}>
+            <div className={`error auth ${loginValidation.FORM_FIELDS.password}`}>
               {validationErrors.password}
             </div>
           )}
