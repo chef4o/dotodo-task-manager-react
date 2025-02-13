@@ -1,20 +1,5 @@
-.error.auth {
+.error {
     color: var(--color-error-red);
-    font-size: 1vw;
-    padding-top: 0.1vw;
-    height: 1vw;
-}
-
-.error.contact {
-    color: var(--color-error-red);
-    font-size: 1.6vw;
-    padding-top: 0.1vw;
-}
-
-.error.auth.login {
-    font-size: 1vw;
-    width: 31vw;
-    text-align: right;
 }
 
 .error-field {
@@ -27,10 +12,24 @@
     align-items: center;
     text-align: center;
     margin-top: 5vw;
+    width: 60vw;
 }
 
 .error-page * {
     margin-bottom: 2vw;
+}
+
+.error-page.not-found,
+.error-page.server-error {
+    margin-top: 12vw;
+}
+
+.error-page.denied {
+    margin-top: 9vw;
+}
+
+.error-page.no-content {
+    width: unset;
 }
 
 .error-page h1 {
@@ -48,5 +47,86 @@
 
 .error-page p {
     font-size: 2vw;
-    width: 30vw;
+    width: 50vw;
+}
+
+.error-page.server-error p {
+    width: 42vw;
+}
+
+.error.auth {
+    font-size: 1vw;
+    height: 2vw;
+    width: 14.4vw;
+    line-height: 1.2vw;
+}
+
+.error.contact {
+    font-size: 1.6vw;
+    padding-top: 0.1vw;
+}
+
+.error.auth.login {
+    padding-top: 0.1vw;
+    font-size: 1vw;
+    width: 31vw;
+    text-align: right;
+}
+
+.auth-form.register .password-error-container {
+    position: relative;
+    display: inline-block;
+    padding-top: 0.1vw;
+}
+
+.auth-form.register .error.fa-triangle-exclamation {
+    position: absolute;
+    right: 1vw;
+    top: 50%;
+    transform: translateY(-235%);
+}
+
+.auth-form.register .password-info {
+    visibility: hidden;
+    position: absolute;
+    z-index: 1;
+    right: -12.4vw;
+    top: -1.8vw;
+    height: 9vw;
+    width: 11.8vw;
+    color: #fff;
+    text-align: left;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.auth.register.user-exists {
+    position: absolute;
+    width: 27vw;
+    padding-top: 0.2vw;
+}
+
+.auth-form.register .error.fa-triangle-exclamation:hover+.password-info {
+    visibility: visible;
+    opacity: 0.96;
+}
+
+.error.new-note.error-list {
+    position: absolute;
+    top: 8.6vw;
+    right: 1.4vw;
+    text-align: right;
+    line-height: 1.2vw;
+}
+
+.error.new-note.error-list p {
+    padding: 0;
+    width: auto;
+}
+
+.profile.error.edit-details {
+    position: absolute;
+    top: 15vw;
+    right: 2vw;
+    text-align: right;
 }

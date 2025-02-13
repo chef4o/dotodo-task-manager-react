@@ -11,7 +11,7 @@ html {
   color: black;
 }
 
-h1, 
+h1,
 h2,
 h3,
 h4,
@@ -23,6 +23,7 @@ h6 {
 h1 {
   font-size: 1.4rem;
 }
+
 h2 {
   font-size: 1.2rem;
 }
@@ -41,4 +42,8 @@ h5 {
 
 h6 {
   font-size: 0.4rem;
+}
+
+p {
+  white-space: pre-wrap;
 }

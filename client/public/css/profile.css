@@ -1,18 +1,28 @@
+.content.profile {
+    position: relative;
+}
+
 .content.profile .user-details {
     display: flex;
-    height: 24vw;
+    height: 17vw;
 }
 
 .content.profile .user-details .profile-image,
-.content.profile .user-details .profile-details {
+.content.profile .user-details .profile-details,
+.content.profile .form-edit {
     padding: 2vw;
 }
 
 .content.profile .user-details .profile-details {
     display: flex;
+    position: relative;
     justify-content: center;
     align-items: center;
     width: 100%;
+}
+
+.content.profile .user-details .profile-details p {
+    font-size: 1.4vw;
 }
 
 .content.profile .user-details .profile-image {
@@ -20,40 +30,67 @@
     text-align: center;
 }
 
-.content.profile .user-details .profile-image img {
+.content.profile .user-details .profile-image img,
+.content.profile .profile-edit .form-edit .profile-image img {
     height: 12vw;
     border-radius: 50%;
+    object-fit: cover;
+}
+
+.content.profile .user-details .profile-image i,
+.content.profile .form-edit .profile-image i {
+    font-size: 8vw;
+}
+
+.content.profile .user-details .profile-details .personal,
+.content.profile .user-details .profile-details .contact,
+.profile-edit .form-edit .personal,
+.profile-edit .form-edit .contact {
+    width: 36%;
+    font-size: 1.6vw;
 }
 
 .content.profile .user-details .profile-details .personal,
 .content.profile .user-details .profile-details .contact {
     display: flex;
     flex-direction: column;
-    gap: 1vw;
-    width: 35%;
-    font-size: 1.6vw;
+}
+
+.profile-edit .form-edit .personal,
+.profile-edit .form-edit .contact {
+    padding-top: 3vw;
 }
 
 .content.profile .user-details .profile-details .contact {
     text-align: right;
 }
 
-.content.profile .expiring-notes .notes-list {
-    display: flex;
-    margin: 0.4vw 1.2vw;
+.content.profile .expiring.notes {
+    background: none;
 }
 
-.content.profile .expiring-notes .notes-list .note {
+.content.profile .expiring.notes h1 {
+    padding-left: 2vw;
+}
+
+.content.profile .expiring.notes .notes-list {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin: 1vw 0 0 2vw;
+    padding-bottom: 1vw;
+}
+
+.content.profile .expiring.notes .notes-list .note {
     padding: 1vw;
-    margin: 1vw;
     overflow: hidden;
-    width: 33%;
 }
 
 .content.profile .expiring-notes .notes-list .note-details.active {
     position: absolute;
     top: 3.4vh;
-    background-color: #dffad9;;
+    background-color: #dffad9;
+    ;
     left: 11vw;
     width: 60vw;
     height: 23vw;
@@ -78,9 +115,9 @@
     justify-content: space-between;
     align-items: center;
     width: 92%;
-} 
+}
 
-.content.profile .expiring-notes .notes-list .note-details.active .heading-row p, 
+.content.profile .expiring-notes .notes-list .note-details.active .heading-row p,
 .content.profile .expiring-notes .notes-list .note-details.active .dates-row * {
     font-size: 1.6vw;
 }
@@ -101,7 +138,7 @@
     padding-bottom: 1vw;
     margin: 0 1.8vw;
     font-size: 2.6vw;
-    border-bottom: 1px solid var(--color-blue-gray);
+    border-bottom: 1px solid var(--color-menu-dark-soft-gray);
 }
 
 .content.profile .expiring-notes .notes-list .note h3 {
@@ -112,4 +149,121 @@
 
 .content.profile .expiring-notes .notes-list .note p {
     font-size: 1.2vw;
+}
+
+.content.profile .note.active.details {
+    width: 93%;
+    margin: 2vw;
+}
+
+.content.profile .note.inactive p {
+    height: 10vw;
+}
+
+.profile-details .edit-btn {
+    position: absolute;
+    top: 0;
+    height: 2.2vw;
+    right: 0;
+    font-size: 1.4vw;
+    margin: 1vw;
+}
+
+.profile-details button {
+    background: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    vertical-align: middle;
+}
+
+.profile-details .edit-btn:hover,
+.profile-edit .update-btn:hover {
+    background-color: var(--color-menu-soft-gray);
+}
+
+.content.profile .profile-edit .form-edit {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    justify-content: space-between;
+    padding: 1vw 2vw 1.4vw;
+}
+
+.profile-edit .form-edit .personal .dob input {
+    width: 10vw;
+}
+
+.profile-edit .form-edit .profile-image {
+    width: 22%;
+}
+
+.profile-edit .form-edit label {
+    display: flex;
+    justify-content: stretch;
+    width: max-content;
+    max-width: 25vw;
+    gap: 1vw;
+}
+
+.profile-edit .form-edit input {
+    background: transparent;
+    border: none;
+    max-width: 14vw;
+    cursor: text;
+}
+
+.content.profile .form-edit * {
+    font-size: 1.4vw;
+}
+
+.profile-edit .xmark {
+    position: absolute;
+    right: 2vw;
+    top: 1vw;
+    z-index: 10;
+}
+
+.profile-edit .update-btn {
+    position: absolute;
+    right: 2vw;
+    bottom: 1.4vw;
+}
+
+#imageUrl {
+    font-size: 1.2vw;
+}
+
+.content.profile .profile-edit .form-edit .profile-image {
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+    padding-top: 1vw;
+    align-items: center;
+}
+
+.content.profile .profile-edit .custom-file-upload {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.1vw;
+}
+
+.content.profile .profile-edit .file-button {
+    width: 100%;
+    justify-content: center;
+    font-size: 1vw;
+    background-color: var(--color-menu-dark-soft-gray-transparent-01);
+    padding: 0.1rem 1.2rem;
+    cursor: pointer;
+}
+
+.content.profile .profile-edit .file-button:hover {
+    background-color: var(--color-menu-dark-soft-gray-transparent-04);
+}
+
+.content.profile .profile-edit #file-chosen {
+    font-size: 0.7rem;
 }

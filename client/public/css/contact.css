@@ -5,14 +5,14 @@
     text-align: center;
 }
 
-.content.contact h3 {
+.content.contact h2 {
     font-size: 2vw;
     margin: 2vw;
 }
 
-.content.contact h2 {
-    font-size: 2vw;
-    margin: 2vw;
+.content.contact h3 {
+    font-size: 1.6vw;
+    margin: 1.6vw;
 }
 
 .content.contact p {
@@ -25,12 +25,16 @@
     flex-direction: column;
     justify-content: center;
     gap: 1vw;
-    width: 50%;
+    width: 30vw;
+}
+
+.content.contact textarea {
+    max-width: 30vw;
+    max-height: 50vh;
 }
 
 .content.contact form h4 {
-    font-size: 1.4vw;
-    padding: 1vw;
+    padding: 2vw 0 0;
 }
 
 .content.contact input[type="text"],
@@ -57,5 +61,9 @@
 }
 
 .content.contact i {
-    font-size: 5vw;
+    font-size: 4vw;
+}
+
+.content.contact .submit-ok {
+    margin-top: 10vh;
 }

@@ -3,20 +3,23 @@
     flex-direction: column;
     align-items: center;
     padding: 1.6vw;
-    color: var(--color-brown);
+}
+
+.content.news div {
+    position: relative;
+    width: 100%;
 }
 
 .content.news h3 {
     font-size: 2.2vw;
-    color: var(--color-menu-orange);
-    margin: 1vw 0 2vw;
+    color: var(--color-body-background);
+    margin: 1vw 0 1.2vw;
 }
 
-.content.news ul {
+.content.news .articles {
     list-style: none;
     padding: 0;
-    width: 50vw;
-    gap: 1vw;
+    gap: 0.6vw;
 }
 
 .content.news li {
@@ -26,56 +29,123 @@
     padding: 1vw;
 }
 
-.content.news .news-article {
-    width: 55.5vw;
+.content.news .article {
+    padding: 1vw 2vw;
 }
 
-.content.news li img {
+.content.news .article img {
     width: 100%;
     height: auto;
 }
 
-.content.news li h4 {
-    font-size: 1.2vw;
-    color: var(--color-sky-blue);
+.content.news .article h4 {
+    font-size: 1.6vw;
     margin-top: 0.5vw;
 }
 
-.content.news li div {
-    font-size: 0.9vw;
-    color: #666;
+.content.news .article .article-info * {
+    font-size: 1.2vw;
 }
 
-.content.news li p {
+.content.news .article p {
     font-size: 1.1vw;
     line-height: 1.74vw;
     text-align: justify;
+    max-height: 5vw;
+    overflow: hidden;
 }
 
-.content.news li a {
-    color: var(--color-light-green);
+.content.news .article a {
+    color: var(--color-sky-blue);
+    font-size: 1.2vw;
     text-decoration: none;
+}
+
+.content.news .article .comments {
+    font-size: 0.9vw;
+}
+
+.content.news .article .read-more {
+    font-size: 1.1vw;
 }
 
 .content.news .paging {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     margin-top: 1vw;
 }
 
 .content.news .paging ul {
     list-style: none;
     display: flex;
+    gap: 0.6vw;
     padding: 0;
+}
+
+.content.news .paging li {
+    padding: 0.1vh 0.5vw;
 }
 
 .content.news .paging li a {
     text-decoration: none;
-    color: var(--color-menu-orange);
+    color: var(--color-body-background);
+    font-size: 1vw;
 }
 
 .content.news .paging span {
     font-size: 0.9vw;
-    color: #666;
+    color: #5d5d5d;
     margin-left: 10px;
+}
+
+.content.news .new-article-btn {
+    position: absolute;
+    right: 0vw;
+    top: 1vw;
+}
+
+.content.news .new-article-btn:hover {
+    background-color: var(--color-menu-cool-gray);
+}
+
+.content.news .news.new {
+    display: flex;
+    flex-direction: column;
+    background: none;
+    width: 30vw;
+}
+
+.content.news .news.new input,
+.content.news .news.new textarea {
+    background: none;
+    border: none;
+}
+
+.content.news .news.new textarea {
+    height: 45vw;
+}
+
+.content.news .xmark {
+    text-align: end;
+}
+
+.content.news .article {
+    background: #fff;
+    box-shadow: var(--left-box-shadow);
+    margin-bottom: 1vw;
+    padding: 1vw;
+    overflow: auto;
+}
+
+.content.news .article h4 a {
+    font-size: 1.6vw;
+}
+
+.content.news .article .posted-on,
+.content.news .article .posted-on a {
+    font-size: 1.4vw;
+}
+
+.content.news .article p {
+    font-size: 1.2vw;
 }

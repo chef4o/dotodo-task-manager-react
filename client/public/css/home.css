@@ -7,7 +7,8 @@
 .home .intro h3,
 .home .intro p {
     text-align: justify;
-    color: var(--color-brown);
+    color: var(--color-body-background);
+    white-space: normal;
 }
 
 .home .intro h3 {
@@ -25,7 +26,7 @@
 }
 
 .home .intro h3 span:nth-of-type(3) {
-    color: var(--color-menu-orange);
+    color: var(--color-pastel-peachy);
 }
 
 .home .intro p {
@@ -41,11 +42,18 @@
 
 .home .intro p .login {
     cursor: pointer;
-    color: var(--color-menu-orange);
+    color: var(--color-pastel-peachy);
 }
 
 .home .featured-img {
-    background: linear-gradient(to bottom, var(--color-gray-light) 0%, rgba(255, 255, 255, 0) 50%), url('/images/featured_img.jpg');
+    background: linear-gradient(to bottom,
+            rgba(205, 211, 211, 1) 0%,
+            rgba(205, 211, 211, 0.6) 15%,
+            rgba(205, 211, 211, 0.4) 30%,
+            rgba(205, 211, 211, 0.6) 80%,
+            rgba(205, 211, 211, 1) 90%),
+        url('/images/featured_img.png');
+
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
@@ -91,25 +99,25 @@
 }
 
 .home .options .notes {
-    background-image: url('/images/note.jpg');
+    background-image: url('/images/note.png');
 }
 
 .home .options .notes h4,
 .home .options .notes .header-text {
-    background: linear-gradient(to right, transparent, var(--color-menu-tobaco) 80%);
+    background: linear-gradient(to right, transparent, var(--color-menu-soft-sky-blue) 80%);
 }
 
 .home .options .checklists {
-    background-image: url('/images/to-do.jpg');
+    background-image: url('/images/to-do.png');
 }
 
 .home .options .checklists h4,
 .home .options .checklists .header-text {
-    background: linear-gradient(to right, transparent, var(--color-menu-beige) 80%);
+    background: linear-gradient(to right, transparent, var(--color-menu-creamy-peach) 80%);
 }
 
 .home .options .events {
-    background-image: url('/images/calendar.jpg');
+    background-image: url('/images/calendar.png');
 }
 
 .home .options .events h4,
