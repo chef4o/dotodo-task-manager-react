@@ -4,7 +4,7 @@ export const registerUser = async (req, res) => {
   const { email, username, password } = req.body;
 
   try {
-    const userAlreadyExists = await userExists(username, email);
+    const userAlreadyExists = await userExists({ username: username, email: email });
 
     if (userAlreadyExists.withUsername || userAlreadyExists.withEmail) {
       return res.status(400).json({
@@ -26,7 +26,7 @@ export const checkUserExistence = async (req, res) => {
   const { username, email } = req.body;
 
   try {
-    const { withUsername, withEmail } = await userExists(username, email);
+    const { withUsername, withEmail } = await userExists({ username, email });
 
     if (withUsername || withEmail) {
       return res.status(400).json({
@@ -42,5 +42,3 @@ export const checkUserExistence = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
-
-

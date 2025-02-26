@@ -1,12 +1,6 @@
 import { isEmail } from "validator";
 import { validate } from "uuid";
-import {
-  findUserByEmail,
-  findUserById,
-  findUserByUsername,
-  getAllUsers,
-} from "../services/userService";
-import { v4 as uuidv4 } from "uuid";
+import { findUserByEmail, findUserById, findUserByUsername } from "../services/userService";
 
 /*
 The getUser function checks the type of the param and acts as follows: 
@@ -23,17 +17,4 @@ export const getUser = async (param) => {
     : findUserByUsername(param);
 
   return user;
-};
-
-export const getFreeUuid = async (ids, id) => {
-  const userIds = ids.length ? ids : Object.keys(await getAllUsers());
-
-  let uuId = id || uuidv4();
-
-  if (userIds.includes(uuId)) {
-    uuId = uuidv4();
-    return await getFreeUuid(userIds, uuId);
-  } else {
-    return uuId;
-  }
 };

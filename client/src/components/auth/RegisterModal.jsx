@@ -24,11 +24,7 @@ export default function RegisterModal() {
 
   const submitFormHandler = async () => {
     registerValidation.validateRegisterFields(formValues, setValidationErrors);
-    await validateNewUser(
-      formValues.username.trim(),
-      formValues.email.trim(),
-      setValidationErrors
-    );
+    await validateNewUser(formValues.username.trim(), formValues.email.trim(), setValidationErrors);
 
     if (validationIsEmpty) {
       isFormReadyForSubmit(true);
@@ -43,16 +39,13 @@ export default function RegisterModal() {
       }
 
       try {
-        const currentUser = await registerAuthUser(
-          formValues.email,
-          formValues.username,
-          formValues.password
-        );
+        const currentUser = await registerAuthUser(formValues.email, formValues.username, formValues.password);
 
         setUser({
           _id: currentUser.id,
           username: currentUser.username,
           email: currentUser.email,
+          role: currentUser.role,
         });
 
         hideAuthModal();
@@ -64,7 +57,7 @@ export default function RegisterModal() {
     };
 
     attemptAddUser();
-  }, [ formReadyForSubmit, validationIsEmpty, setUser, hideAuthModal, formValues ]);
+  }, [formReadyForSubmit, validationIsEmpty, setUser, hideAuthModal, formValues]);
 
   return (
     <form method="post" className={`auth-form ${selectedPageBg} register`} action="/register">
@@ -86,11 +79,7 @@ export default function RegisterModal() {
                 value={formValues.email}
                 onChange={changeHandler}
                 onBlur={() =>
-                  formUtils.focusHandler(
-                    registerValidation.validateEmail,
-                    setValidationErrors,
-                    formValues.email
-                  )
+                  formUtils.focusHandler(registerValidation.validateEmail, setValidationErrors, formValues.email)
                 }
                 className={validationErrors.email && "error-field"}
               />
@@ -100,9 +89,7 @@ export default function RegisterModal() {
           </div>
 
           <div className={registerValidation.FORM_FIELDS.username}>
-            <label htmlFor={registerValidation.FORM_FIELDS.username}>
-              Username
-            </label>
+            <label htmlFor={registerValidation.FORM_FIELDS.username}>Username</label>
             <div className="form-input">
               <i className="fa-solid fa-user" />
               <input
@@ -112,11 +99,7 @@ export default function RegisterModal() {
                 value={formValues.username}
                 onChange={changeHandler}
                 onBlur={() =>
-                  formUtils.focusHandler(
-                    registerValidation.validateUsername,
-                    setValidationErrors,
-                    formValues.username
-                  )
+                  formUtils.focusHandler(registerValidation.validateUsername, setValidationErrors, formValues.username)
                 }
                 className={validationErrors.username && "error-field"}
               />
@@ -128,9 +111,7 @@ export default function RegisterModal() {
 
         <div className="password-container">
           <div className={registerValidation.FORM_FIELDS.password}>
-            <label htmlFor={registerValidation.FORM_FIELDS.password}>
-              Password
-            </label>
+            <label htmlFor={registerValidation.FORM_FIELDS.password}>Password</label>
             <div className="form-input">
               <i className="fa-solid fa-key" />
               <input
@@ -140,11 +121,7 @@ export default function RegisterModal() {
                 value={formValues.password}
                 onChange={changeHandler}
                 onBlur={() =>
-                  formUtils.focusHandler(
-                    registerValidation.validatePassword,
-                    setValidationErrors,
-                    formValues.password
-                  )
+                  formUtils.focusHandler(registerValidation.validatePassword, setValidationErrors, formValues.password)
                 }
                 className={validationErrors.password && "error-field"}
               />
@@ -154,9 +131,7 @@ export default function RegisterModal() {
           </div>
 
           <div className={registerValidation.FORM_FIELDS.repass}>
-            <label htmlFor={registerValidation.FORM_FIELDS.repass}>
-              Repeat password
-            </label>
+            <label htmlFor={registerValidation.FORM_FIELDS.repass}>Repeat password</label>
             <div className="form-input">
               <i className="fa-solid fa-key" />
               <input

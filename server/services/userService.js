@@ -1,10 +1,12 @@
 import { db } from "../configuration/firebaseConfig.js";
 import { dbTables } from "../configuration/firebaseDb.js";
 
-export const checkExistingUserInFirestore = async (username, email) => {
+export const checkExistingUserInFirestore = async ({ username, email }) => {
   try {
-    const usernameExists = await findUserByUsername(username);
-    const emailExists = await findUserByEmail(email);
+    const usernameExists = username
+      ? await findUserByUsername(username)
+      : false;
+    const emailExists = email ? await findUserByEmail(email) : false;
 
     return {
       usernameExists: !!usernameExists,
@@ -59,11 +61,9 @@ export const findAllUsers = async () => {
 };
 
 export const deleteUser = async (id) => {
-  const userDoc = db
-    .collection(dbTables.USERS.tableName)
-    .doc(id);
+  const userDoc = db.collection(dbTables.USERS.tableName).doc(id);
 
-    const user = await userDoc.get();
+  const user = await userDoc.get();
 
   if (!user.exists) {
     return null;

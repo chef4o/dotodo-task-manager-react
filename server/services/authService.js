@@ -24,19 +24,22 @@ export const registerAuthUser = async (email, username, password, role) => {
       id: userRecord.uid,
       username: username,
       email: email,
-      role: role
+      role: role,
     };
 
     return user;
   } catch (error) {
-    console.error("Error registering user:", error.message);
+    console.error("Error registering user: ", error.message);
     throw error;
   }
 };
 
-export const userExists = async (username, email) => {
+export const userExists = async ({ username, email }) => {
   try {
-    const user = await checkExistingUserInFirestore(username, email);
+    const user = await checkExistingUserInFirestore({
+      username: username,
+      email: email,
+    });
 
     return {
       withUsername: user.usernameExists,
@@ -51,16 +54,11 @@ export const userExists = async (username, email) => {
 export const superAdminExists = async () => {
   const usersRef = db.collection(dbTables.USERS.tableName);
 
-  const adminQuery = await usersRef
-    .where("role", "==", UserRole.SUPER_ADMIN)
-    .limit(1)
-    .get();
+  const adminQuery = await usersRef.where("role", "==", UserRole.SUPER_ADMIN).limit(1).get();
 
   return !adminQuery.empty;
 };
 
 export const setRole = async () => {
-  return await superAdminExists()
-      ? UserRole.LIGHT
-      : UserRole.SUPER_ADMIN;
-}
+  return (await superAdminExists()) ? UserRole.LIGHT : UserRole.SUPER_ADMIN;
+};
