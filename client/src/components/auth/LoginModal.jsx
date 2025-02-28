@@ -8,34 +8,28 @@ import NavContext from "../../contexts/navContext";
 export default function LoginModal() {
   const { selectedPageBg } = useContext(NavContext);
   const { setUser, hideAuthModal } = useContext(AuthContext);
-  const [formValues, setFormValues] = useState(
-    commonValidations.formInitialState(loginValidation.FORM_FIELDS)
-  );
+  const [formValues, setFormValues] = useState(commonValidations.initialState(loginValidation.FORM_FIELDS));
   const [validationErrors, setValidationErrors] = useState(
-    commonValidations.validationInitialState(loginValidation.ERROR_FIELDS)
+    commonValidations.initialState(loginValidation.ERROR_FIELDS)
   );
-  const changeHandler = formUtils.handleInputChange(setFormValues);
+  const changeHandler = formUtils.handleInputChange(setFormValues, setValidationErrors);
 
   const usernameInputRef = useRef();
   useEffect(() => {
     usernameInputRef.current.focus();
   }, []);
-
+ 
   const submitFormHandler = () => {
     loginValidation.validateLogin(
       setUser,
       hideAuthModal,
-      validationErrors,
       setValidationErrors,
       formValues
     );
   };
 
   return (
-    <form
-      method="post"
-      className={`auth-form ${selectedPageBg} login`}
-      action="/login">
+    <form method="post" className={`auth-form ${selectedPageBg} login`} action="/login">
       <button className="xmark" onClick={() => hideAuthModal()}>
         <i className="fa-solid fa-xmark" />
       </button>
@@ -56,9 +50,7 @@ export default function LoginModal() {
             />
           </div>
           {validationErrors.username && (
-            <div className={`error auth ${loginValidation.FORM_FIELDS.username}`}>
-              {validationErrors.username}
-            </div>
+            <div className={`error auth ${loginValidation.FORM_FIELDS.username}`}>{validationErrors.username}</div>
           )}
         </div>
 
@@ -76,21 +68,14 @@ export default function LoginModal() {
             />
           </div>
           {validationErrors.password && (
-            <div className={`error auth ${loginValidation.FORM_FIELDS.password}`}>
-              {validationErrors.password}
-            </div>
+            <div className={`error auth ${loginValidation.FORM_FIELDS.password}`}>{validationErrors.password}</div>
           )}
         </div>
       </div>
 
-      {validationErrors.login && (
-        <div className="error auth login">{validationErrors.login}</div>
-      )}
+      {validationErrors.login && <div className="error auth login">{validationErrors.login}</div>}
 
-      <button
-        type="button"
-        className="login"
-        onClick={() => submitFormHandler()}>
+      <button type="button" className="login" onClick={() => submitFormHandler()}>
         Login
       </button>
     </form>

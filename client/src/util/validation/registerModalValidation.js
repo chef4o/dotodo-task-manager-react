@@ -1,6 +1,6 @@
 import { formEmptyFieldsHandler } from "../../controllers/errorController";
 import { isEmail } from "validator";
-import { formInitialState } from "./commonValidation";
+import { initialState } from "./commonValidation";
 
 const FORM_FIELDS = {
   email: "email",
@@ -11,7 +11,7 @@ const FORM_FIELDS = {
 
 const validateRegisterFields = (formValues, setValidationErrors) => {
   formEmptyFieldsHandler(
-    formInitialState(FORM_FIELDS),
+    initialState(FORM_FIELDS),
     formValues,
     [],
     setValidationErrors

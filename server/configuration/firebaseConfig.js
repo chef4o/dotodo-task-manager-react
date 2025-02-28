@@ -23,18 +23,28 @@ admin.initializeApp({
 const db = admin.firestore();
 const auth = admin.auth();
 
-export const createCustomToken = async (req, res) => {
+const createCustomToken = async (req, res) => {
   try {
     const { idToken } = req.body;
 
     const decodedToken = await admin.auth().verifyIdToken(idToken);
-    const uid = decodedToken.uid;
 
+    const uid = decodedToken.uid;
     const customToken = await generateCustomToken(uid);
 
     res.json({ customToken });
   } catch (error) {
     res.status(401).json({ error: "Invalid ID token" });
+  }
+};
+
+const generateCustomToken = async (uid) => {
+  try {
+    const token = await admin.auth().createCustomToken(uid);
+    return token;
+  } catch (error) {
+    console.error("Error generating custom token:", error);
+    throw error;
   }
 };
 

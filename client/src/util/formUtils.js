@@ -1,8 +1,13 @@
-const handleInputChange = (setFormValues) => (e) => {
+const handleInputChange = (setFormValues, setValidationErrors) => (e) => {
   const { name, value } = e.target;
   setFormValues((state) => ({
     ...state,
     [name]: value,
+  }));
+
+  setValidationErrors((state) => ({
+    ...state,
+    [name]: value.trim() ? "" : state[name],
   }));
 };
 

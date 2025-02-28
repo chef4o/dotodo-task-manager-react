@@ -1,44 +1,43 @@
 import { formEmptyFieldsHandler, emptyField } from "../../controllers/errorController";
 import { getUser } from "../../controllers/userController";
 import { createToken } from "../../services/authService";
-import { formInitialState } from "./commonValidation";
+import { initialState } from "./commonValidation";
 
-const FORM_FIELDS = { email: "email", username: "username", password: "password" };
+const FORM_FIELDS = { username: "username", password: "password" };
 
 const ERROR_FIELDS = { ...FORM_FIELDS, login: "login" };
 
-const validateLogin = async (setUser, hideAuthModal, validationErrors, setValidationErrors, formValues) => {
-  formEmptyFieldsHandler(formInitialState, formValues, ["login"], setValidationErrors);
+const validateLogin = async (setUser, hideAuthModal, setValidationErrors, formValues) => {
+  formEmptyFieldsHandler(initialState, formValues, ["login"], setValidationErrors);
 
-  const existingUser = await getUser(formValues.username);
+  if (emptyField(formValues)) return;
 
-  if (!existingUser) {
-    emptyField(formValues) &&
-      !validationErrors.login &&
+  const existingUser = await getUser(formValues.username.trim());
+
+  if (!existingUser.username) {
+    setValidationErrors((state) => ({
+      ...state,
+      login: existingUser.message,
+    }));
+    return;
+  }
+
+  try {
+    const loginToken = await createToken(existingUser.email, formValues.password);
+
+    setValidationErrors(initialState);
+    hideAuthModal();
+    setUser({
+      username: existingUser.username,
+      firstName: existingUser.firstName,
+      email: existingUser.email,
+      role: existingUser.role,
+    });
+  } catch (error) {
       setValidationErrors((state) => ({
         ...state,
-        login: "User does not exist",
+        login: error.message,
       }));
-  } else {
-    const loginToken = createToken(existingUser.email, formValues.password);
-
-    if (loginToken) {
-      setValidationErrors(formInitialState);
-      hideAuthModal();
-      setUser({
-        username: existingUser.username,
-        firstName: existingUser.firstName,
-        email: existingUser.email,
-        role: existingUser.role,
-      });
-    } else {
-      !emptyField(formValues) &&
-        !validationErrors.login &&
-        setValidationErrors((state) => ({
-          ...state,
-          login: "Username or password is wrong",
-        }));
-    }
   }
 };
 

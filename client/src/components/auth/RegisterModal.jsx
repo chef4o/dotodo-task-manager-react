@@ -10,15 +10,15 @@ export default function RegisterModal() {
   const { selectedPageBg } = useContext(NavContext);
   const { setUser, hideAuthModal } = useContext(AuthContext);
   const [formValues, setFormValues] = useState(() =>
-    commonValidations.formInitialState(registerValidation.FORM_FIELDS)
+    commonValidations.initialState(registerValidation.FORM_FIELDS)
   );
   const [validationErrors, setValidationErrors] = useState(() =>
-    commonValidations.validationInitialState(registerValidation.FORM_FIELDS)
+    commonValidations.initialState(registerValidation.FORM_FIELDS)
   );
   const [formReadyForSubmit, isFormReadyForSubmit] = useState(false);
   const validationIsEmpty = Object.values(validationErrors).every((value) => !value);
 
-  const changeHandler = formUtils.handleInputChange(setFormValues);
+  const changeHandler = formUtils.handleInputChange(setFormValues, setValidationErrors);
 
   const emailInputRef = useRef();
 

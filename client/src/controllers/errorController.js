@@ -1,11 +1,6 @@
 import capitalize from "../util/capitalize";
 
-export const formEmptyFieldsHandler = (
-  formInitialState,
-  formValues,
-  addintionalFields,
-  setValidationErrors
-) => {
+export const formEmptyFieldsHandler = (formInitialState, formValues, addintionalFields, setValidationErrors) => {
   if (emptyField(formValues)) {
     setValidationErrors((state) => ({
       ...state,
@@ -31,5 +26,4 @@ const emptyFieldsErrorHandler = (formValues, setValidationErrors) => {
   });
 };
 
-export const emptyField = (formValues) =>
-  Object.values(formValues).some((value) => value.trim() === "");
+export const emptyField = (formValues) => Object.values(formValues).some((value) => value.trim() === "");
