@@ -9,6 +9,8 @@ import Notes from "./components/notes/Notes.jsx";
 import Nav from "./components/Nav.jsx";
 import NotFound from "./components/error/NotFound.jsx";
 import Footer from "./components/Footer.jsx";
+import LoginModal from "./components/auth/LoginModal.jsx";
+import RegisterModal from "./components/auth/RegisterModal.jsx";
 import taskTypes from "./assets/taskTypes.js";
 import { topNav, sideNav, bottomNav, connectNav } from "./assets/navElements.js";
 import Contacts from "./components/Contacts.jsx";
@@ -26,8 +28,8 @@ const App = () => {
   });
   const [user, setUser] = useState({});
 
-  const guestAuthNavElements = topNav.filter((item) => item.name != "logout");
-  const loggedAuthNavElements = topNav.filter((item) => item.name === "logout");
+  const guestAuthNavElements = topNav.filter((item) => item.name == "login" || item.name == "register");
+  const loggedAuthNavElements = topNav.filter(({ name }) => !guestAuthNavElements.some(el => el.name === name));
   const [topNavElements, setTopNavElements] = useState(guestAuthNavElements);
 
   const guestSideNavElements = sideNav.filter((item) => item.name != "profile");
@@ -68,7 +70,7 @@ const App = () => {
 
   return (
     <NavContext.Provider value={{ handleNavigationClick, selectedPageBg }}>
-      <AuthContext.Provider value={{ user, setUser, showAuthModal, hideAuthModal: hideAuthModalHandler }}>
+      <AuthContext.Provider value={{ user, setUser, hideAuthModal: hideAuthModalHandler }}>
         <main className={selectedPageBg}>
           <Nav
             topNav={topNavElements}
@@ -76,6 +78,12 @@ const App = () => {
             connectNav={connectNav}
             bottomNav={bottomNav}
           />
+
+          {(showAuthModal.login || showAuthModal.register) && (
+            <div className="backdrop" onClick={hideAuthModalHandler} />
+          )}
+          {showAuthModal.login && <LoginModal />}
+          {showAuthModal.register && <RegisterModal />}
 
           <Routes>
             <Route path="/" element={<Home taskTypes={taskTypes} />} />

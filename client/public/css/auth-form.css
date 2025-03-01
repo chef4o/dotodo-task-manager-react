@@ -1,26 +1,52 @@
+.backdrop {
+    display: block;
+    position: absolute;
+    width: 98.2vw;
+    height: 100%;
+    left: 44.4%;
+    transform: translate(-50%, 0);
+    backdrop-filter: blur(3px);
+    background-color: rgba(0, 0, 0, 0.2);
+    background: var(--semi-transparent-filter);
+    z-index: 20;
+}
+
 .auth-form {
     position: absolute;
-    top: 0;
+    top: 5vh;
     left: 39vw;
     width: 33vw;
-    padding: 5vh 1vw 0;
+    padding: 0 1vw 0;
     z-index: 30;
 }
 
-.auth-form .auth-fields  {
+.auth-form .auth-fields {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
 .auth-form.login {
-    height: 10vw;   
-    min-height: 120px;
+    height: 8vw;
+    min-height: 46px;
+}
+
+.auth-form.login .rememberMe {
+    display: flex;
+    gap: 0.6vw;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 0.5vw;
+    font-size: 1.2vw;
+}
+
+.auth-form.login .rememberMe input {
+    width: 1.4vw;
 }
 
 .auth-form.register {
-    height: 16vw;
-    min-height: 180px;
+    height: 14vw;
+    min-height: 74px;
 }
 
 .auth-form button {
@@ -30,10 +56,10 @@
     cursor: pointer;
 }
 
-.auth-form button .fa-xmark {
+.auth-form .fa-xmark {
     position: absolute;
     top: -1.2vh;
-    right: 0;
+    right: 1vw;
     color: white;
 }
 
@@ -80,5 +106,5 @@
 }
 
 .auth-form input {
-    padding-left: 1.6vw;
+    padding-left: 2.2vw;
 }

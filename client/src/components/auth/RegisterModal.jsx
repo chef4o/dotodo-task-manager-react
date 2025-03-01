@@ -60,7 +60,7 @@ export default function RegisterModal() {
   }, [formReadyForSubmit, validationIsEmpty, setUser, hideAuthModal, formValues]);
 
   return (
-    <form method="post" className={`auth-form ${selectedPageBg} register`} action="/register">
+    <form method="post" className={`auth-form register`} action="/register">
       <button className="xmark" onClick={() => hideAuthModal("register")}>
         <i className="fa-solid fa-xmark" />
       </button>

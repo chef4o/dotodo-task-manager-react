@@ -3,10 +3,8 @@ import { commonValidations } from "../../util/validation/commonValidation";
 import { loginValidation } from "../../util/validation/loginModalValidation";
 import { formUtils } from "../../util/formUtils";
 import AuthContext from "../../contexts/authContext";
-import NavContext from "../../contexts/navContext";
 
 export default function LoginModal() {
-  const { selectedPageBg } = useContext(NavContext);
   const { setUser, hideAuthModal } = useContext(AuthContext);
   const [formValues, setFormValues] = useState(commonValidations.initialState(loginValidation.FORM_FIELDS));
   const [validationErrors, setValidationErrors] = useState(
@@ -29,7 +27,7 @@ export default function LoginModal() {
   };
 
   return (
-    <form method="post" className={`auth-form ${selectedPageBg} login`} action="/login">
+    <form method="post" className={`auth-form login`} action="/login">
       <button className="xmark" onClick={() => hideAuthModal()}>
         <i className="fa-solid fa-xmark" />
       </button>

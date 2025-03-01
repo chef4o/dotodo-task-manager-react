@@ -28,6 +28,10 @@ const sideNav = [
 
 const topNav = [
   {
+    name: "administration",
+    href: "admin-panel",
+  },
+  {
     name: "login",
   },
   {
