@@ -6,8 +6,8 @@ export default function ProfileNoteDetails({ note, activeNoteId, setActiveNoteId
     };
 
     return (
-        <div className={activeNoteId === note._id ? "note-details active" : "note"} onClick={() => setActiveNoteId(note._id)}>
-            {activeNoteId === note._id &&
+        <div className={activeNoteId === note.id ? "note-details active" : "note"} onClick={() => setActiveNoteId(note.id)}>
+            {activeNoteId === note.id &&
                 <button className="xmark" onClick={handleXmarkClick}>
                     <i className="fa-solid fa-xmark" />
                 </button>}

@@ -33,4 +33,5 @@ export const createToken = async (email, password) => {
 
 export const handleLogout = () => {
   Cookies.remove('authToken');
+  sessionStorage.clear();
 }

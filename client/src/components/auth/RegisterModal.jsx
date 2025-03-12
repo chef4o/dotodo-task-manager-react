@@ -1,22 +1,17 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { registerAuthUser, validateNewUser } from "../../services/userService";
-import { commonValidations } from "../../util/validation/commonValidation";
+import { validationIsEmpty, initialState } from "../../util/validation/commonValidation";
 import { registerValidation } from "../../util/validation/registerModalValidation";
 import { formUtils } from "../../util/formUtils";
-import NavContext from "../../contexts/navContext";
 import AuthContext from "../../contexts/authContext";
 
 export default function RegisterModal() {
-  const { selectedPageBg } = useContext(NavContext);
   const { setUser, hideAuthModal } = useContext(AuthContext);
-  const [formValues, setFormValues] = useState(() =>
-    commonValidations.initialState(registerValidation.FORM_FIELDS)
-  );
+  const [formValues, setFormValues] = useState(() => initialState(registerValidation.FORM_FIELDS));
   const [validationErrors, setValidationErrors] = useState(() =>
-    commonValidations.initialState(registerValidation.FORM_FIELDS)
+    initialState(registerValidation.FORM_FIELDS)
   );
   const [formReadyForSubmit, isFormReadyForSubmit] = useState(false);
-  const validationIsEmpty = Object.values(validationErrors).every((value) => !value);
 
   const changeHandler = formUtils.handleInputChange(setFormValues, setValidationErrors);
 
@@ -26,14 +21,14 @@ export default function RegisterModal() {
     registerValidation.validateRegisterFields(formValues, setValidationErrors);
     await validateNewUser(formValues.username.trim(), formValues.email.trim(), setValidationErrors);
 
-    if (validationIsEmpty) {
+    if (validationIsEmpty(validationErrors)) {
       isFormReadyForSubmit(true);
     }
   };
 
   useEffect(() => {
     const attemptAddUser = async () => {
-      if (!formReadyForSubmit || !validationIsEmpty) {
+      if (!formReadyForSubmit || !validationIsEmpty(validationErrors)) {
         isFormReadyForSubmit(false);
         return;
       }
@@ -42,7 +37,7 @@ export default function RegisterModal() {
         const currentUser = await registerAuthUser(formValues.email, formValues.username, formValues.password);
 
         setUser({
-          _id: currentUser.id,
+          id: currentUser.id,
           username: currentUser.username,
           email: currentUser.email,
           role: currentUser.role,
@@ -57,13 +52,13 @@ export default function RegisterModal() {
     };
 
     attemptAddUser();
-  }, [formReadyForSubmit, validationIsEmpty, setUser, hideAuthModal, formValues]);
+  }, [formReadyForSubmit, validationErrors, setUser, hideAuthModal, formValues]);
 
   return (
     <form method="post" className={`auth-form register`} action="/register">
-      <button className="xmark" onClick={() => hideAuthModal("register")}>
+      <a className="xmark" onClick={() => hideAuthModal("register")} role="button" tabIndex="0">
         <i className="fa-solid fa-xmark" />
-      </button>
+      </a>
 
       <div className="auth-fields">
         <div className="user-container">

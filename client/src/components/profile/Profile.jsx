@@ -18,10 +18,10 @@ export default function Profile() {
     async function loadUser() {
         const userData = await findUserById(id);
 
-        if (user._id === id && userData) {
+        if (user.id === id && userData) {
             setProfileDetails({...userData})
 
-            await getExpiringEvents(userData._id, 4)
+            await getExpiringEvents(userData.id, 4)
 
         } else {
             navigate('/404');
@@ -36,15 +36,13 @@ export default function Profile() {
 
     useEffect(() => {
         loadUser();
-    }, [id, user._id]);
+    }, [id, user.id]);
 
     return (
         <div className="content profile">
             <ProfileDetails profileDetails={profileDetails} />
 
             <ProfileNotes expiringNotes={expiringNotes} />
-
-            <div className="latest-checklists"></div>
         </div>
 
     )

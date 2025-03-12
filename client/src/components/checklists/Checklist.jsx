@@ -24,8 +24,8 @@ export default function Checklist({ checklist, deleteChecklist }) {
     }
 
     async function deleteTask(taskId) {
-        await deleteChecklistItem(user._id, checklist._id, taskId)
-        setTasks(tasks.filter(task => task._id !== taskId));
+        await deleteChecklistItem(user.id, checklist.id, taskId)
+        setTasks(tasks.filter(task => task.id !== taskId));
     }
 
     useEffect(() => {
@@ -55,14 +55,14 @@ export default function Checklist({ checklist, deleteChecklist }) {
     };
 
     return (
-        <div className={activeChecklistId === checklist._id ? "checklist active" : "checklist"}
-            onClick={() => setActiveChecklistId(checklist._id)}>
-            {activeChecklistId === checklist._id &&
+        <div className={activeChecklistId === checklist.id ? "checklist active" : "checklist"}
+            onClick={() => setActiveChecklistId(checklist.id)}>
+            {activeChecklistId === checklist.id &&
                 <button className="xmark" onClick={handleXmarkClick}>
                     <i className="fa-solid fa-xmark" />
                 </button>}
 
-            <button className="delete-checklist" onClick={() => deleteChecklist(checklist._id)}>
+            <button className="delete-checklist" onClick={() => deleteChecklist(checklist.id)}>
                 <i className="fa-solid fa-trash-can" />
             </button>
 
@@ -75,7 +75,7 @@ export default function Checklist({ checklist, deleteChecklist }) {
 
             {tasks.map(task => (
                 <ChecklistItem
-                    key={task._id}
+                    key={task.id}
                     task={task}
                     checklist={checklist}
                     deleteTask={deleteTask} />

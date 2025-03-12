@@ -18,7 +18,7 @@ export default function EmptyChecklist({ setChecklists }) {
                 events: tasks
             };
 
-            await addChecklist(user._id, newChecklist);
+            await addChecklist(user.id, newChecklist);
             setChecklists((state) => [...state, newChecklist]);
             setTitle('');
             setText('');

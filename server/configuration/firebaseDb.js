@@ -7,5 +7,20 @@ export const dbTables = {
       email: "email",
       createdAt: "createdAt",
     },
-  }
+  },
+  NOTES: {
+    tableName: "notes",
+    fields: {
+      id: "id",
+      title: "title",
+      content: "content",
+      startDate: "startDate",
+      completedOn: "completedOn",
+      dueDate: "dueDate",
+      dueDateOnly: "dueDateOnly",
+      ownerId: "ownerId",
+      trackProgress: "trackProgress",
+      archived: "archived",
+    },
+  },
 };

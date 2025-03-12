@@ -1,40 +1,35 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { commonValidations } from "../../util/validation/commonValidation";
+import { initialState } from "../../util/validation/commonValidation";
 import { loginValidation } from "../../util/validation/loginModalValidation";
 import { formUtils } from "../../util/formUtils";
 import AuthContext from "../../contexts/authContext";
+import NavContext from "../../contexts/navContext";
 
 export default function LoginModal() {
   const { setUser, hideAuthModal } = useContext(AuthContext);
-  const [formValues, setFormValues] = useState(commonValidations.initialState(loginValidation.FORM_FIELDS));
-  const [validationErrors, setValidationErrors] = useState(
-    commonValidations.initialState(loginValidation.ERROR_FIELDS)
-  );
+  const { setLoading } = useContext(NavContext);
+  const [formValues, setFormValues] = useState(initialState(loginValidation.FORM_FIELDS));
+  const [validationErrors, setValidationErrors] = useState(initialState(loginValidation.ERROR_FIELDS));
   const changeHandler = formUtils.handleInputChange(setFormValues, setValidationErrors);
 
   const usernameInputRef = useRef();
   useEffect(() => {
     usernameInputRef.current.focus();
   }, []);
- 
+
   const submitFormHandler = () => {
-    loginValidation.validateLogin(
-      setUser,
-      hideAuthModal,
-      setValidationErrors,
-      formValues
-    );
+    loginValidation.validateLogin(setUser, setLoading, hideAuthModal, setValidationErrors, formValues);
   };
 
   return (
     <form method="post" className={`auth-form login`} action="/login">
-      <button className="xmark" onClick={() => hideAuthModal()}>
+      <a className="xmark" onClick={() => hideAuthModal()} role="button">
         <i className="fa-solid fa-xmark" />
-      </button>
+      </a>
 
       <div className="auth-fields">
         <div className={loginValidation.FORM_FIELDS.username}>
-          <label htmlFor={loginValidation.FORM_FIELDS.username}>Username/Email</label>
+          <label htmlFor={loginValidation.FORM_FIELDS.username}>User</label>
           <div className="form-input">
             <i className="fa-solid fa-user" />
             <input
@@ -43,6 +38,7 @@ export default function LoginModal() {
               name={loginValidation.FORM_FIELDS.username}
               type="text"
               value={formValues.username}
+              autoComplete="off"
               onChange={changeHandler}
               className={validationErrors.username && "error-field"}
             />
@@ -62,6 +58,7 @@ export default function LoginModal() {
               type="password"
               value={formValues.password}
               onChange={changeHandler}
+              autoComplete="off"
               className={validationErrors.password && "error-field"}
             />
           </div>
@@ -72,6 +69,11 @@ export default function LoginModal() {
       </div>
 
       {validationErrors.login && <div className="error auth login">{validationErrors.login}</div>}
+
+      {/* <div class="rememberMe">
+        <input type="checkbox" name="remember-me" id="remember-me" />
+        <label for="remember-me">Remember me</label>
+      </div> */}
 
       <button type="button" className="login" onClick={() => submitFormHandler()}>
         Login

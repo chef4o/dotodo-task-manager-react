@@ -1,4 +1,4 @@
-export default function UnderConstruction({ }) {
+export default function UnderConstruction() {
     return (
         <div className="error-page under-construction">
             <i className="fa-solid fa-screwdriver-wrench"></i>

@@ -1,38 +1,73 @@
+*::-webkit-scrollbar {
+    width: 0.4vw;
+    background: transparent;
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: var(--color-menu-icon-soft-sky-blue);
+    border-radius: 0.4vw;
+    border: 0.1vw solid transparent;
+}
+
 .notes p,
 .notes p:hover,
 .notes ul,
 .notes ul:hover,
 .notes textarea,
 .notes textarea:hover {
-    overflow: auto;
     scrollbar-color: var(--color-menu-icon-soft-sky-blue) transparent;
     scrollbar-width: thin;
 }
 
-p::-webkit-scrollbar,
-ul::-webkit-scrollbar,
-textarea::-webkit-scrollbar {
-    width: 0.4vw;
+.notes p,
+.notes p:hover,
+.notes textarea,
+.notes textarea:hover {
+    overflow: auto;
 }
 
-p::-webkit-scrollbar-track,
-ul::-webkit-scrollbar-track,
-textarea::-webkit-scrollbar-track {
+.content::-webkit-scrollbar-thumb {
+    background-color: var(--color-menu-soft-sky-blue);
+    border-radius: 0.4vw;
+    border: 0.1vw solid transparent;
+}
+
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 60vw;
+    height: 93.1vh;
+    margin-top: 3.5vh;
+    margin-left: 11vw;
+    backdrop-filter: blur(3px);
+    z-index: 30;
+}
+
+.spinner {
+    width: 7vw;
+    height: 7vw;
+    border: 5px solid rgba(0, 0, 0, 0.1);
+    border-top: 5px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    z-index: 30;
     background: transparent;
+    position: absolute;
+    top: 10vw;
 }
 
-p::-webkit-scrollbar-thumb,
-ul::-webkit-scrollbar-thumb,
-textarea::-webkit-scrollbar-thumb {
-    background-color: var(--color-menu-icon-soft-sky-blue);
-    border-radius: 0.4vw;
-    border: 0.1vw solid transparent;
-}
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
 
-p:hover::-webkit-scrollbar-thumb,
-ul:hover::-webkit-scrollbar-thumb,
-textarea:hover::-webkit-scrollbar-thumb {
-    background-color: var(--color-menu-icon-soft-sky-blue);
-    border-radius: 0.4vw;
-    border: 0.1vw solid transparent;
+    100% {
+        transform: rotate(360deg);
+    }
 }

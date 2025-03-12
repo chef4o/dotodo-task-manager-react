@@ -7,6 +7,7 @@ import Events from "./components/events/Events.jsx";
 import Checklists from "./components/checklists/Checklists.jsx";
 import Notes from "./components/notes/Notes.jsx";
 import Nav from "./components/Nav.jsx";
+import Spinner from "./components/Spinner.jsx";
 import NotFound from "./components/error/NotFound.jsx";
 import Footer from "./components/Footer.jsx";
 import LoginModal from "./components/auth/LoginModal.jsx";
@@ -21,15 +22,26 @@ import { handleLogout } from "./services/authService.js";
 
 const App = () => {
   const [selectedPageBg, setSelectedPageBg] = useState("home");
-
+  const [loading, setLoading] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState({
     login: false,
     register: false,
   });
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(() => {
+    const savedUser = sessionStorage.getItem("user");
+    return savedUser ? JSON.parse(savedUser) : {};
+  });
+
+  useEffect(() => {
+    if (user && user.email) {
+      sessionStorage.setItem("user", JSON.stringify(user));
+    } else {
+      console.log("User is empty or doesn't have email");
+    }
+  }, [user]);
 
   const guestAuthNavElements = topNav.filter((item) => item.name == "login" || item.name == "register");
-  const loggedAuthNavElements = topNav.filter(({ name }) => !guestAuthNavElements.some(el => el.name === name));
+  const loggedAuthNavElements = topNav.filter(({ name }) => !guestAuthNavElements.some((el) => el.name === name));
   const [topNavElements, setTopNavElements] = useState(guestAuthNavElements);
 
   const guestSideNavElements = sideNav.filter((item) => item.name != "profile");
@@ -69,7 +81,7 @@ const App = () => {
   }, [user]);
 
   return (
-    <NavContext.Provider value={{ handleNavigationClick, selectedPageBg }}>
+    <NavContext.Provider value={{ handleNavigationClick, selectedPageBg, setLoading }}>
       <AuthContext.Provider value={{ user, setUser, hideAuthModal: hideAuthModalHandler }}>
         <main className={selectedPageBg}>
           <Nav
@@ -78,6 +90,8 @@ const App = () => {
             connectNav={connectNav}
             bottomNav={bottomNav}
           />
+
+          {loading && <Spinner />}
 
           {(showAuthModal.login || showAuthModal.register) && (
             <div className="backdrop" onClick={hideAuthModalHandler} />

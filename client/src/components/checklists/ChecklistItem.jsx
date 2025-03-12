@@ -16,7 +16,7 @@ export default function ChecklistItem({ task, checklist, deleteTask }) {
     }
 
     const updateValue = async () => {
-        await editChecklistItem(user._id, checklist._id, task._id, formValues)
+        await editChecklistItem(user.id, checklist.id, task.id, formValues)
     }
 
     const handleTickChange = async () => {
@@ -25,7 +25,7 @@ export default function ChecklistItem({ task, checklist, deleteTask }) {
             ...state,
             taskStatus: newStatus
         }));
-        await editChecklistItem(user._id, checklist._id, task._id, { status: newStatus });
+        await editChecklistItem(user.id, checklist.id, task.id, { status: newStatus });
     };
 
     return (
@@ -45,7 +45,7 @@ export default function ChecklistItem({ task, checklist, deleteTask }) {
                 onChange={changeHandler}
                 onBlur={updateValue}
             />
-            <button className="delete" onClick={() => deleteTask(task._id)}>
+            <button className="delete" onClick={() => deleteTask(task.id)}>
                 <i className="fa-solid fa-square-minus" />
             </button>
         </form>

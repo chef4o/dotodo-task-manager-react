@@ -12,10 +12,10 @@ export default function ProfileNotes({ expiringNotes }) {
             <h1>Notes close to expiry</h1>
             {expiringNotes.length > 0
                 ? <ul className="notes-list">
-                    {expiringNotes.map(item => item._id === activeNoteId
-                        ? <ProfileNoteDetails key={item._id} note={item}
+                    {expiringNotes.map(item => item.id === activeNoteId
+                        ? <ProfileNoteDetails key={item.id} note={item}
                             activeNoteId={activeNoteId} setActiveNoteId={setActiveNoteId} />
-                        : <ProfileNote key={item._id} note={item}
+                        : <ProfileNote key={item.id} note={item}
                             activeNoteId={activeNoteId} setActiveNoteId={setActiveNoteId} />
                     )}
                 </ul>

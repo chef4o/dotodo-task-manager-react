@@ -3,9 +3,7 @@ import { dbTables } from "../configuration/firebaseDb.js";
 
 export const checkExistingUserInFirestore = async ({ username, email }) => {
   try {
-    const usernameExists = username
-      ? await findUserByUsername(username)
-      : false;
+    const usernameExists = username ? await findUserByUsername(username) : false;
     const emailExists = email ? await findUserByEmail(email) : false;
 
     return {
@@ -22,11 +20,9 @@ export const findUserByUsername = async (username) => {
   if (!username) return null;
 
   const usersRef = db.collection(dbTables.USERS.tableName);
-  const snapshot = await usersRef
-    .where(dbTables.USERS.fields.username, "==", username)
-    .get();
+  const snapshot = await usersRef.where(dbTables.USERS.fields.username, "==", username).get();
 
-  return snapshot.empty ? null : snapshot.docs[0].data();
+  return snapshot.empty ? null : { id: snapshot.docs[0].id, ...snapshot.docs[0].data() };
 };
 
 export const findUserById = async (id) => {
@@ -34,18 +30,16 @@ export const findUserById = async (id) => {
 
   const userDoc = await db.collection(dbTables.USERS.tableName).doc(id).get();
 
-  return !userDoc.exists ? null : userDoc.data();
+  return !userDoc.exists ? null : { id: userDoc.id, ...userDoc.data() }; 
 };
 
 export const findUserByEmail = async (email) => {
   if (!email) return null;
 
   const usersRef = db.collection(dbTables.USERS.tableName);
-  const snapshot = await usersRef
-    .where(dbTables.USERS.fields.email, "==", email)
-    .get();
+  const snapshot = await usersRef.where(dbTables.USERS.fields.email, "==", email).get();
 
-  return snapshot.empty ? null : snapshot.docs[0].data();
+  return snapshot.empty ? null : { id: snapshot.docs[0].id, ...snapshot.docs[0].data() };
 };
 
 export const findAllUsers = async () => {

@@ -25,34 +25,34 @@ export default function Checklists() {
                 events: {}
             };
 
-            await addChecklist(user._id, newChecklist);
+            await addChecklist(user.id, newChecklist);
             setChecklists([...checklists, newChecklist]);
             setText('');
         }
     }
 
     const deleteChecklistHandler = async (id) => {
-        await deleteChecklist(user._id, id);
+        await deleteChecklist(user.id, id);
 
-        setChecklists(checklists.filter(checklist => checklist._id !== id));
+        setChecklists(checklists.filter(checklist => checklist.id !== id));
     }
 
     useEffect(() => {
-        if (user._id) {
-            getAllChecklists(user._id)
+        if (user.id) {
+            getAllChecklists(user.id)
                 .then(setChecklists);
         }
     }, [user, checklists]);
 
     return (
         <div className="content checklists">
-            {!user._id
+            {!user.id
                 ? <NoAccess onItemClick={handleNavigationClick} />
                 : checklists.length > 0
                     ? <ul className="checklists-list">
                         {checklists.map(checklist =>
                             <Checklist 
-                            key={checklist._id} 
+                            key={checklist.id} 
                             checklist={checklist}
                             setChecklists={setChecklists}
                             deleteChecklist={deleteChecklistHandler} />
