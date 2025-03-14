@@ -4,7 +4,7 @@ export default function NoteItem({ note, setActiveNoteId, setEditNoteId, deleteN
   return (
     <Link onClick={() => setActiveNoteId(note.id)}>
       <div className="note inactive">
-        <h3>{note.title}</h3>
+        <h3>{note.title.length > 17 ? note.title.slice(0, 17) + "..." : note.title}</h3>
         <p className={note.dueDaysHours ? "with-due" : ""}>{note.content}</p>
 
         {note.dueDaysHours && (

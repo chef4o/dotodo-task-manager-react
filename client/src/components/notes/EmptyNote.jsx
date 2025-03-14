@@ -7,35 +7,35 @@ import { noteValidation } from "../../util/validation/noteValidation";
 import NavContext from "../../contexts/navContext";
 
 export default function EmptyNote({ setNotes, setMakeNew }) {
-  const [formValues, setFormValues] = useState(() => initialState(noteValidation.FORM_ERROR_FIELDS));
-  const [validationErrors, setValidationErrors] = useState(initialState(noteValidation.FORM_ERROR_FIELDS));
+  const [formValues, setFormValues] = useState(() => initialState(noteValidation.FORM_REQUIRED_FIELDS));
+  const [validationErrors, setValidationErrors] = useState(() => initialState(noteValidation.FORM_ERROR_FIELDS));
   const { user } = useContext(AuthContext);
   const { setLoading } = useContext(NavContext);
 
   const changeHandler = (event) => {
     const { name, value } = event.target;
-    setFormValues((prev) => ({ ...prev, [name]: value }));
+    const newValues = { ...formValues, [name]: value };
+    setFormValues(newValues);
 
-    if (name === noteValidation.FORM_ERROR_FIELDS.title) {
-      noteValidation.validateTitle(setValidationErrors, value);
-    } else if (name === noteValidation.FORM_ERROR_FIELDS.content) {
-      noteValidation.validateContent(setValidationErrors, value);
-    }
+    const errors = noteValidation.getValidationErrors(newValues);
+    setValidationErrors(errors);
   };
 
   async function createNote(event) {
     event.preventDefault();
 
-    noteValidation.validateNoteFields(formValues, setValidationErrors);
-    if (!validationIsEmpty(validationErrors)) return;
+    const errors = noteValidation.getValidationErrors(formValues);
+    setValidationErrors(errors);
+
+    if (!validationIsEmpty(errors)) {
+      return;
+    }
 
     setLoading(true);
     await addNote({ ...formValues, ownerId: user?.id });
-
     const notes = await getAllNotesSorted(user?.id, "startDate", "desc");
     setNotes(notes);
     sessionStorage.setItem("notes", JSON.stringify(notes));
-
     setMakeNew(false);
     setLoading(false);
   }
@@ -72,7 +72,7 @@ export default function EmptyNote({ setNotes, setMakeNew }) {
         <input id="dueTime" type="time" name="dueTime" value={formValues.dueTime} onChange={changeHandler} />
       </label>
 
-      {(validationErrors["title"] || validationErrors["content"]) && (
+      {!validationIsEmpty(validationErrors) && (
         <div className="error new-note error-list">
           {Object.entries(validationErrors).map(([key, error]) =>
             error ? (
