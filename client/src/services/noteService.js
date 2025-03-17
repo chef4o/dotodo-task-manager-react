@@ -1,6 +1,6 @@
 import * as request from "../api/request";
 import { url } from "../api/url";
-import { processData } from "../util/dataUtils";
+import { computeDueDaysHours, processData } from "../util/dataUtils";
 
 export const getAllNotes = async (userId) => {
   if (!userId) {
@@ -20,8 +20,15 @@ export const getAllNotes = async (userId) => {
 export const getAllNotesSorted = async (userId, sortKey, sortOrder) => {
   const data = await getAllNotes(userId);
 
+  const notesWithAddedDateTime = data.map((note) => {
+    if (note.dueDate) {
+      note.dueDaysHours = computeDueDaysHours(note.dueDate, note.dueTime);
+    }
+    return note;
+  });
+
   const sortedNotes = processData({
-    data,
+    data: notesWithAddedDateTime,
     sortKey: sortKey,
     sortOrder: sortOrder,
   });

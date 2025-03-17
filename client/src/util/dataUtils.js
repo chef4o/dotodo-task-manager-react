@@ -26,3 +26,23 @@ export const processData = ({
   
     return result;
   };
+
+  export function computeDueDaysHours(dueDate, dueTime) {
+    if (!dueDate) {
+      return null;
+    }
+
+    const dueDateTime = dueTime ? new Date(`${dueDate}T${dueTime}`) : new Date(dueDate);
+    const now = new Date();
+    const diffMs = dueDateTime - now;
+    
+    if (diffMs < 0) {
+      return { days: 0, hours: 0, expired: true };
+    }
+    
+    const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diffMs / (1000 * 60 * 60)) % 24);
+    
+    return { days, hours, expired: false };
+  }
+  

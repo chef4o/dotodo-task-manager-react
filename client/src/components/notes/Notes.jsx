@@ -34,11 +34,11 @@ export default function Notes() {
   };
 
   useEffect(() => {
+    setLoading(true);
     if (user?.id) {
-      setLoading(true);
       getNotesFromStorageOrServer(user.id, setNotes);
-      setLoading(false);
     }
+    setLoading(false);
   }, [user]);
 
   return (
@@ -53,7 +53,14 @@ export default function Notes() {
             </h2>
             {!makeNew && (
               <form>
-                <button type="submit" className="delete-btn" onClick={() => setMakeNew(true)}>
+                <button
+                  type="submit"
+                  className="delete-btn"
+                  onClick={() => {
+                    setActiveNoteId("");
+                    setEditNoteId("");
+                    setMakeNew(true);
+                  }}>
                   Create new note
                 </button>
               </form>
@@ -62,7 +69,14 @@ export default function Notes() {
 
           {notes.length > 0 || makeNew ? (
             <ul className="notes-list">
-              {makeNew && <EmptyNote setMakeNew={setMakeNew} setNotes={setNotes}></EmptyNote>}
+              {makeNew && (
+                <EmptyNote
+                  setMakeNew={setMakeNew}
+                  setEditNoteId={setEditNoteId}
+                  setActiveNoteId={setActiveNoteId}
+                  setNotes={setNotes}
+                />
+              )}
 
               {notes.map((item) =>
                 editNoteId && editNoteId === item.id ? (
@@ -70,10 +84,11 @@ export default function Notes() {
                     key={item.id}
                     note={item}
                     editNoteId={editNoteId}
-                    activeNoteId={activeNoteId}
+                    setNotes={setNotes}
                     setEditNoteId={setEditNoteId}
                     setActiveNoteId={setActiveNoteId}
                     deleteNote={deleteNoteHandler}
+                    setMakeNew={setMakeNew}
                   />
                 ) : null
               )}
@@ -87,22 +102,23 @@ export default function Notes() {
                     activeNoteId={activeNoteId}
                     setActiveNoteId={setActiveNoteId}
                     deleteNote={deleteNoteHandler}
+                    setMakeNew={setMakeNew}
                   />
                 ) : null
               )}
 
-              {notes.map(
-                (item) =>
-                  ((!editNoteId && !activeNoteId) || editNoteId != item.id || activeNoteId != item.id) && (
-                    <NoteItem
-                      key={item.id}
-                      note={item}
-                      editNoteId={setEditNoteId}
-                      activeNoteId={setActiveNoteId}
-                      deleteNote={deleteNoteHandler}
-                    />
-                  )
-              )}
+              {notes
+                .filter((item) => item.id !== activeNoteId && item.id !== editNoteId)
+                .map((item) => (
+                  <NoteItem
+                    key={item.id}
+                    note={item}
+                    setActiveNoteId={setActiveNoteId}
+                    setEditNoteId={setEditNoteId}
+                    deleteNote={deleteNoteHandler}
+                    setMakeNew={setMakeNew}
+                  />
+                ))}
             </ul>
           ) : (
             <>

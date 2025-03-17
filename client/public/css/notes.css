@@ -83,7 +83,7 @@
 
 .note.new,
 .note.active {
-    width: 100%;
+    width: 99.1%;
     background-color: var(--color-menu-soft-sky-blue-transparent);
 }
 
@@ -141,6 +141,13 @@
     font-size: 1.8vw;
     padding: 0;
     border-bottom: 1px solid var(--color-menu-icon-soft-sky-blue);
+}
+
+.note.active .form-edit .title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-top: 0.3vw;
 }
 
 .note.active.details .title {

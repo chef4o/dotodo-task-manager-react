@@ -72,7 +72,7 @@ export default function LoginModal() {
 
       {/* <div class="rememberMe">
         <input type="checkbox" name="remember-me" id="remember-me" />
-        <label for="remember-me">Remember me</label>
+        <label htmlFor="remember-me">Remember me</label>
       </div> */}
 
       <button type="button" className="login" onClick={() => submitFormHandler()}>

@@ -51,6 +51,10 @@
   --semi-transparent-filter: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0));
 }
 
+.xmark {
+  cursor: pointer;
+}
+
 body {
   margin: 0;
   padding-left: 10vw;

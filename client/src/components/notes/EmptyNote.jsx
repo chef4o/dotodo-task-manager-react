@@ -42,9 +42,9 @@ export default function EmptyNote({ setNotes, setMakeNew }) {
 
   return (
     <form className="note new">
-      <Link className="xmark" onClick={() => setMakeNew(false)}>
+      <div className="xmark" onClick={() => setMakeNew(false)}>
         <i className="fa-solid fa-xmark"></i>
-      </Link>
+      </div>
 
       <input
         className="title"
@@ -65,11 +65,11 @@ export default function EmptyNote({ setNotes, setMakeNew }) {
 
       <label className="due-date">
         <p>Due date / time</p>
-        <input id="dueDate" type="date" name="dueDate" value={formValues.dueDate} onChange={changeHandler} />
+        <input id="dueDate" type="date" name="dueDate" value={formValues.dueDate || ""} onChange={changeHandler} />
       </label>
 
       <label className="due-time">
-        <input id="dueTime" type="time" name="dueTime" value={formValues.dueTime} onChange={changeHandler} />
+        <input id="dueTime" type="time" name="dueTime" value={formValues.dueTime || ""} onChange={changeHandler} />
       </label>
 
       {!validationIsEmpty(validationErrors) && (
@@ -84,7 +84,7 @@ export default function EmptyNote({ setNotes, setMakeNew }) {
         </div>
       )}
 
-      <button className="create" type="submit" onClick={createNote}>
+      <button className="create" onClick={createNote}>
         Create
       </button>
     </form>

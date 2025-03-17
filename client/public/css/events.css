@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 2vw;
+    margin: 2vw 2.4vw 2vw 2vw;
 }
 
 .content.events .header-menu h2,
