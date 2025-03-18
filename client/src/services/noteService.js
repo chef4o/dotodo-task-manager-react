@@ -43,7 +43,7 @@ export const getNoteById = async (noteId) => {
   }
 
   try {
-    const response = await request.get(`${url.note}/${noteId}`);
+    const response = await request.get(`${url.notes}/${noteId}`);
     return response;
   } catch (error) {
     console.error("Error fetching note:", error);

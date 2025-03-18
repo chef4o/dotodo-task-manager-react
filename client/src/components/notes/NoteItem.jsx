@@ -32,6 +32,7 @@ export default function NoteItem({ note, setActiveNoteId, setEditNoteId, deleteN
             e.stopPropagation();
             setActiveNoteId("");
             setEditNoteId(note.id);
+            setMakeNew(false);
           }}>
           Edit
         </button>

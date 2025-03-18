@@ -38,7 +38,7 @@ export default function EditNoteItem({ note, editNoteId, setEditNoteId, setNotes
     }
 
     setLoading(true);
-    await editNote({ noteId: note?.id, ...formValues });
+    await editNote(note?.id, formValues);
     const notes = await getAllNotesSorted(user?.id, "startDate", "desc");
     setNotes(notes);
     sessionStorage.setItem("notes", JSON.stringify(notes));
