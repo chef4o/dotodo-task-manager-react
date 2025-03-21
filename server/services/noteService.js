@@ -67,6 +67,7 @@ export const addNote = async (noteData) => {
     ownerId: noteData.ownerId,
     trackProgress: "New",
     archived: false,
+    peers: []
   };
 
   const docRef = await notesRef.add(newNote);

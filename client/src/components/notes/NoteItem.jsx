@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 export default function NoteItem({ note, setActiveNoteId, setEditNoteId, deleteNote, setMakeNew }) {
   return (
     <div

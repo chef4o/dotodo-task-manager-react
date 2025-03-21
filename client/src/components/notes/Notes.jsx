@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { deleteNote, getAllNotesSorted, getNotesFromStorageOrServer } from "../../services/noteService";
+import { deleteNote, getNotesFromStorageOrServer } from "../../services/noteService";
 import NoteItem from "./NoteItem";
 import EditNoteItem from "./EditNoteItem";
 import NoteItemDetails from "./NoteItemDetails";
@@ -27,9 +27,7 @@ export default function Notes() {
     setLoading(true);
     await deleteNote(id);
     sessionStorage.removeItem("notes");
-
-    const notes = await getAllNotesSorted(user?.id, "startDate", "desc");
-    setNotes(notes);
+    getNotesFromStorageOrServer(user.id, setNotes);
     setLoading(false);
   };
 

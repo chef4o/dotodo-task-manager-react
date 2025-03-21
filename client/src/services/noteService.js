@@ -97,7 +97,24 @@ export const deleteNote = async (noteId) => {
 };
 
 export const getSomeNotesByDueDateDesc = async (userId, numberOfEvents) => {
-  return null;
+  const data = await getAllNotes(userId);
+
+  const notesWithAddedDateTime = data.map((note) => {
+    if (note.dueDate) {
+      note.dueDaysHours = computeDueDaysHours(note.dueDate, note.dueTime);
+    }
+    return note;
+  });
+
+  const sortedNotes = processData({
+    data: notesWithAddedDateTime,
+    sortKey: "dueDate",
+    sortOrder: "desc",
+    filterFn: (note) => !note.archived,
+    limit: numberOfEvents,
+  });
+
+  return sortedNotes;
 };
 
 export const getNotesFromStorageOrServer = async (userId, setNotes) => {

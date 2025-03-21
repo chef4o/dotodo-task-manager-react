@@ -252,3 +252,10 @@ select:focus {
     border: none;
     width: 7.6vw;
 }
+
+.notes p,
+.notes p:hover,
+.notes textarea,
+.notes textarea:hover {
+    overflow: auto;
+}

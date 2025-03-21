@@ -1,5 +1,4 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
 import AuthContext from "../../contexts/authContext";
 import { addNote, getAllNotesSorted } from "../../services/noteService";
 import { initialState, validationIsEmpty } from "../../util/validation/commonValidation";
