@@ -51,22 +51,21 @@ export const editChecklistById = async (id, updatedData) => {
 };
 
 export const addChecklist = async (checklistData) => {
-  if (!checklistData.ownerId || !checklistData.title || !checklistData.content) {
+  if (!checklistData.ownerId || !checklistData.title || checklistData.elements.length === 0) {
     throw new Error("Owner, title and content are required.");
   }
 
   const checklistsRef = db.collection(dbTables.CHECKLISTS.tableName);
   const newChecklist = {
     title: checklistData.title || "",
-    content: checklistData.content || "",
     startDate: new Date().toISOString(),
     completedOn: "",
     dueDate: checklistData.dueDate || "",
-    dueDateOnly: (checklistData.dueDate && !checklistData.dueTime) || "",
-    dueTime: checklistData.dueTime || "",
     ownerId: checklistData.ownerId,
     trackProgress: "New",
     archived: false,
+    elements: checklistData.elements,
+    peers: [],
   };
 
   const docRef = await checklistsRef.add(newChecklist);

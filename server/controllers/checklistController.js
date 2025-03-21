@@ -93,12 +93,8 @@ export const editChecklist = async (req, res) => {
 
 export const createChecklist = async (req, res) => {
   try {
-    if (!req.body.ownerId || !req.body.title || !req.body.content) {
-      return res.status(400).json({ error: "Owner ID, title, and content are required." });
-    }
-
-    const newNChecklist = await addChecklist(req.body);
-    res.status(201).json(newNChecklist);
+    const newChecklist = await addChecklist(req.body);
+    res.status(201).json(newChecklist);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

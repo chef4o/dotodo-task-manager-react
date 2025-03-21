@@ -1,87 +1,116 @@
 import * as request from "../api/request";
-const baseUrl = "http://localhost:3030/jsonstore/users";
+import { url } from "../api/url";
+import { processData } from "../util/dataUtils";
 
-export const getAllChecklists = async (userID) => {
-  const response = await request.get(`${baseUrl}/${userID}/checklists`);
+export const getAllChecklists = async (userId) => {
+  if (!userId) {
+    console.error("User ID is required to fetch checklists.");
+    return { error: "User ID is required." };
+  }
 
-  return Object.values(response);
+  try {
+    const response = await request.get(`${url.checklists}/${userId}`);
+    return response;
+  } catch (error) {
+    console.error("Error fetching checklists:", error);
+    return { error: "Failed to fetch checklists." };
+  }
 };
 
-export const getCheckListByUserAndId = async (userID, id) => {
-  const response = await request.get(`${baseUrl}/${userID}/checklists/${id}`);
+export const getAllChecklistsSorted = async (userId, sortKey, sortOrder) => {
+  const checklists = await getAllChecklists(userId);
 
-  return Object.values(response);
+  return checklists?.length > 0
+    ? processData({
+        data: checklists,
+        sortKey: sortKey,
+        sortOrder: sortOrder,
+      })
+    : []
 };
 
-export const deleteChecklist = async (userID, id) => {
-  const response = await request.remove(
-    `${baseUrl}/${userID}/checklists/${id}`
-  );
+export const getChecklistById = async (checklistId) => {
+  if (!checklistId) {
+    console.error("Checklist ID is required.");
+    return { error: "Checklist ID is required." };
+  }
 
-  return response;
+  try {
+    const response = await request.get(`${url.checklists}/${checklistId}`);
+    return response;
+  } catch (error) {
+    console.error("Error fetching checklist:", error);
+    return { error: "Failed to fetch checklist." };
+  }
 };
 
-export const addChecklist = async (userID, body) => {
-  const response = request.post(`${baseUrl}/${userID}/checklists/`, body);
+export const addChecklist = async (checklistData) => {
+  if (!checklistData.ownerId || !checklistData.title || checklistData.elements.length === 0) {
+    console.error("User ID, title and elements are required.");
+    return { error: "Missing required fields." };
+  }
 
-  return response;
+  try {
+    const response = await request.post(url.addChecklist, checklistData);
+    return response;
+  } catch (error) {
+    console.error("Error creating checklist:", error);
+    return { error: "Failed to create checklist." };
+  }
 };
 
-export const editChecklist = async (userID, body) => {
-  const response = request.put(`${baseUrl}/${userID}/checklists/`, body);
+export const editChecklist = async (checklistId, updatedData) => {
+  if (!checklistId || !updatedData) {
+    console.error("Checklist ID and update data are required.");
+    return { error: "Missing required fields." };
+  }
 
-  return response;
+  try {
+    const response = await request.put(`${url.editChecklist}/${checklistId}`, updatedData);
+    return response;
+  } catch (error) {
+    console.error("Error updating checklist:", error);
+    return { error: "Failed to update checklist." };
+  }
 };
 
-export const getCheckListData = async (userID, checklistId, elementId) => {
-  const response = await request.get(
-    `${baseUrl}/${userID}/checklists/${checklistId}/elements/${elementId}`
-  );
+export const deleteChecklist = async (checklistId) => {
+  try {
+    if (!checklistId) {
+      console.error("Checklist ID is required.");
+      return { error: "Checklist ID is required." };
+    }
 
-  return response;
+    const response = await request.remove(`${url.deleteChecklist}/${checklistId}`);
+    return response;
+  } catch (error) {
+    console.error("Error deleting checklist:", error);
+    return { error: "Failed to delete checklist." };
+  }
 };
 
-export const editChecklistItem = async (
-  userID,
-  checklistId,
-  elementId,
-  body
-) => {
-  const response = await request.put(
-    `${baseUrl}/${userID}/checklists/${checklistId}/elements/${elementId}`,
-    body
-  );
+export const getSomeChecklistsByDueDateDesc = async (userId, numberOfEvents) => {
+  const checklists = await getAllChecklists(userId);
 
-  return response;
+  const sortedChecklists = processData({
+    data: checklists,
+    sortKey: "dueDate",
+    sortOrder: "desc",
+    filterFn: (checklist) => !checklist.archived,
+    limit: numberOfEvents,
+  });
+
+  return sortedChecklists;
 };
 
-export const addChecklistItem = async (
-  userID,
-  checklistId,
-  elementId,
-  body
-) => {
-  const response = request.post(
-    `${baseUrl}/${userID}/checklists/${checklistId}/elements/${elementId}`,
-    body
-  );
+export const getChecklistsFromStorageOrServer = async (userId, setChecklists) => {
+  const cachedChecklists = sessionStorage.getItem("checklists");
 
-  return response;
-};
-
-export const deleteChecklistItem = async (userID, checklistId, elementId) => {
-  const response = await request.remove(
-    `${baseUrl}/${userID}/checklists/${checklistId}/elements/${elementId}`
-  );
-
-  return response;
-};
-
-export const getSomeChecklistsByDueDateDesc = async (
-  userId,
-  numberOfResults
-) => {
-  const response = await getAllChecklists(userId);
-
-  return response.slice(-numberOfResults);
+  if (cachedChecklists) {
+    setChecklists(JSON.parse(cachedChecklists));
+  } else {
+    const checklists = await getAllChecklistsSorted(userId, "startDate", "desc");
+    setChecklists(checklists);
+    sessionStorage.setItem("checklists", JSON.stringify(checklists));
+  }
 };

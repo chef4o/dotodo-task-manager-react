@@ -24,7 +24,7 @@ export const dbTables = {
     },
   },
   CHECKLISTS: {
-    tableName: "notes",
+    tableName: "checklists",
     fields: {
       id: "id",
       title: "title",

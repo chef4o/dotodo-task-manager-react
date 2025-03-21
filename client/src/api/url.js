@@ -8,10 +8,14 @@ const validateIfExists = `${baseUrl}/auth/validate-existing-user`;
 const customToken = `${baseUrl}/auth/custom-token`;
 
 const notes = `${baseUrl}/notes`;
-const note = `${baseUrl}/notes`;
 const deleteNote = `${baseUrl}/notes/delete`;
 const editNote = `${baseUrl}/notes/edit`;
 const addNote = `${baseUrl}/notes/add`;
+
+const checklists = `${baseUrl}/checklists`;
+const deleteChecklist = `${baseUrl}/checklists/delete`;
+const editChecklist = `${baseUrl}/checklists/edit`;
+const addChecklist = `${baseUrl}/checklists/add`;
 
 export const url = {
   users,
@@ -21,8 +25,11 @@ export const url = {
   validateIfExists,
   customToken,
   notes,
-  note,
   deleteNote,
   editNote,
   addNote,
+  checklists,
+  deleteChecklist,
+  editChecklist,
+  addChecklist,
 };

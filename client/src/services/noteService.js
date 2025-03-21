@@ -20,6 +20,8 @@ export const getAllNotes = async (userId) => {
 export const getAllNotesSorted = async (userId, sortKey, sortOrder) => {
   const data = await getAllNotes(userId);
 
+  if (data?.lenght === 0) return [];
+
   const notesWithAddedDateTime = data.map((note) => {
     if (note.dueDate) {
       note.dueDaysHours = computeDueDaysHours(note.dueDate, note.dueTime);

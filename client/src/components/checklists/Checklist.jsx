@@ -1,85 +1,50 @@
-import { useContext, useEffect, useState } from "react";
 import ChecklistItem from "./ChecklistItem";
-import { addChecklistItem, deleteChecklistItem } from "../../services/checklistService";
-import AuthContext from "../../contexts/authContext";
 
-export default function Checklist({ checklist, deleteChecklist }) {
+export default function Checklist({
+  checklist,
+  activeChecklistId,
+  setActiveChecklistId,
+  deleteChecklist,
+  setMakeNew,
+}) {
+  const handleXmarkClick = (event) => {
+    event.stopPropagation();
+    setActiveChecklistId("");
+  };
 
-    const [activeChecklistId, setActiveChecklistId] = useState('');
-    const [tasks, setTasks] = useState(checklist.tasks || []);
-    const [newTodoItem, setNewTodoItem] = useState('');
-    const [title, setTitle] = useState(checklist.title);
+  return (
+    <div
+      className={activeChecklistId === checklist.id ? "checklist active" : "checklist"}
+      onClick={() => {
+        setMakeNew(false);
+        setActiveChecklistId(checklist.id);
+      }}>
+      {activeChecklistId === checklist.id && (
+        <button className="xmark" onClick={handleXmarkClick}>
+          <i className="fa-solid fa-xmark" />
+        </button>
+      )}
 
-    const { user } = useContext(AuthContext);
+      <h3 className="title">{checklist.title}</h3>
 
-    async function addTask(text) {
-        if (text) {
-            const newTask = {
-                content: text,
-                status: "Not started",
-            };
-            setTasks([...tasks, newTask]);
-            setNewTodoItem('');
-        }
-    }
+      <div className="todo-items-container">
+        {checklist.elements.map((task, index) => (
+          <ChecklistItem key={index} task={task} />
+        ))}
+      </div>
 
-    async function deleteTask(taskId) {
-        await deleteChecklistItem(user.id, checklist.id, taskId)
-        setTasks(tasks.filter(task => task.id !== taskId));
-    }
+      <button
+        className="edit-btn"
+        onClick={() => {
+          setActiveChecklistId("");
+          setMakeNew(false);
+        }}>
+        Edit
+      </button>
 
-    useEffect(() => {
-        if (checklist.elements) {
-            setTasks(Object.values(checklist.elements));
-        }
-    }, [checklist.elements]);
-
-    const handleXmarkClick = (event) => {
-        event.stopPropagation();
-        setActiveChecklistId("");
-    };
-
-    const handleTitleChange = (e) => {
-        setTitle(e.target.value);
-    };
-
-    useEffect(() => {
-        if (title) {
-            checklist[title] = title;
-        }
-
-    }, [])
-
-    const handleTitleBlur = () => {
-
-    };
-
-    return (
-        <div className={activeChecklistId === checklist.id ? "checklist active" : "checklist"}
-            onClick={() => setActiveChecklistId(checklist.id)}>
-            {activeChecklistId === checklist.id &&
-                <button className="xmark" onClick={handleXmarkClick}>
-                    <i className="fa-solid fa-xmark" />
-                </button>}
-
-            <button className="delete-checklist" onClick={() => deleteChecklist(checklist.id)}>
-                <i className="fa-solid fa-trash-can" />
-            </button>
-
-            <input className="title" value={title} onChange={handleTitleChange} onBlur={handleTitleBlur} />
-
-            <div className="new-todo-item">
-                <input className="new-todo-item-text" value={newTodoItem} onChange={e => setNewTodoItem(e.target.value)} />
-                <button onClick={() => addTask(newTodoItem)}><i className="fa-solid fa-square-plus" /></button>
-            </div>
-
-            {tasks.map(task => (
-                <ChecklistItem
-                    key={task.id}
-                    task={task}
-                    checklist={checklist}
-                    deleteTask={deleteTask} />
-            ))}
-        </div>
-    );
+      <button className="delete-btn" onClick={() => deleteChecklist(checklist.id)}>
+        Delete
+      </button>
+    </div>
+  );
 }
