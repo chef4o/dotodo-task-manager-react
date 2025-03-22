@@ -1,20 +1,39 @@
 import { useAutoResizeInput } from "../../util/hooks";
 
-export default function ChecklistDetailsItem({ task, onUpdateTask, onDeleteTask }) {
+export default function ChecklistDetailsItem({ task, index, formValues, setFormValues }) {
   const { inputRef, spanRef } = useAutoResizeInput(task.content, 10, 40);
 
   const handleTickChange = () => {
-    const newStatus = task.status !== "Done" ? "Done" : "In Progress";
-    onUpdateTask({ ...task, status: newStatus });
+    setFormValues((prev) => {
+      const newElements = [...prev.elements];
+      newElements[index] = {
+        ...newElements[index],
+        status: newElements[index].status !== "Done" ? "Done" : "In Progress",
+      };
+      return { ...prev, elements: newElements };
+    });
   };
 
   const handleContentChange = (e) => {
-    onUpdateTask({ ...task, content: e.target.value });
+    const newValue = e.target.value;
+    setFormValues((prev) => {
+      const newElements = [...prev.elements];
+      newElements[index] = { ...newElements[index], content: newValue };
+      return { ...prev, elements: newElements };
+    });
+  };
+
+  const handleDelete = () => {
+    setFormValues((prev) => {
+      const newElements = prev.elements.filter((_, i) => i !== index);
+      return { ...prev, elements: newElements };
+    });
   };
 
   return (
     <div className="todo-item">
       <input className="tick" type="checkbox" checked={task.status === "Done"} onChange={handleTickChange} />
+
       <input
         className={`todo-item-text ${task.status === "Done" ? "done" : ""}`}
         id="content"
@@ -25,8 +44,8 @@ export default function ChecklistDetailsItem({ task, onUpdateTask, onDeleteTask 
         onChange={handleContentChange}
         onBlur={handleContentChange}
       />
-      
-      <button type="button" className="delete" onClick={onDeleteTask}>
+
+      <button type="button" className="delete" onClick={handleDelete}>
         <i className="fa-solid fa-square-minus" />
       </button>
 

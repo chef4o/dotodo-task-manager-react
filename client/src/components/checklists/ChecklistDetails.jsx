@@ -18,7 +18,7 @@ export default function ChecklistDetails({
     title: checklist.title,
     elements: checklist.elements,
     dueDate: checklist.dueDate || "",
-    element: ""
+    element: "",
   });
 
   const [validationErrors, setValidationErrors] = useState(() => initialState(checklistValidation.FORM_ERROR_FIELDS));
@@ -98,15 +98,8 @@ export default function ChecklistDetails({
             key={task.id || index}
             task={task}
             index={index}
-            onUpdateTask={(updatedTask) => {
-              const newElements = [...formValues.elements];
-              newElements[index] = updatedTask;
-              setFormValues({ ...formValues, elements: newElements });
-            }}
-            onDeleteTask={() => {
-              const newElements = formValues.elements.filter((_, i) => i !== index);
-              setFormValues({ ...formValues, elements: newElements });
-            }}
+            formValues={formValues}
+            setFormValues={setFormValues}
           />
         ))}
 
