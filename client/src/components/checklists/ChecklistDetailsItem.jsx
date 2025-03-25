@@ -1,6 +1,6 @@
 import { useAutoResizeInput } from "../../util/hooks";
 
-export default function ChecklistDetailsItem({ task, index, formValues, setFormValues }) {
+export default function ChecklistDetailsItem({ task, index, setFormValues }) {
   const { inputRef, spanRef } = useAutoResizeInput(task.content, 10, 40);
 
   const handleTickChange = () => {

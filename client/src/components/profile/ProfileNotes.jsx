@@ -10,7 +10,7 @@ export default function ProfileNotes({ expiringNotes }) {
     return (
         <div className="expiring-notes">
             <h1>Notes close to expiry</h1>
-            {expiringNotes.length > 0
+            {expiringNotes?.length > 0
                 ? <ul className="notes-list">
                     {expiringNotes.map(item => item.id === activeNoteId
                         ? <ProfileNoteDetails key={item.id} note={item}

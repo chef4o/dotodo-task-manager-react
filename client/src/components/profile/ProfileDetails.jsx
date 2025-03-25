@@ -1,11 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
-export default function ProfileDetails({ profileDetails, activeNoteId, setActiveNoteId }) {
-  const formatAddress = (address) => {
-    return Object.values(address)
-      .filter((value) => value)
-      .join(", ");
-  };
+export default function ProfileDetails({ profileDetails, setEditProfile }) {
+  const { id } = useParams();
+
+  const formatAddress = [profileDetails.street, profileDetails.town].filter(Boolean).join(", ");
 
   return (
     <div className="user-details">
@@ -17,21 +15,25 @@ export default function ProfileDetails({ profileDetails, activeNoteId, setActive
             <p className="name">{`Name: ${profileDetails.firstName} ${profileDetails.lastName}`}</p>
           )}
 
-          {profileDetails.dateOfBirth && <p className="dateOfBirth">{`Birthday: ${profileDetails.dateOfBirth}`}</p>}
+          {profileDetails.dob && <p className="dateOfBirth">{`Birthday: ${profileDetails.dob}`}</p>}
         </div>
 
         <div className="profile-image">
-          <img src={profileDetails.imageUrl} alt="" />
+          {profileDetails.imageUrl ? (
+            <img src={profileDetails.imageUrl} alt="" />
+          ) : (
+            <i className="fa-solid fa-user"></i>
+          )}
         </div>
 
         <div className="contact">
           <p className="email">{`Email: ${profileDetails.email}`}</p>
           {profileDetails.phoneNumber && <p className="phoneNumber">{`Phone: ${profileDetails.phoneNumber}`}</p>}
-          {profileDetails.address && <p className="address">{`Address: ${formatAddress(profileDetails.address)}`}</p>}
+          {(profileDetails.street || profileDetails.town) && <p className="address">{`Address: ${formatAddress}`}</p>}
         </div>
 
-        <Link className="edit-btn" to={"/profile/edit"}>
-            <button>Edit details</button>
+        <Link className="edit-btn" to={`/profile/edit/${id}`} onClick={() => setEditProfile(true)}>
+          <button>Edit details</button>
         </Link>
       </div>
     </div>

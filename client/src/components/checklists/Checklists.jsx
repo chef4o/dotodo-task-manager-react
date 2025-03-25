@@ -1,4 +1,4 @@
-import { deleteChecklist, getChecklistsFromStorageOrServer } from "../../services/checklistService";
+import { deleteChecklist, getAllChecklistsSorted } from "../../services/checklistService";
 import Checklist from "./Checklist";
 import { useContext, useEffect, useState } from "react";
 import NoAccess from "../error/NoAccess";
@@ -7,9 +7,10 @@ import EmptyChecklist from "./EmptyChecklist";
 import ChecklistDetails from "./ChecklistDetails";
 import NavContext from "../../contexts/navContext";
 import AuthContext from "../../contexts/authContext";
+import { getDataFromStorageOrServer } from "../../services/cacheService";
 
 export default function Checklists() {
-  const { handleNavigationClick, setLoading } = useContext(NavContext);
+  const { handleNavigationClick, setLoading, navigate } = useContext(NavContext);
   const { user } = useContext(AuthContext);
 
   const [checklists, setChecklists] = useState([]);
@@ -24,22 +25,31 @@ export default function Checklists() {
 
     setLoading(true);
     await deleteChecklist(id);
+    navigate("/checklists");
     sessionStorage.removeItem("checklists");
-    getChecklistsFromStorageOrServer(user.id, setChecklists);
+    getDataFromStorageOrServer("checklists", () => getAllChecklistsSorted(user.id, "startDate", "desc"), setChecklists);
     setLoading(false);
   };
 
   useEffect(() => {
     setLoading(true);
     if (user?.id) {
-      getChecklistsFromStorageOrServer(user.id, setChecklists);
+      getDataFromStorageOrServer(
+        "checklists",
+        () => getAllChecklistsSorted(user.id, "startDate", "desc"),
+        setChecklists
+      );
     }
+    navigate("/checklists");
     setLoading(false);
   }, [user]);
 
   useEffect(() => {
     if (makeNew) {
       setActiveChecklistId("");
+      navigate("/checklists/new");
+    } else {
+      navigate("/checklists");
     }
   }, [makeNew]);
 
@@ -84,6 +94,7 @@ export default function Checklists() {
                     setActiveChecklistId={setActiveChecklistId}
                     deleteChecklist={deleteChecklistHandler}
                     setMakeNew={setMakeNew}
+                    navigate={navigate}
                   />
                 ) : null
               )}
@@ -99,6 +110,7 @@ export default function Checklists() {
                     setChecklists={setChecklists}
                     deleteChecklist={deleteChecklistHandler}
                     setMakeNew={setMakeNew}
+                    navigate={navigate}
                   />
                 ))}
             </ul>

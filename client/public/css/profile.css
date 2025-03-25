@@ -89,8 +89,7 @@
 .content.profile .expiring-notes .notes-list .note-details.active {
     position: absolute;
     top: 3.4vh;
-    background-color: #dffad9;
-    ;
+    background-color: #dffad9;;
     left: 11vw;
     width: 60vw;
     height: 23vw;
@@ -188,7 +187,14 @@
     flex-wrap: wrap;
     position: relative;
     justify-content: space-between;
-    padding: 1vw 2vw 1.4vw;
+    padding: 1vw 2vw 1.2vw;
+}
+
+.content.profile .profile-edit .form-edit .error.edit-details.error-list {
+    position: absolute;
+    top: 13.4vw;
+    right: 8vw;
+    text-align: right;
 }
 
 .profile-edit .form-edit .personal .dob input {
@@ -238,8 +244,8 @@
 .content.profile .profile-edit .form-edit .profile-image {
     display: flex;
     flex-direction: column;
-    gap: 1vw;
-    padding-top: 1vw;
+    gap: 0.4vw;
+    padding-top: 3.4vw;
     align-items: center;
 }
 

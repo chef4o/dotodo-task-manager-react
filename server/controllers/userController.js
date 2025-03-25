@@ -1,5 +1,6 @@
 import {
   deleteUser,
+  editUserById,
   findAllUsers,
   findUserByEmail,
   findUserById,
@@ -89,6 +90,28 @@ export const deleteUserById = async (req, res) => {
     return res.status(200).json({ message: "User successfully deleted" });
   } catch (error) {
     console.error("Error in deleteUserById from Firestore: ", error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+export const editUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedData = req.body;
+
+    if (!id || !updatedData) {
+      return res.status(400).json({ error: "User ID and updated data are required" });
+    }
+
+    const updatedUser = await editUserById(id, updatedData);
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found or update failed" });
+    }
+
+    return res.json(updatedUser);
+  } catch (error) {
+    console.error("Error updating user:", error);
     return res.status(500).json({ error: "Internal server error" });
   }
 };

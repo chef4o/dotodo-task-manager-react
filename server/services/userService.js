@@ -30,7 +30,7 @@ export const findUserById = async (id) => {
 
   const userDoc = await db.collection(dbTables.USERS.tableName).doc(id).get();
 
-  return !userDoc.exists ? null : { id: userDoc.id, ...userDoc.data() }; 
+  return !userDoc.exists ? null : { id: userDoc.id, ...userDoc.data() };
 };
 
 export const findUserByEmail = async (email) => {
@@ -52,6 +52,20 @@ export const findAllUsers = async () => {
         id: doc.id,
         ...doc.data(),
       }));
+};
+
+export const editUserById = async (id, updatedData) => {
+  if (!id || !updatedData) return null;
+
+  const userDoc = db.collection(dbTables.USERS.tableName).doc(id);
+  const user = await userDoc.get();
+
+  if (!user.exists) {
+    return null;
+  }
+
+  await userDoc.update(updatedData);
+  return { id, ...updatedData };
 };
 
 export const deleteUser = async (id) => {

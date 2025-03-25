@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { noteValidation } from "../../util/validation/noteValidation";
 import { initialState, validationIsEmpty } from "../../util/validation/commonValidation";
 import { useContext, useState } from "react";
@@ -6,13 +6,14 @@ import AuthContext from "../../contexts/authContext";
 import NavContext from "../../contexts/navContext";
 import { editNote, getAllNotesSorted } from "../../services/noteService";
 
-export default function EditNoteItem({ note, editNoteId, setEditNoteId, setNotes, setActiveNoteId, deleteNote }) {
+export default function EditNoteItem({ note, editNoteId, setEditNoteId, setNotes, setActiveNoteId, deleteNote, navigate }) {
   const [formValues, setFormValues] = useState({
     title: note.title,
     content: note.content,
     dueDate: note.dueDate || "",
     dueTime: note.dueTime || "",
   });
+  const { id } = useParams();
 
   const [validationErrors, setValidationErrors] = useState(() => initialState(noteValidation.FORM_ERROR_FIELDS));
   const { user } = useContext(AuthContext);
@@ -44,16 +45,17 @@ export default function EditNoteItem({ note, editNoteId, setEditNoteId, setNotes
     sessionStorage.setItem("notes", JSON.stringify(notes));
     setLoading(false);
     setEditNoteId("");
-    setActiveNoteId(note.id);
+    setActiveNoteId("");
   }
 
   return (
-    <div className={editNoteId === note.id ? "note active" : "note"}>
+    <div className={editNoteId === note.id && note.id === id ? "note active" : "note"}>
       {editNoteId === note.id && (
         <button
           className="xmark"
           onClick={() => {
             setEditNoteId("");
+            navigate("/notes");
           }}>
           <i className="fa-solid fa-xmark" />
         </button>

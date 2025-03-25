@@ -1,49 +1,64 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom"
 import { findUserById } from "../../services/userService";
 import { getSomeNotesByDueDateDesc } from "../../services/noteService";
 import ProfileDetails from "./ProfileDetails";
 import ProfileNotes from "./ProfileNotes";
 import AuthContext from "../../contexts/authContext";
+import NavContext from "../../contexts/navContext";
+import NoAccess from "../error/NoAccess";
+import { useParams } from "react-router-dom";
+import ProfileEditDetails from "./ProfileEditDetails";
 
 export default function Profile() {
+  const { user } = useContext(AuthContext);
+  const { id } = useParams();
 
-    const { user } = useContext(AuthContext);
-    const { id } = useParams();
-    const navigate = useNavigate();
+  const { handleNavigationClick, setLoading } = useContext(NavContext);
 
-    const [profileDetails, setProfileDetails] = useState({});
-    const [expiringNotes, setExpiringNotes] = useState([]);
+  const [profileDetails, setProfileDetails] = useState({});
+  const [activeNoteId, setActiveNoteId] = useState("");
+  const [editProfile, setEditProfile] = useState(false);
 
-    async function loadUser() {
-        const userData = await findUserById(id);
-
-        if (user.id === id && userData) {
-            setProfileDetails({...userData})
-
-            await getExpiringEvents(userData.id, 4)
-
+  useEffect(() => {
+    setLoading(true);
+    if (user?.id && user.id === id) {
+      (async () => {
+        let profileData = sessionStorage.getItem("profile");
+        if (profileData) {
+          profileData = JSON.parse(profileData);
         } else {
-            navigate('/404');
+          profileData = await findUserById(id);
         }
+        const expiringNotes = await getSomeNotesByDueDateDesc(id, 3);
+        profileData = { ...profileData, expiringNotes };
+        sessionStorage.setItem("profile", JSON.stringify(profileData));
+        setProfileDetails(profileData);
+        setLoading(false);
+      })();
+    } else {
+      setLoading(false);
     }
+  }, [user.id]);
 
-    async function getExpiringEvents(userId, numberOfEvents) {
-        const expiringEvents = await getSomeNotesByDueDateDesc(userId, numberOfEvents);
+  return (
+    <div className="content profile">
+      {!user?.id ? (
+        <NoAccess onItemClick={handleNavigationClick} />
+      ) : (
+        <>
+          {editProfile ? (
+            <ProfileEditDetails profileDetails={profileDetails} setProfileDetails={setProfileDetails} setEditProfile={setEditProfile} />
+          ) : (
+            <ProfileDetails profileDetails={profileDetails} setEditProfile={setEditProfile} />
+          )}
 
-        setExpiringNotes(expiringEvents);
-    }
-
-    useEffect(() => {
-        loadUser();
-    }, [id, user.id]);
-
-    return (
-        <div className="content profile">
-            <ProfileDetails profileDetails={profileDetails} />
-
-            <ProfileNotes expiringNotes={expiringNotes} />
-        </div>
-
-    )
+          <ProfileNotes
+            activeNoteId={activeNoteId}
+            setActiveNoteId={setActiveNoteId}
+            expiringNotes={profileDetails.expiringNotes}
+          />
+        </>
+      )}
+    </div>
+  );
 }

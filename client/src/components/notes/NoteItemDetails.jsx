@@ -1,11 +1,24 @@
-export default function NoteItem({ note, setEditNoteId, activeNoteId, setActiveNoteId, deleteNote, setMakeNew }) {
+import { useParams } from "react-router-dom";
+
+export default function NoteItem({
+  note,
+  setEditNoteId,
+  activeNoteId,
+  setActiveNoteId,
+  deleteNote,
+  setMakeNew,
+  navigate,
+}) {
+  const { id } = useParams();
+
   const handleXmarkClick = (event) => {
     event.stopPropagation();
     setActiveNoteId("");
+    navigate("/notes");
   };
 
   return (
-    <div className={activeNoteId === note.id ? "note active" : "note"}>
+    <div className={activeNoteId === note.id && note.id === id ? "note active" : "note"}>
       {activeNoteId === note.id && (
         <button className="xmark" onClick={handleXmarkClick}>
           <i className="fa-solid fa-xmark" />
@@ -44,13 +57,13 @@ export default function NoteItem({ note, setEditNoteId, activeNoteId, setActiveN
         className="edit-btn"
         onClick={() => {
           setActiveNoteId("");
-          setEditNoteId(note.id);
+          setEditNoteId(id);
           setMakeNew(false);
         }}>
         Edit
       </button>
 
-      <button className="delete-btn" onClick={() => deleteNote(note.id)}>
+      <button className="delete-btn" onClick={() => deleteNote(id)}>
         Delete
       </button>
     </div>

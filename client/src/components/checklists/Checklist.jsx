@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import ChecklistItem from "./ChecklistItem";
 
 export default function Checklist({
@@ -6,14 +7,17 @@ export default function Checklist({
   setActiveChecklistId,
   deleteChecklist,
   setMakeNew,
+  navigate,
 }) {
   const handleXmarkClick = (event) => {
     event.stopPropagation();
     setActiveChecklistId("");
+    navigate("/checklists");
   };
 
   return (
-    <div
+    <Link
+      to={`/checklists/${checklist.id}`}
       className={activeChecklistId === checklist.id ? "checklist active" : "checklist"}
       onClick={() => {
         setMakeNew(false);
@@ -45,6 +49,6 @@ export default function Checklist({
       <button className="delete-btn" onClick={() => deleteChecklist(checklist.id)}>
         Delete
       </button>
-    </div>
+    </Link>
   );
 }

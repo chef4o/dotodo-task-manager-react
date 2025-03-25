@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Home from "./components/home/Home.jsx";
 import AboutUs from "./components/AboutUs.jsx";
 import News from "./components/News.jsx";
@@ -31,6 +31,8 @@ const App = () => {
     const savedUser = sessionStorage.getItem("user");
     return savedUser ? JSON.parse(savedUser) : {};
   });
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user && user.email) {
@@ -81,7 +83,7 @@ const App = () => {
   }, [user]);
 
   return (
-    <NavContext.Provider value={{ handleNavigationClick, selectedPageBg, setLoading }}>
+    <NavContext.Provider value={{ handleNavigationClick, selectedPageBg, setLoading, navigate}}>
       <AuthContext.Provider value={{ user, setUser, hideAuthModal: hideAuthModalHandler }}>
         <main className={selectedPageBg}>
           <Nav
@@ -102,9 +104,12 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home taskTypes={taskTypes} />} />
             <Route path="/notes" element={<Notes />} />
+            <Route path="/notes/:id" element={<Notes />} />
             <Route path="/checklists" element={<Checklists />} />
+            <Route path="/checklists/:id" element={<Checklists />} />
             <Route path="/events" element={<Events />} />
             <Route path="/profile/:id" element={<Profile />} />
+            <Route path="/profile/edit/:id" element={<Profile />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contacts" element={<Contacts />} />
             <Route path="/news" element={<News />} />

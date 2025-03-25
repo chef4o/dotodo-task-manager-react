@@ -20,7 +20,7 @@ export const getAllNotes = async (userId) => {
 export const getAllNotesSorted = async (userId, sortKey, sortOrder) => {
   const data = await getAllNotes(userId);
 
-  if (data?.lenght === 0) return [];
+  if (!Array.isArray(data) || data.length === 0) return [];
 
   const notesWithAddedDateTime = data.map((note) => {
     if (note.dueDate) {
@@ -101,6 +101,8 @@ export const deleteNote = async (noteId) => {
 export const getSomeNotesByDueDateDesc = async (userId, numberOfEvents) => {
   const data = await getAllNotes(userId);
 
+  if (!Array.isArray(data) || data.length === 0) return [];
+
   const notesWithAddedDateTime = data.map((note) => {
     if (note.dueDate) {
       note.dueDaysHours = computeDueDaysHours(note.dueDate, note.dueTime);
@@ -117,16 +119,4 @@ export const getSomeNotesByDueDateDesc = async (userId, numberOfEvents) => {
   });
 
   return sortedNotes;
-};
-
-export const getNotesFromStorageOrServer = async (userId, setNotes) => {
-  const cachedNotes = sessionStorage.getItem("notes");
-
-  if (cachedNotes) {
-    setNotes(JSON.parse(cachedNotes));
-  } else {
-    const notes = await getAllNotesSorted(userId, "startDate", "desc");
-    setNotes(notes);
-    sessionStorage.setItem("notes", JSON.stringify(notes));
-  }
 };

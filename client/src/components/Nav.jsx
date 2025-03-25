@@ -37,7 +37,7 @@ export default function Nav({ topNav, sideNavElements, connectNav, bottomNav }) 
             {sideNavElements.map((item) => (
               <li key={item.name} className={selectedPageBg === item.name ? `${item.name} active` : item.name}>
                 <Link
-                  to={item.name === "profile" ? `${item.href}/${user.username}` : item.href}
+                  to={item.name === "profile" ? `${item.href}/${user.id}` : item.href}
                   onClick={() => handleNavigationClick(item.name)}>
                   <i className={item.icon}></i>
                   <p>{item.name}</p>

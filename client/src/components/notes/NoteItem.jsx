@@ -1,6 +1,9 @@
-export default function NoteItem({ note, setActiveNoteId, setEditNoteId, deleteNote, setMakeNew }) {
+import { Link } from "react-router-dom";
+
+export default function NoteItem({ note, setActiveNoteId, setEditNoteId, deleteNote, setMakeNew, navigate }) {
   return (
-    <div
+    <Link
+      to={`/notes/${note.id}`}
       onClick={() => {
         setEditNoteId("");
         setActiveNoteId(note.id);
@@ -9,7 +12,6 @@ export default function NoteItem({ note, setActiveNoteId, setEditNoteId, deleteN
       <div className="note inactive">
         <h3>{note.title.length > 14 ? note.title.slice(0, 14) + "..." : note.title}</h3>
         <p className={note.dueDaysHours ? "with-due" : ""}>{note.content}</p>
-
         {note.dueDaysHours && (
           <div className="due">
             {note.dueDaysHours.expired
@@ -23,22 +25,29 @@ export default function NoteItem({ note, setActiveNoteId, setEditNoteId, deleteN
               : null}
           </div>
         )}
-
         <button
+          type="button"
           className="edit-btn"
           onClick={(e) => {
+            e.preventDefault();
             e.stopPropagation();
             setActiveNoteId("");
             setEditNoteId(note.id);
             setMakeNew(false);
+            navigate(`/notes/${note.id}`);
           }}>
           Edit
         </button>
-
-        <button className="delete-btn" onClick={() => deleteNote(note.id)}>
+        <button
+          className="delete-btn"
+          onClick={(e) => {
+            e.preventDefault();
+            deleteNote(note.id);
+            navigate(`/notes`);
+          }}>
           Delete
         </button>
       </div>
-    </div>
+    </Link>
   );
 }

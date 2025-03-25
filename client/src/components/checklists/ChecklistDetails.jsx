@@ -13,6 +13,7 @@ export default function ChecklistDetails({
   setActiveChecklistId,
   deleteChecklist,
   setChecklists,
+  navigate,
 }) {
   const [formValues, setFormValues] = useState({
     title: checklist.title,
@@ -65,14 +66,20 @@ export default function ChecklistDetails({
     const checklists = await getAllChecklistsSorted(user?.id, "startDate", "desc");
     setChecklists(checklists);
     sessionStorage.setItem("checklists", JSON.stringify(checklists));
-    setLoading(false);
     setActiveChecklistId("");
+    navigate("/checklists");
+    setLoading(false);
   }
 
   return (
     <form className={activeChecklistId === checklist.id ? "checklist active" : "checklist"}>
       {activeChecklistId === checklist.id && (
-        <button className="xmark" onClick={() => setActiveChecklistId("")}>
+        <button
+          className="xmark"
+          onClick={() => {
+            setActiveChecklistId("");
+            navigate("/checklists");
+          }}>
           <i className="fa-solid fa-xmark" />
         </button>
       )}

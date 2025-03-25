@@ -51,7 +51,7 @@ export const editUser = async (id, body) => {
     return { error: "User ID is required." };
   }
 
-  const response = await request.put(`${url.users}/${id}`, body);
+  const response = await request.put(`${url.editUser}/${id}`, body);
   return response;
 };
 

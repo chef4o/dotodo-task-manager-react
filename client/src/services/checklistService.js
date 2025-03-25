@@ -20,13 +20,13 @@ export const getAllChecklists = async (userId) => {
 export const getAllChecklistsSorted = async (userId, sortKey, sortOrder) => {
   const checklists = await getAllChecklists(userId);
 
-  return checklists?.length > 0
-    ? processData({
-        data: checklists,
-        sortKey: sortKey,
-        sortOrder: sortOrder,
-      })
-    : []
+  if (!Array.isArray(checklists) || checklists.length === 0) return [];
+
+  return processData({
+    data: checklists,
+    sortKey: sortKey,
+    sortOrder: sortOrder,
+  });
 };
 
 export const getChecklistById = async (checklistId) => {
@@ -101,16 +101,4 @@ export const getSomeChecklistsByDueDateDesc = async (userId, numberOfEvents) => 
   });
 
   return sortedChecklists;
-};
-
-export const getChecklistsFromStorageOrServer = async (userId, setChecklists) => {
-  const cachedChecklists = sessionStorage.getItem("checklists");
-
-  if (cachedChecklists) {
-    setChecklists(JSON.parse(cachedChecklists));
-  } else {
-    const checklists = await getAllChecklistsSorted(userId, "startDate", "desc");
-    setChecklists(checklists);
-    sessionStorage.setItem("checklists", JSON.stringify(checklists));
-  }
 };
