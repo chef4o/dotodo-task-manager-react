@@ -26,11 +26,11 @@ const getValidationErrors = (formValues) => {
   }
 
   if (formValues.dueDate) {
-    if (formValues.dueTime) {
-      const dueDateTime = new Date(`${formValues.dueDate}T${formValues.dueTime}`);
-      if (dueDateTime < new Date() || formValues.dueDate < new Date()) {
-        errors.dueDate = "The due date/time must not be in the past";
-      }
+    const dueDateTime = formValues.dueTime
+      ? new Date(`${formValues.dueDate}T${formValues.dueTime}`)
+      : new Date(formValues.dueDate);
+    if (dueDateTime < new Date()) {
+      errors.dueDate = "The due date/time must not be in the past";
     }
   }
 
