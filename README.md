@@ -62,6 +62,7 @@ The DOTODO app aims to provide various functionalities for assistance with our e
 -	free-hand notes 
 -	to-do tasks and checklists
 -	calendar events
+
 Each functionality has its own concept and design oriented towards intuitiveness, flexibility and detail. 
 Functionalities
 1. Core note elements
