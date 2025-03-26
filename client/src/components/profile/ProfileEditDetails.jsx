@@ -49,8 +49,10 @@ export default function ProfileEditDetails({ setEditProfile, profileDetails, set
     try {
       setLoading(true);
       const data = await editUser(user.id, formValues);
-      setProfileDetails(data);
-      sessionStorage.setItem("profile", JSON.stringify(data));
+
+      const profileData = { ...data, expiringNotes: profileDetails.expiringNotes };
+      setProfileDetails(profileData);
+      sessionStorage.setItem("profile", JSON.stringify(profileData));
       setLoading(false);
       setEditProfile(false);
       navigate(`/profile/${user.id}`);
