@@ -15,7 +15,8 @@ export default function Notes() {
   const { handleNavigationClick, setLoading, navigate } = useContext(NavContext);
   const { user } = useContext(AuthContext);
 
-  const [notes, setNotes] = useState([]);
+  const initialNotes = JSON.parse(sessionStorage.getItem("notes")) || [];
+  const [notes, setNotes] = useState(initialNotes);
   const [activeNoteId, setActiveNoteId] = useState("");
   const [editNoteId, setEditNoteId] = useState("");
   const [makeNew, setMakeNew] = useState(false);

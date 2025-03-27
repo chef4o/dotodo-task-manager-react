@@ -16,7 +16,8 @@ export default function Profile() {
 
   const { handleNavigationClick, setLoading } = useContext(NavContext);
 
-  const [profileDetails, setProfileDetails] = useState({});
+  const initialData = JSON.parse(sessionStorage.getItem("profile")) || [];
+  const [profileDetails, setProfileDetails] = useState(initialData);
   const [activeNoteId, setActiveNoteId] = useState("");
   const [editProfile, setEditProfile] = useState(false);
 

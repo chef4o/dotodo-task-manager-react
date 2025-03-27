@@ -13,7 +13,8 @@ export default function Checklists() {
   const { handleNavigationClick, setLoading, navigate } = useContext(NavContext);
   const { user } = useContext(AuthContext);
 
-  const [checklists, setChecklists] = useState([]);
+  const initialChecklists = JSON.parse(sessionStorage.getItem("checklists")) || [];
+  const [checklists, setChecklists] = useState(initialChecklists);
   const [makeNew, setMakeNew] = useState(false);
   const [activeChecklistId, setActiveChecklistId] = useState("");
 

@@ -16,13 +16,14 @@ export default function Checklist({
   };
 
   return (
-    <Link
-      to={`/checklists/${checklist.id}`}
-      className={activeChecklistId === checklist.id ? "checklist active" : "checklist"}
-      onClick={() => {
-        setMakeNew(false);
-        setActiveChecklistId(checklist.id);
-      }}>
+    <div className={activeChecklistId === checklist.id ? "checklist active" : "checklist"}>
+      <Link
+        to={`/checklists/${checklist.id}`}
+        onClick={() => {
+          setMakeNew(false);
+          setActiveChecklistId(checklist.id);
+        }}></Link>
+
       {activeChecklistId === checklist.id && (
         <button className="xmark" onClick={handleXmarkClick}>
           <i className="fa-solid fa-xmark" />
@@ -49,6 +50,6 @@ export default function Checklist({
       <button className="delete-btn" onClick={() => deleteChecklist(checklist.id)}>
         Delete
       </button>
-    </Link>
+    </div>
   );
 }
