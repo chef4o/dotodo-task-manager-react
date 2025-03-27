@@ -1,30 +1,38 @@
 export default function ProfileNoteDetails({ note, activeNoteId, setActiveNoteId }) {
+  const handleXmarkClick = (event) => {
+    event.stopPropagation();
+    setActiveNoteId("");
+  };
 
-    const handleXmarkClick = (event) => {
-        event.stopPropagation();
-        setActiveNoteId("");
-    };
+  return (
+    <div className="note active details">
+      <button className="xmark" onClick={handleXmarkClick}>
+        <i className="fa-solid fa-xmark" />
+      </button>
 
-    return (
-        <div className={activeNoteId === note.id ? "note-details active" : "note"} onClick={() => setActiveNoteId(note.id)}>
-            {activeNoteId === note.id &&
-                <button className="xmark" onClick={handleXmarkClick}>
-                    <i className="fa-solid fa-xmark" />
-                </button>}
+      <h3 className="title" name="title">
+        {note.title}
+      </h3>
 
-            <div className="heading-row">
-                <h3>{note.title}</h3>
-                <p>{`Status: ${note.isArchived ? 'Archived' : 'Active'}`}</p>
+      <p className="note-text" name="content">
+        {note.content}
+      </p>
+
+      {note.dueDate && (
+        <div className="due-date" text={!!note.dueTime ? "Due date / time" : "Due date"}>
+          <div>
+            <p>{note.dueDate}</p>
+            <i className="fa-regular fa-calendar"></i>
+          </div>
+
+          {note.dueTime && (
+            <div>
+              <p>{note.dueTime}</p>
+              <i className="fa-regular fa-clock"></i>
             </div>
-
-            <div className="dates-row">
-                <p>{`Initiated on: ${note.startDate}`}</p>
-                {!note.completedOn
-                    ? <p>{`Due date: ${note.dueDate}`}</p>
-                    : <p>{`Completed on: ${note.completedOn}`}</p>}
-            </div>
-
-            <p className="expiring-notes-content">{note.content}</p>
+          )}
         </div>
-    );
+      )}
+    </div>
+  );
 }

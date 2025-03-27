@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { findUserById } from "../../services/userService";
 import { getSomeNotesByDueDateDesc } from "../../services/noteService";
 import ProfileDetails from "./ProfileDetails";
+import ProfileNoteDetails from "./ProfileNoteDetails";
 import ProfileNotes from "./ProfileNotes";
 import AuthContext from "../../contexts/authContext";
 import NavContext from "../../contexts/navContext";
@@ -46,8 +47,16 @@ export default function Profile() {
         <NoAccess onItemClick={handleNavigationClick} />
       ) : (
         <>
-          {editProfile ? (
-            <ProfileEditDetails profileDetails={profileDetails} setProfileDetails={setProfileDetails} setEditProfile={setEditProfile} />
+          {activeNoteId ? (
+            profileDetails.expiringNotes
+              .filter((item) => item.id === activeNoteId)
+              .map((item) => <ProfileNoteDetails key={item.id} note={item} setActiveNoteId={setActiveNoteId} />)
+          ) : editProfile ? (
+            <ProfileEditDetails
+              profileDetails={profileDetails}
+              setProfileDetails={setProfileDetails}
+              setEditProfile={setEditProfile}
+            />
           ) : (
             <ProfileDetails profileDetails={profileDetails} setEditProfile={setEditProfile} />
           )}
