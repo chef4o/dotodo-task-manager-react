@@ -13,34 +13,49 @@ import ProfileEditDetails from "./ProfileEditDetails";
 export default function Profile() {
   const { user } = useContext(AuthContext);
   const { id } = useParams();
-
   const { handleNavigationClick, setLoading } = useContext(NavContext);
 
-  const initialData = JSON.parse(sessionStorage.getItem("profile")) || [];
+  const initialData = sessionStorage.getItem("profile") ? JSON.parse(sessionStorage.getItem("profile")) : [];
   const [profileDetails, setProfileDetails] = useState(initialData);
   const [activeNoteId, setActiveNoteId] = useState("");
   const [editProfile, setEditProfile] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
     if (user?.id && user.id === id) {
-      (async () => {
-        let profileData = sessionStorage.getItem("profile");
-        if (profileData) {
-          profileData = JSON.parse(profileData);
-        } else {
-          profileData = await findUserById(id);
-        }
-        const expiringNotes = await getSomeNotesByDueDateDesc(id, 3);
-        profileData = { ...profileData, expiringNotes };
-        sessionStorage.setItem("profile", JSON.stringify(profileData));
-        setProfileDetails(profileData);
-        setLoading(false);
-      })();
+      const storedProfile = sessionStorage.getItem("profile");
+      if (storedProfile) {
+        const parsedProfile = JSON.parse(storedProfile);
+        setProfileDetails(parsedProfile);
+        (async () => {
+          try {
+            const expiringNotes = await getSomeNotesByDueDateDesc(id, 3);
+            const updatedProfile = { ...parsedProfile, expiringNotes };
+            setProfileDetails(updatedProfile);
+            sessionStorage.setItem("profile", JSON.stringify(updatedProfile));
+          } catch (error) {
+            console.error("Error updating expiring notes:", error);
+          }
+        })();
+      } else {
+        setLoading(true);
+        (async () => {
+          try {
+            let profileData = await findUserById(id);
+            const expiringNotes = await getSomeNotesByDueDateDesc(id, 3);
+            profileData = { ...profileData, expiringNotes };
+            sessionStorage.setItem("profile", JSON.stringify(profileData));
+            setProfileDetails(profileData);
+          } catch (error) {
+            console.error("Error fetching profile data:", error);
+          } finally {
+            setLoading(false);
+          }
+        })();
+      }
     } else {
       setLoading(false);
     }
-  }, [user.id]);
+  }, [user?.id, id, setLoading]);
 
   return (
     <div className="content profile">
