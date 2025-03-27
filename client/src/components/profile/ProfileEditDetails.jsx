@@ -5,6 +5,7 @@ import NavContext from "../../contexts/navContext";
 import AuthContext from "../../contexts/authContext";
 import { editUser } from "../../services/userService";
 import { profileValidation } from "../../util/validation/profileValidation";
+import { uploadImage } from "../../services/cloudService";
 // import * as profileAvatarUploader from "../../util/uploadProfileAvatar";
 
 export default function ProfileEditDetails({ setEditProfile, profileDetails, setProfileDetails }) {
@@ -34,6 +35,26 @@ export default function ProfileEditDetails({ setEditProfile, profileDetails, set
 
     const errors = profileValidation.getValidationErrors(newValues);
     setValidationErrors(errors);
+  };
+
+  const handleFileChange = async (event) => {
+    const file = event.target.files[0];
+    const fileChosen = document.getElementById("file-chosen");
+
+    if (file) {
+      fileChosen.textContent = file.name;
+      try {
+        setLoading(true);
+        const secureUrl = await uploadImage(file);
+        setFormValues((prev) => ({ ...prev, imageUrl: secureUrl }));
+        setLoading(false);
+      } catch (error) {
+        console.error("Error uploading image:", error);
+        setLoading(false);
+      }
+    } else {
+      fileChosen.textContent = "No file selected";
+    }
   };
 
   async function editProfileHandler(event) {
@@ -134,7 +155,14 @@ export default function ProfileEditDetails({ setEditProfile, profileDetails, set
               Update avatar
             </label>
             <span id="file-chosen">No file selected</span>
-            <input type="file" id="profilePicture" name="profilePicture" accept="image/*" hidden />
+            <input
+              type="file"
+              id="profilePicture"
+              name="profilePicture"
+              accept="image/*"
+              hidden
+              onChange={handleFileChange}
+            />
           </div>
         </div>
 
