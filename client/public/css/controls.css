@@ -14,21 +14,6 @@
     border: 0.1vw solid transparent;
 }
 
-.notes p,
-.notes p:hover,
-.notes ul,
-.notes ul:hover,
-.notes textarea,
-.notes textarea:hover {
-    scrollbar-color: var(--color-menu-icon-soft-sky-blue) transparent;
-    scrollbar-width: thin;
-}
-
-.checklists * {
-    scrollbar-color: var(--color-menu-icon-creamy-peach) transparent;
-    scrollbar-width: thin;
-}
-
 .content::-webkit-scrollbar-thumb {
     background-color: var(--color-menu-soft-sky-blue);
     border-radius: 0.4vw;
