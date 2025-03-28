@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { ReactBingmaps } from "react-bingmaps";
 
 export default function AboutUs() {
   useEffect(() => {
@@ -23,8 +24,19 @@ export default function AboutUs() {
       </div>
       <div className="location">
         <h2>Located in Sofia, BULGARIA</h2>
-        <div className="location">
-          <div id="bing-map"></div>
+          <div id="bing-map">
+            <ReactBingmaps
+              bingmapKey={import.meta.env.VITE_BING_MAPS_KEY}
+              center={[42.6977, 23.3219]}
+              zoom={10}
+              pushPins={[
+                {
+                  location: [42.6977, 23.3219],
+                  option: { title: "Sofia" },
+                },
+              ]}
+              mapTypeId="road"
+            />
         </div>
       </div>
     </div>
