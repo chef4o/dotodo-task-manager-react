@@ -15,15 +15,17 @@ export default function Contacts() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (contactForm.isValid(formData, setError)) {
-      setLoading(true);
-      contactForm.sendMessage(formData);
+    if (!contactForm.isValid(formData, setError)) return;
+    setLoading(true);
+    try {
+      await contactForm.sendMessage(formData);
       setMessageSent(true);
+    } catch (err) {
+      setError(err.message || "Failed to send message");
+    } finally {
       setLoading(false);
-    } else {
-      setMessageSent(false);
     }
   };
 
