@@ -13,14 +13,7 @@ To install the app, clone the repository and run npm install to load the necessa
 
 *This will install the dependencies from the root, the client and the server folders. 
 
-## Used external services
-
-- [Firebase](https://console.firebase.google.com/) (database and authentication servivce)
-- [Cloudinary](https://cloudinary.com/) (file upload cloud service)
-- [Mailtrap](https://mailtrap.io/home) (email delivery service)
-- [BingMaps](https://www.bingmapsportal.com/) (contact location service)
-
-## Server setup
+## Setup
 To be able to run the Firebase API on both the server and client, you have to add .env files* inside the /client and /server folders and set the following variables with your own firebase profile details:
 > /server/.env: 
 - `FIREBASE_PROJECT_ID`
@@ -70,6 +63,13 @@ Start the app* from the root folder using:
 > To debug the client  use the Launch Chrome against localhost configuration
 
 **To start the debug the main server connection sholud be killed.  
+
+## Used external services
+
+- [Firebase](https://console.firebase.google.com/) (database and authentication servivce)
+- [Cloudinary](https://cloudinary.com/) (file upload cloud service)
+- [Mailtrap](https://mailtrap.io/home) (email delivery service)
+- [BingMaps](https://www.bingmapsportal.com/) (contact location service)
 
 ## Concept
 
