@@ -13,6 +13,13 @@ To install the app, clone the repository and run npm install to load the necessa
 
 *This will install the dependencies from the root, the client and the server folders. 
 
+## Used external services
+
+- [Firebase](https://console.firebase.google.com/) (database and authentication servivce)
+- [Cloudinary](https://cloudinary.com/) (file upload cloud service)
+- [Mailtrap](https://mailtrap.io/home) (email delivery service)
+- [BingMaps](https://www.bingmapsportal.com/) (contact location service)
+
 ## Server setup
 To be able to run the Firebase API on both the server and client, you have to add .env files* inside the /client and /server folders and set the following variables with your own firebase profile details:
 > /server/.env: 
@@ -25,6 +32,11 @@ To be able to run the Firebase API on both the server and client, you have to ad
 - `FIREBASE_TOKEN_URI`
 - `FIREBASE_AUTH_PROVIDER_CERT_URL`
 - `FIREBASE_CLIENT_CERT_URL`
+- `MAILTRAP_HOST`
+- `MAILTRAP_PORT`
+- `MAILTRAP_USER`
+- `MAILTRAP_PASS`
+- `SUPPORT_EMAIL`
 
 >/client/.env:
 - `VITE_FIREBASE_API_KEY`
@@ -33,6 +45,9 @@ To be able to run the Firebase API on both the server and client, you have to ad
 - `VITE_FIREBASE_STORAGE_BUCKET`
 - `VITE_FIREBASE_MESSAGING_SENDER_ID`
 - `VITE_FIREBASE_APP_ID`
+- `VITE_CLOUDINARY_CLOUD_NAME`
+- `VITE_CLOUDINARY_UPLOAD_PRESET`
+- `VITE_BING_MAPS_KEY`
 
 Your Firestore database shuld have all collections from `server/configuration/firebaseDb`.
 
