@@ -7,7 +7,7 @@ import { editUser } from "../../services/userService";
 import { profileValidation } from "../../util/validation/profileValidation";
 import { uploadImage } from "../../services/cloudService";
 
-export default function ProfileEditDetails({ setEditProfile, profileDetails, setProfileDetails }) {
+export default function ArticleEditDetails({ setEditProfile, profileDetails, setProfileDetails }) {
   const [formValues, setFormValues] = useState({
     username: profileDetails.username,
     email: profileDetails.email,
