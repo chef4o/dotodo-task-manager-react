@@ -18,6 +18,8 @@ const deleteChecklist = `${baseUrl}/checklists/delete`;
 const editChecklist = `${baseUrl}/checklists/edit`;
 const addChecklist = `${baseUrl}/checklists/add`;
 
+const sendSupportMessage = `${baseUrl}/contact-us/send`;
+
 export const url = {
   users,
   editUser,
@@ -34,4 +36,5 @@ export const url = {
   deleteChecklist,
   editChecklist,
   addChecklist,
+  sendSupportMessage
 };
