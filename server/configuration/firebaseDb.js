@@ -40,4 +40,18 @@ export const dbTables = {
       archived: "archived",
     },
   },
+  NEWS: {
+    tableName: "news",
+    fields: {
+      id: "id",
+      title: "title",
+      content: "content",
+      uploadDate: "uploadDate",
+      updateDate: "updateDate",
+      ownerId: "ownerId",
+      likes: [],
+      comments: [],
+      archived: "archived",
+    },
+  },
 };
