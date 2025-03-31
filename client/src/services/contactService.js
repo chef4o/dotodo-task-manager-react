@@ -10,7 +10,7 @@ const isValid = (formData, setError) => {
     setError("Email must be valid.");
     return false;
   }
-
+  setError("");
   return true;
 };
 
