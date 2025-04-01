@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 export const processData = ({ data = [], sortKey = null, sortOrder = "asc", filterFn = null, limit = null }) => {
   let result = [...data];
 
@@ -66,4 +68,8 @@ export function computeDueDaysHours(dueDate, dueTime) {
   const hours = Math.floor((diffMs / (1000 * 60 * 60)) % 24);
 
   return { days, hours, expired: false };
+}
+
+export function formatToDateTime(dateTime) {
+  return format(new Date(dateTime), "dd MMM yyyy HH:mm");
 }
