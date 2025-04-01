@@ -7,6 +7,9 @@
 
 .content.news div {
     position: relative;
+}
+
+.content.news .container {
     width: 100%;
 }
 
@@ -102,17 +105,20 @@
     position: absolute;
     right: 0vw;
     top: 1vw;
+    color: darkslategray;
 }
 
 .content.news .new-article-btn:hover {
     background-color: var(--color-menu-cool-gray);
+    color: white;
 }
 
 .content.news .news.new {
+    position: relative;
     display: flex;
     flex-direction: column;
     background: none;
-    width: 30vw;
+    width: 54vw;
 }
 
 .content.news .news.new input,
@@ -121,17 +127,45 @@
     border: none;
 }
 
+.content.news .news.new input {
+    border-bottom: 1px solid darkgray;
+    margin-bottom: 1vw;
+}
+
 .content.news .news.new textarea {
-    height: 45vw;
+    height: 28vw;
 }
 
 .content.news .xmark {
-    text-align: end;
+    position: absolute;
+    right: 0;
+    top: 1vw;
+}
+
+.content.news .news.new button.create {
+    position: absolute;
+    bottom: -4vw;
+    right: 0;
+}
+
+.content.news .news.new button.create:hover {
+    background-color: var(--color-menu-cool-gray);
+}
+
+.content.news .error.new-article.error-list {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    right: 0;
+    text-align: right;
+    font-size: 1.6vw;
+    width: 33vw;
+    bottom: 2vw;
 }
 
 .content.news .article {
-    background: #fff;
-    box-shadow: var(--left-box-shadow);
+    background: rgb(255 255 255 / 40%);
+    box-shadow: none;
     margin-bottom: 1vw;
     padding: 1vw;
     overflow: auto;
@@ -143,9 +177,124 @@
 
 .content.news .article .posted-on,
 .content.news .article .posted-on a {
-    font-size: 1.4vw;
+    color: darkslategray;
+    font-size: 1.2vw;
 }
 
 .content.news .article p {
     font-size: 1.2vw;
+}
+
+.content.news .article .interact {
+    display: flex;
+    gap: 0.28vw
+}
+
+.content.news .article-details {
+    width: 90%;
+}
+
+.content.news .article-details .article-content,
+.content.news .article-details .posted-on {
+    padding-bottom: 1vw;
+}
+
+.content.news .article-details .posted-on,
+.content.news .article-details .interact * {
+    color: darkslategray;
+}
+
+.content.news .article-details .fa-thumbs-up,
+.content.news .article-details .fa-comment {
+    cursor: pointer;
+}
+
+.content.news .article-details .interact {
+    display: flex;
+    justify-content: space-between;
+}
+
+.content.news .article-details .interact .comments,
+.content.news .article-details .interact .likes {
+    display: flex;
+    gap: 1vw;
+    align-items: center;
+}
+
+.content.news .article-details .new-comment {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 1vw 0;
+}
+
+.content.news .article-details .new-comment .xmark {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.content.news .article-details .new-comment .xmark i {
+    color: darkslategray;
+}
+
+.content.news .article-details .new-comment .comment-text {
+    border: none;
+    background: rgb(255 255 255 / 40%);
+    padding: 1vw;
+    height: 12vw;
+    max-width: 51.4vw;
+    min-width: 51.4vw;
+}
+
+.content.news .article-details .new-comment button.create {
+    position: absolute;
+    right: 0.6vw;
+    bottom: 1vw;
+    background-color: var(--color-gray-light);
+    color: darkslategray;
+}
+
+.content.news .article-details .archive-btn {
+    background: rgb(255 255 255 / 40%);
+    position: absolute;
+    color: darkslategray;
+    right: 0;
+    top: 1vw;
+}
+
+.content.news .article-details .new-comment button.create:hover,
+.content.news .article-details .archive-btn:hover {
+    background-color: var(--color-menu-cool-gray);
+    color: white;
+}
+
+.content.news .article-details .comments-list h4 {
+    padding-top: 1vw;
+    margin-bottom: 1vw;
+    font-size: 1.4vw;
+    border-bottom: 1px solid darkslategray;
+}
+
+.content.news .article-details .comments-list .comment {
+    margin-top: 1.2vw;
+    display: flex;
+}
+
+.content.news .article-details .comments-list .comment p {
+    font-size: 1.2vw;
+}
+
+.content.news .article-details .comments-list .comment .left-container {
+    width: 30%;
+    border-right: 1px solid darkslategray;
+}
+
+.content.news .article-details .comments-list .comment .right-container {
+    width: 70%;
+    padding-left: 1vw;
+}
+
+.content.news .article-details .comments-list .comment:nth-child(even) {
+    background: rgb(255 255 255 / 20%);
 }

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Home from "./components/home/Home.jsx";
 import AboutUs from "./components/AboutUs.jsx";
-import News from "./components/News.jsx";
+import News from "./components/news/News.jsx";
 import Events from "./components/events/Events.jsx";
 import Checklists from "./components/checklists/Checklists.jsx";
 import Notes from "./components/notes/Notes.jsx";
@@ -19,6 +19,8 @@ import Profile from "./components/profile/Profile.jsx";
 import NavContext from "./contexts/navContext.js";
 import AuthContext from "./contexts/authContext.js";
 import { handleLogout } from "./services/authService.js";
+import NewArticleItem from "./components/news/NewArticleItem.jsx";
+import ArticleDetails from "./components/news/ArticleDetails.jsx";
 
 const App = () => {
   const [selectedPageBg, setSelectedPageBg] = useState("home");
@@ -83,7 +85,7 @@ const App = () => {
   }, [user]);
 
   return (
-    <NavContext.Provider value={{ handleNavigationClick, selectedPageBg, setLoading, navigate}}>
+    <NavContext.Provider value={{ handleNavigationClick, selectedPageBg, setLoading, navigate }}>
       <AuthContext.Provider value={{ user, setUser, hideAuthModal: hideAuthModalHandler }}>
         <main className={selectedPageBg}>
           <Nav
@@ -113,6 +115,8 @@ const App = () => {
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contacts" element={<Contacts />} />
             <Route path="/news" element={<News />} />
+            <Route path="/news/new" element={<NewArticleItem />} />
+            <Route path="/news/:id" element={<ArticleDetails />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
 

@@ -1,80 +1,54 @@
-import { useContext, useEffect } from "react";
-import ArticleDetails from "./ArticleDetails";
-import ArticleEditDetails from "./ArticleEditDetails";
+import { useContext, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import ArticleItem from "./ArticleItem";
 import NavContext from "../../contexts/navContext";
 import { getDataFromStorageOrServer } from "../../services/cacheService";
+import { getAllNews } from "../../services/newsService";
+import AuthContext from "../../contexts/authContext";
 
 export default function News() {
-  const { handleNavigationClick, setLoading, navigate } = useContext(NavContext);
+  const { setLoading, navigate } = useContext(NavContext);
   const { user } = useContext(AuthContext);
-  const { page } = useParams();
 
+  const location = useLocation();
   const initialNews = JSON.parse(sessionStorage.getItem("news")) || [];
   const [articles, setArticles] = useState(initialNews);
-  const [activeArticleId, setActiveArticleId] = useState("");
-  const [editArticleId, setEditArticleId] = useState("");
-  const [makeNew, setMakeNew] = useState(false);
 
   useEffect(() => {
     setLoading(true);
-    if (user?.id) {
-      getDataFromStorageOrServer("news", () => getAllArticlesSorted("startDate", "desc"), setArticles);
-    }
+    getDataFromStorageOrServer("news", () => getAllNews("uploadDate", "desc"), setArticles);
     setLoading(false);
-  }, [user]);
+  }, [location.pathname]);
 
   return (
     <div className="content news">
-      {!activeArticleId && !editArticleId ? (
-        <div>
-          <form className="new-article-btn" th:action="@{'/news/new'}" th:method="get">
-            <button type="submit">Create article</button>
-          </form>
-          <h3>Latest news and updates</h3>
-          <ul className="articles" th:if="${articles != null && articles.size() > 0}">
-                          {notes.map((item) =>
-                            activeNoteId && activeNoteId === item.id ? (
-                              <NoteItemDetails
-                                key={item.id}
-                                note={item}
-                                setEditNoteId={setEditNoteId}
-                                activeNoteId={activeNoteId}
-                                setActiveNoteId={setActiveNoteId}
-                                deleteNote={deleteNoteHandler}
-                                setMakeNew={setMakeNew}
-                                navigate={navigate}
-                              />
-                            ) : null
-                          )}
+      <div className="container">
+        {user?.role >= 4 && (
+          <button
+            className="new-article-btn"
+            onClick={() => {
+              navigate(`/news/new`);
+            }}>
+            Create article
+          </button>
+        )}
 
-            <li className="article" th:each="article: ${articles}">
-              <th:block th:insert="~{fragments/news/news-details}"></th:block>
-            </li>
+        <h3>Latest news and updates</h3>
+
+        {articles?.length > 0 ? (
+          <ul className="articles">
+            {articles
+              .filter((item) => !item.archived)
+              .map((item) => (
+                <ArticleItem key={item.id} article={item} />
+              ))}
           </ul>
-          <div className="paging" th:if="${articles != null && articles.size() > 0}">
-            <ul>
-              <li className="selected">
-                <a href="#">1</a>
-              </li>
-              <li>
-                <a href="#">2</a>
-              </li>
-              <li>
-                <a href="#">NEXT</a>
-              </li>
-            </ul>
-            <span>Page 1 of 2</span>
-          </div>
-
-          <div className="articles" th:if="${articles == null || articles.size() == 0}">
+        ) : (
+          <div className="articles">
             <p>There are no articles yet.</p>
           </div>
-        </div>
-      ) : activeArticleId ? (
-        <ArticleDetails />
-      ) : (
-        <ArticleEditDetails />
-      )}
+        )}
+      </div>
     </div>
   );
 }
