@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:5000";
+const baseUrl = "https://dotodo-server-eu-80910eb8e52a.herokuapp.com";
 
 const users = `${baseUrl}/users`;
 const editUser = `${users}/edit`; 
