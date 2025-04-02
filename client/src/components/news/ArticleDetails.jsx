@@ -129,7 +129,7 @@ export default function ArticleDetails() {
           <ul className="comments-list">
             <h4>All comments</h4>
             {article.comments.map((item) => (
-              <ArticleComment key={item.id} comment={item} />
+              <ArticleComment key={item.createdAt} comment={item} />
             ))}
           </ul>
         )}
