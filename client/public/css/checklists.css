@@ -19,6 +19,7 @@
 }
 
 .checklists .header-menu button {
+    margin-right: 0.3vw;
     font-size: 1.4vw;
     padding: 0.2vw 0.8vw;
     background-color: var(--color-menu-soft-sky-blue-transparent);
