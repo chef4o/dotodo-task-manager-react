@@ -12,15 +12,17 @@ import NotFound from "./components/error/NotFound.jsx";
 import Footer from "./components/Footer.jsx";
 import LoginModal from "./components/auth/LoginModal.jsx";
 import RegisterModal from "./components/auth/RegisterModal.jsx";
-import taskTypes from "./assets/taskTypes.js";
-import { topNav, sideNav, bottomNav, connectNav } from "./assets/navElements.js";
-import Contacts from "./components/Contacts.jsx";
-import Profile from "./components/profile/Profile.jsx";
-import NavContext from "./contexts/navContext.js";
-import AuthContext from "./contexts/authContext.js";
-import { handleLogout } from "./services/authService.js";
 import NewArticleItem from "./components/news/NewArticleItem.jsx";
 import ArticleDetails from "./components/news/ArticleDetails.jsx";
+import Contacts from "./components/Contacts.jsx";
+import Profile from "./components/profile/Profile.jsx";
+import AdminPanel from "./components/admin-panel/AdminPanel.jsx";
+import taskTypes from "./assets/taskTypes.js";
+import { topNav, sideNav, bottomNav, connectNav } from "./assets/navElements.js";
+import { handleLogout } from "./services/authService.js";
+import NavContext from "./contexts/navContext.js";
+import AuthContext from "./contexts/authContext.js";
+
 
 const App = () => {
   const [selectedPageBg, setSelectedPageBg] = useState("home");
@@ -117,6 +119,7 @@ const App = () => {
             <Route path="/news" element={<News />} />
             <Route path="/news/new" element={<NewArticleItem />} />
             <Route path="/news/:id" element={<ArticleDetails />} />
+            <Route path="/admin-panel" element={<AdminPanel />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
 

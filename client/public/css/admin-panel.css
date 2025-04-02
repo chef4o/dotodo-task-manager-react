@@ -56,6 +56,11 @@
     width: 20%;
 }
 
+.admin-panel-users thead,
+.admin-panel-users tbody {
+    width: 100%;
+}
+
 .admin-panel-users .fields #header-username,
 .admin-panel-users .fields #header-email {
     width: 35%;

@@ -2,6 +2,7 @@ const baseUrl = "http://localhost:5000";
 
 const users = `${baseUrl}/users`;
 const editUser = `${users}/edit`; 
+const deleteUser = `${users}/delete`;
 const userByEmail = `${users}/email`;
 const userByUsername = `${users}/username`;
 
@@ -28,6 +29,7 @@ const sendSupportMessage = `${baseUrl}/contact-us/send`;
 export const url = {
   users,
   editUser,
+  deleteUser,
   userByEmail,
   userByUsername,
   register,

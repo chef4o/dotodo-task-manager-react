@@ -6,6 +6,11 @@ export const getAllUsers = async () => {
   return Object.values(response);
 };
 
+export const getUsersWithLowerRole = async (currentUserRole) => {
+  const users = (await getAllUsers()).filter((user) => user.role < currentUserRole);
+  return users;
+};
+
 export const findUserById = async (id) => {
   const response = await request.get(`${url.users}/${id}`);
   return response;
@@ -27,7 +32,7 @@ export const deleteUser = async (userId) => {
     return { error: "User ID is required." };
   }
 
-  const response = await request.remove(`${url.users}/${userId}`);
+  const response = await request.remove(`${url.deleteUser}/${userId}`);
   return response;
 };
 
