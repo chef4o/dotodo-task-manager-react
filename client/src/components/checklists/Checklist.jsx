@@ -41,7 +41,7 @@ export default function Checklist({
       <button
         className="edit-btn"
         onClick={() => {
-          setActiveChecklistId("");
+          setActiveChecklistId(checklist.id);
           setMakeNew(false);
         }}>
         Edit
