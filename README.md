@@ -2,15 +2,17 @@
 
 **Created with React + Vite**
 
+Available online at https://jsappsdemo-fd0fa.firebaseapp.com/
+
 ## Used external services
 
-- [Firebase](https://console.firebase.google.com/) (client-side, database and authentication servivce)
+- [Firebase](https://console.firebase.google.com/) (client-side, database and authentication services)
 - [Heroku](https://dashboard.heroku.com/apps) (server-side cloud service)
 - [Cloudinary](https://cloudinary.com/) (file upload cloud service)
 - [Mailtrap](https://mailtrap.io/home) (email delivery service)
 - [BingMaps](https://www.bingmapsportal.com/) (contact location service)
 
-## Installation
+## Local Installation
 To install the app, clone the repository and run npm install to load the necessary dependencies.
 
 `git clone <repository-url>`
