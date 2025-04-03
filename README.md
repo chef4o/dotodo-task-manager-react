@@ -1,6 +1,14 @@
 # DOTODO TASK MANAGER
 
-**Initial setup via React + Vite**
+**Created with React + Vite**
+
+## Used external services
+
+- [Firebase](https://console.firebase.google.com/) (client-side, database and authentication servivce)
+- [Heroku](https://dashboard.heroku.com/apps) (server-side cloud service)
+- [Cloudinary](https://cloudinary.com/) (file upload cloud service)
+- [Mailtrap](https://mailtrap.io/home) (email delivery service)
+- [BingMaps](https://www.bingmapsportal.com/) (contact location service)
 
 ## Installation
 To install the app, clone the repository and run npm install to load the necessary dependencies.
@@ -13,8 +21,8 @@ To install the app, clone the repository and run npm install to load the necessa
 
 *This will install the dependencies from the root, the client and the server folders. 
 
-## Setup
-To be able to run the Firebase API on both the server and client, you have to add .env files* inside the /client and /server folders and set the following variables with your own firebase profile details:
+## Local Setup
+To be able to run the Firebase API on both the server and client locally, you have to add .env files* inside the /client and /server folders and set the following variables with your own firebase profile details:
 > /server/.env: 
 - `FIREBASE_PROJECT_ID`
 - `FIREBASE_PRIVATE_KEY_ID`
@@ -46,7 +54,7 @@ Your Firestore database shuld have all collections from `server/configuration/fi
 
 *Note: inside the /server and /client folders there are .env.sample files for reference.
 
-## Usage
+## Local Usage
 Start the app* from the root folder using:
 
 `npm run project`  
@@ -63,13 +71,6 @@ Start the app* from the root folder using:
 > To debug the client  use the Launch Chrome against localhost configuration
 
 **To start the debug the main server connection sholud be killed.  
-
-## Used external services
-
-- [Firebase](https://console.firebase.google.com/) (database and authentication servivce)
-- [Cloudinary](https://cloudinary.com/) (file upload cloud service)
-- [Mailtrap](https://mailtrap.io/home) (email delivery service)
-- [BingMaps](https://www.bingmapsportal.com/) (contact location service)
 
 ## Concept
 
