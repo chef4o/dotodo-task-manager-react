@@ -10,8 +10,5 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
-console.log(import.meta.env);
-console.log("Firebase API Key:", firebaseConfig.apiKey); // For debugging only
-
 const firebaseApp = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
 export const firebaseAuth = getAuth(firebaseApp);
