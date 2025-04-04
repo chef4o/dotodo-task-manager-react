@@ -34,4 +34,4 @@ jobs:
 
       - name: Deploy to Firebase Hosting
         working-directory: client
-        run: firebase deploy --only hosting
+        run: firebase deploy --only hosting --token ${{ secrets.FIREBASE_TOKEN }}
