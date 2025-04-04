@@ -1,7 +1,7 @@
-const baseUrl = "https://dotodo-server-eu-80910eb8e52a.herokuapp.com";
+const baseUrl = import.meta.env.DEV ? "http://localhost:5000" : "https://dotodo-server-eu-80910eb8e52a.herokuapp.com";
 
 const users = `${baseUrl}/users`;
-const editUser = `${users}/edit`; 
+const editUser = `${users}/edit`;
 const deleteUser = `${users}/delete`;
 const userByEmail = `${users}/email`;
 const userByUsername = `${users}/username`;
@@ -43,8 +43,8 @@ export const url = {
   deleteChecklist,
   editChecklist,
   addChecklist,
-  news, 
-  editArticle, 
+  news,
+  editArticle,
   addArticle,
-  sendSupportMessage
+  sendSupportMessage,
 };
