@@ -102,7 +102,7 @@ main.profile {
   background-color: var(--color-menu-soft-gray);
 }
 
-@media (max-height: 800px) {
+@media (max-width: 520px) {
   body {
     padding-left: 0;
   }
