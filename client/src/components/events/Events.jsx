@@ -4,6 +4,7 @@ import Calendar from "./Calendar";
 import NoAccess from "../error/NoAccess";
 import NavContext from "../../contexts/navContext";
 import AuthContext from "../../contexts/authContext";
+import { loadHolidays } from "../../../public/js/holidays";
 
 export default function Events() {
   const { handleNavigationClick, setLoading, navigate } = useContext(NavContext);
@@ -21,11 +22,10 @@ export default function Events() {
             <h2>
               <i className="fa-regular fa-calendar-check"></i>Events
             </h2>
-            {makeNew && (
-              <button type="submit" className="delete-btn">
-                Create new event
-              </button>
-            )}
+
+            <button type="submit" className="delete-btn" onClick={() => navigate("/under-construction")}>
+              Create new event
+            </button>
           </div>
 
           <div className="holidays-info">
@@ -33,7 +33,7 @@ export default function Events() {
             <p id="next-month-holidays"></p>
           </div>
 
-          <script src="/js/holidays.js"></script>
+          <script src="/js/holidays.js" onLoad={() => loadHolidays()}></script>
 
           <Calendar />
         </>
