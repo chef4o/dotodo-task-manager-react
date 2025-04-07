@@ -22,7 +22,7 @@ import { topNav, sideNav, bottomNav, connectNav } from "./assets/navElements.js"
 import { handleLogout } from "./services/authService.js";
 import NavContext from "./contexts/navContext.js";
 import AuthContext from "./contexts/authContext.js";
-
+import UnderConstruction from "./components/error/UnderConstruction.jsx";
 
 const App = () => {
   const [selectedPageBg, setSelectedPageBg] = useState("home");
@@ -120,6 +120,7 @@ const App = () => {
             <Route path="/news/new" element={<NewArticleItem />} />
             <Route path="/news/:id" element={<ArticleDetails />} />
             <Route path="/admin-panel" element={<AdminPanel />} />
+            <Route path="/under-construction" element={<UnderConstruction />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
 
