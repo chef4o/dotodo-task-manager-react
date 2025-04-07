@@ -23,6 +23,7 @@ import { handleLogout } from "./services/authService.js";
 import NavContext from "./contexts/navContext.js";
 import AuthContext from "./contexts/authContext.js";
 import UnderConstruction from "./components/error/UnderConstruction.jsx";
+import { Path } from "./assets/paths.js";
 
 const App = () => {
   const [selectedPageBg, setSelectedPageBg] = useState("home");
@@ -106,22 +107,22 @@ const App = () => {
           {showAuthModal.register && <RegisterModal />}
 
           <Routes>
-            <Route path="/" element={<Home taskTypes={taskTypes} />} />
-            <Route path="/notes" element={<Notes />} />
-            <Route path="/notes/:id" element={<Notes />} />
-            <Route path="/checklists" element={<Checklists />} />
-            <Route path="/checklists/:id" element={<Checklists />} />
-            <Route path="/events" element={<Events />} />
-            <Route path="/profile/:id" element={<Profile />} />
-            <Route path="/profile/edit/:id" element={<Profile />} />
-            <Route path="/about" element={<AboutUs />} />
-            <Route path="/contacts" element={<Contacts />} />
-            <Route path="/news" element={<News />} />
-            <Route path="/news/new" element={<NewArticleItem />} />
-            <Route path="/news/:id" element={<ArticleDetails />} />
-            <Route path="/admin-panel" element={<AdminPanel />} />
-            <Route path="/under-construction" element={<UnderConstruction />} />
-            <Route path="*" element={<NotFound />} />
+            <Route path={Path.HOME} element={<Home taskTypes={taskTypes} />} />
+            <Route path={Path.NOTES} element={<Notes />} />
+            <Route path={Path.NOTE} element={<Notes />} />
+            <Route path={Path.CHECKLISTS} element={<Checklists />} />
+            <Route path={Path.CHECKLIST} element={<Checklists />} />
+            <Route path={Path.EVENTS} element={<Events />} />
+            <Route path={Path.PROFILE} element={<Profile />} />
+            <Route path={Path.PROFILE_EDIT} element={<Profile />} />
+            <Route path={Path.ABOUT} element={<AboutUs />} />
+            <Route path={Path.CONTACTS} element={<Contacts />} />
+            <Route path={Path.NEWS} element={<News />} />
+            <Route path={Path.NEW_ARTICLE} element={<NewArticleItem />} />
+            <Route path={Path.ARTICLE} element={<ArticleDetails />} />
+            <Route path={Path.ADMIN_PANEL} element={<AdminPanel />} />
+            <Route path={Path.UNDER_CONSTRUCTION} element={<UnderConstruction />} />
+            <Route path={Path.ANY} element={<NotFound />} />
           </Routes>
 
           <Footer />
