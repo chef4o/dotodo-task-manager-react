@@ -2,7 +2,7 @@
 
 **Created with React + Vite**
 
-Available online at https://jsappsdemo-fd0fa.firebaseapp.com/
+Available online at https://dotodo.dev-apps.eu/
 
 ## Used external services
 
