@@ -108,7 +108,7 @@ main.profile {
   }
 
   body main {
-    height: 88vh;
+    height: 92vh;
     padding-right: 0;
   }
 
@@ -127,31 +127,85 @@ main.profile {
   }
 
   body .footer {
-    width: 83.8vw;
-    margin-left: 9vw;
+    width: 91.4vw;
+    margin-left: 8vw;
     height: 2vh;
+    bottom: -4vw;
+  }
+
+  .footer * {
+    font-size: 1.6vw;
   }
 
   body main .nav .top-bar,
   body main .nav .bottom-bar {
     margin-left: 13vw;
     width: 81.6vw;
-    height: 2vh;
+    height: 4vh;
+    gap: 3vw;
+  }
+
+  .top-bar *,
+  .bottom-bar * {
+    font-size: 3vw;
+  }
+
+  .top-bar-controls {
+    gap: 3vw;
+  }
+
+  .top-bar .greeting {
+    left: 0;
   }
 
   body main .auth-form {
-    top: 4vh;
-    width: 34vw;
-    left: 62vw;
+    top: 6vh;
+    width: 44vw;
+    left: 52vw;
+  }
+
+  body main .auth-form * {
+    font-size: 3vw;
   }
 
   body main .auth-form .fa-xmark {
     font-size: 3vw;
   }
 
+  .auth-form button.login,
+  .auth-form button.register {
+    font-size: 4vw;
+    border-radius: 0.1vw;
+  }
+
+  .auth-form.register {
+    height: 56vw;
+  }
+
+  .auth-form button.login {
+    top: 22vw;
+    width: 14vw;
+    height: 6vw;
+  }
+
+  .auth-form button.register {
+    width: 18vw;
+  }
+
+  .auth-form input {
+    padding-left: 4.2vw;
+    width: 42vw;
+  }
+
+  .error.auth {
+    font-size: 3vw;
+    width: 42vw;
+    line-height: 2.2vw;
+  }
+
   body main .nav .sidebar {
     padding: 2.2vh 0 6vw;
-    height: 88vh;
+    height: 92vh;
     width: 8vw;
   }
 
@@ -177,7 +231,7 @@ main.profile {
   body main .content {
     height: 83.5vh;
     width: 82vw;
-    margin-top: 2vh;
+    margin-top: 4.5vh;
   }
 
   body main .content .error-page {
@@ -193,17 +247,16 @@ main.profile {
     height: 26vh;
   }
 
+  body main .content.home .intro {
+    flex-direction: column;
+    gap: 2vw;
+    margin-bottom: 2vw;
+  }
+
   body main .content.home .intro h3,
   body main .content.home .intro p {
     font-size: 1.8vw;
-  }
-
-  body main .content.home .intro h3 {
-    width: 32vw;
-  }
-
-  body main .content.home .intro p {
-    width: 42vw;
+    width: 98%;
   }
 
   body main .content.about-us .location #bing-map {
