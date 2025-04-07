@@ -5,7 +5,7 @@ import { initialState, validationIsEmpty } from "../../util/validation/commonVal
 import { editChecklist, getAllChecklistsSorted } from "../../services/checklistService";
 import NavContext from "../../contexts/navContext";
 import AuthContext from "../../contexts/authContext";
-import { useAutoResizeInput } from "../../util/hooks";
+import { formUtils } from "../../util/formUtils";
 
 export default function ChecklistDetails({
   checklist,
@@ -26,7 +26,7 @@ export default function ChecklistDetails({
   const { user } = useContext(AuthContext);
   const { setLoading } = useContext(NavContext);
 
-  const { inputRef, spanRef } = useAutoResizeInput(formValues.element);
+  const { inputRef, spanRef } = formUtils.useAutoResizeInput(formValues.element);
 
   const changeHandler = (event) => {
     const { name, value } = event.target;

@@ -4,7 +4,7 @@ import AuthContext from "../../contexts/authContext";
 import { checklistValidation } from "../../util/validation/checklistValidation";
 import NavContext from "../../contexts/navContext";
 import { initialState, validationIsEmpty } from "../../util/validation/commonValidation";
-import { useAutoResizeInput, useAutoScroll } from "../../util/hooks";
+import { formUtils } from "../../util/formUtils";
 
 export default function EmptyChecklist({ setChecklists, setMakeNew }) {
   const [formValues, setFormValues] = useState(() => {
@@ -15,8 +15,8 @@ export default function EmptyChecklist({ setChecklists, setMakeNew }) {
   const { setLoading } = useContext(NavContext);
   const { user } = useContext(AuthContext);
 
-  const containerRef = useAutoScroll(formValues.elements);
-  const { inputRef, spanRef } = useAutoResizeInput(formValues.element);
+  const containerRef = formUtils.useAutoScroll(formValues.elements);
+  const { inputRef, spanRef } = formUtils.useAutoResizeInput(formValues.element);
 
   async function createChecklist(event) {
     event.preventDefault();
