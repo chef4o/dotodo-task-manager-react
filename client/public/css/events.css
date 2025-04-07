@@ -30,7 +30,15 @@
 }
 
 .content.events .holidays-info {
+    display: flex;
+    justify-content: space-between;
     padding: 0 2vw;
+}
+
+.content.events .holidays-info h4 {
+    border-bottom: 1px solid gray;
+    margin-bottom: 1vw;
+    font-size: 1.6vw;
 }
 
 .content.events .holidays-info p {
