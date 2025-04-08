@@ -16,7 +16,14 @@ export default function News() {
 
   useEffect(() => {
     setLoading(true);
-    getDataFromStorageOrServer("news", () => getAllNews("uploadDate", "desc"), setArticles);
+    getDataFromStorageOrServer(
+      "news",
+      async () => {
+        const data = await getAllNews("uploadDate", "desc");
+        return Array.isArray(data) ? data : [];
+      },
+      setArticles
+    );
     setLoading(false);
   }, [location.pathname]);
 
