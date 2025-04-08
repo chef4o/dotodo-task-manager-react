@@ -42,7 +42,8 @@ export default function ArticleDetails() {
     setArticle(updatedArticle);
 
     sessionStorage.removeItem("news");
-    sessionStorage.setItem("news", () => getAllNews("uploadDate", "desc"));
+    const updatedNews = await getAllNews("uploadDate", "desc");
+    sessionStorage.setItem("news", JSON.stringify(updatedNews));
 
     setFormValues({ text: "" });
     setNewComment(false);
