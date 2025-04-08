@@ -1,5 +1,9 @@
-import { useEffect, useState } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import { useContext } from "react";
+import { Path } from "./assets/paths.js";
+import NavContext, { NavProvider } from "./contexts/navContext.jsx";
+import AuthContext, { AuthProvider } from "./contexts/authContext.jsx";
+import taskTypes from "./assets/taskTypes.js";
 import Home from "./components/home/Home.jsx";
 import AboutUs from "./components/AboutUs.jsx";
 import News from "./components/news/News.jsx";
@@ -17,118 +21,51 @@ import ArticleDetails from "./components/news/ArticleDetails.jsx";
 import Contacts from "./components/Contacts.jsx";
 import Profile from "./components/profile/Profile.jsx";
 import AdminPanel from "./components/admin-panel/AdminPanel.jsx";
-import taskTypes from "./assets/taskTypes.js";
-import { topNav, sideNav, bottomNav, connectNav } from "./assets/navElements.js";
-import { handleLogout } from "./services/authService.js";
-import NavContext from "./contexts/navContext.js";
-import AuthContext from "./contexts/authContext.js";
 import UnderConstruction from "./components/error/UnderConstruction.jsx";
-import { Path } from "./assets/paths.js";
 
-const App = () => {
-  const [selectedPageBg, setSelectedPageBg] = useState("home");
-  const [loading, setLoading] = useState(false);
-  const [showAuthModal, setShowAuthModal] = useState({
-    login: false,
-    register: false,
-  });
-  const [user, setUser] = useState(() => {
-    const savedUser = sessionStorage.getItem("user");
-    return savedUser ? JSON.parse(savedUser) : {};
-  });
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (user && user.email) {
-      sessionStorage.setItem("user", JSON.stringify(user));
-    } else {
-      console.log("User is empty or doesn't have email");
-    }
-  }, [user]);
-
-  const guestAuthNavElements = topNav.filter((item) => item.name == "login" || item.name == "register");
-  const loggedAuthNavElements = topNav.filter(({ name }) => !guestAuthNavElements.some((el) => el.name === name));
-  const [topNavElements, setTopNavElements] = useState(guestAuthNavElements);
-
-  const guestSideNavElements = sideNav.filter((item) => item.name != "profile");
-  const [sideNavElements, setSideNavElements] = useState(guestSideNavElements);
-
-  const handleNavigationClick = (page) => {
-    !topNav.map((item) => item.name).includes(page) && setSelectedPageBg(page);
-
-    if (page === "logout") {
-      setUser({});
-      handleLogout();
-    }
-
-    setShowAuthModal((oldShowAuthModalState) => {
-      return Object.keys(oldShowAuthModalState).reduce((newShowAuthModalState, key) => {
-        newShowAuthModalState[key] = key === page;
-        return newShowAuthModalState;
-      }, {});
-    });
-  };
-
-  const hideAuthModalHandler = () => {
-    setShowAuthModal({
-      login: false,
-      register: false,
-    });
-  };
-
-  useEffect(() => {
-    if (user.email) {
-      setTopNavElements(loggedAuthNavElements);
-      setSideNavElements(sideNav);
-    } else {
-      setTopNavElements(guestAuthNavElements);
-      setSideNavElements(guestSideNavElements);
-    }
-  }, [user]);
+const AppContent = () => {
+  const { loading } = useContext(NavContext);
+  const { showAuthModal, hideAuthModal } = useContext(AuthContext);
 
   return (
-    <NavContext.Provider value={{ handleNavigationClick, selectedPageBg, setLoading, navigate }}>
-      <AuthContext.Provider value={{ user, setUser, hideAuthModal: hideAuthModalHandler }}>
-        <main className={selectedPageBg}>
-          <Nav
-            topNav={topNavElements}
-            sideNavElements={sideNavElements}
-            connectNav={connectNav}
-            bottomNav={bottomNav}
-          />
+    <main>
+      <Nav />
+      {loading && <Spinner />}
+      {(showAuthModal.login || showAuthModal.register) && <div className="backdrop" onClick={hideAuthModal} />}
+      {showAuthModal.login && <LoginModal />}
+      {showAuthModal.register && <RegisterModal />}
 
-          {loading && <Spinner />}
+      <Routes>
+        <Route path={Path.HOME} element={<Home taskTypes={taskTypes} />} />
+        <Route path={Path.NOTES} element={<Notes />} />
+        <Route path={Path.NOTE} element={<Notes />} />
+        <Route path={Path.CHECKLISTS} element={<Checklists />} />
+        <Route path={Path.CHECKLIST} element={<Checklists />} />
+        <Route path={Path.EVENTS} element={<Events />} />
+        <Route path={Path.PROFILE} element={<Profile />} />
+        <Route path={Path.PROFILE_EDIT} element={<Profile />} />
+        <Route path={Path.ABOUT} element={<AboutUs />} />
+        <Route path={Path.CONTACTS} element={<Contacts />} />
+        <Route path={Path.NEWS} element={<News />} />
+        <Route path={Path.NEW_ARTICLE} element={<NewArticleItem />} />
+        <Route path={Path.ARTICLE} element={<ArticleDetails />} />
+        <Route path={Path.ADMIN_PANEL} element={<AdminPanel />} />
+        <Route path={Path.UNDER_CONSTRUCTION} element={<UnderConstruction />} />
+        <Route path={Path.ANY} element={<NotFound />} />
+      </Routes>
 
-          {(showAuthModal.login || showAuthModal.register) && (
-            <div className="backdrop" onClick={hideAuthModalHandler} />
-          )}
-          {showAuthModal.login && <LoginModal />}
-          {showAuthModal.register && <RegisterModal />}
+      <Footer />
+    </main>
+  );
+};
 
-          <Routes>
-            <Route path={Path.HOME} element={<Home taskTypes={taskTypes} />} />
-            <Route path={Path.NOTES} element={<Notes />} />
-            <Route path={Path.NOTE} element={<Notes />} />
-            <Route path={Path.CHECKLISTS} element={<Checklists />} />
-            <Route path={Path.CHECKLIST} element={<Checklists />} />
-            <Route path={Path.EVENTS} element={<Events />} />
-            <Route path={Path.PROFILE} element={<Profile />} />
-            <Route path={Path.PROFILE_EDIT} element={<Profile />} />
-            <Route path={Path.ABOUT} element={<AboutUs />} />
-            <Route path={Path.CONTACTS} element={<Contacts />} />
-            <Route path={Path.NEWS} element={<News />} />
-            <Route path={Path.NEW_ARTICLE} element={<NewArticleItem />} />
-            <Route path={Path.ARTICLE} element={<ArticleDetails />} />
-            <Route path={Path.ADMIN_PANEL} element={<AdminPanel />} />
-            <Route path={Path.UNDER_CONSTRUCTION} element={<UnderConstruction />} />
-            <Route path={Path.ANY} element={<NotFound />} />
-          </Routes>
-
-          <Footer />
-        </main>
-      </AuthContext.Provider>
-    </NavContext.Provider>
+const App = () => {
+  return (
+    <NavProvider>
+      <AuthProvider>
+        <AppContent />
+      </AuthProvider>
+    </NavProvider>
   );
 };
 

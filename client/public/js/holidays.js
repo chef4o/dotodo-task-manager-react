@@ -1,8 +1,8 @@
 const thisMonthInfo = document.getElementById("this-month-holidays");
 const nextMonthInfo = document.getElementById("next-month-holidays");
-const country_code = "BG";
 const currentMonth = new Date().getMonth() + 1;
 const currentYear = new Date().getFullYear();
+const country_code = "BG";
 
 export function loadHolidays() {
   fetch(`https://date.nager.at/api/v3/PublicHolidays/${currentYear}/${country_code}`)

@@ -1,11 +1,11 @@
 import { useContext, useState } from "react";
 import { checklistValidation } from "../../util/validation/checklistValidation";
-import ChecklistDetailsItem from "./ChecklistDetailsItem";
 import { initialState, validationIsEmpty } from "../../util/validation/commonValidation";
 import { editChecklist, getAllChecklistsSorted } from "../../services/checklistService";
-import NavContext from "../../contexts/navContext";
-import AuthContext from "../../contexts/authContext";
 import { formUtils } from "../../util/formUtils";
+import ChecklistDetailsItem from "./ChecklistDetailsItem";
+import NavContext from "../../contexts/navContext.jsx";
+import AuthContext from "../../contexts/authContext.jsx";
 
 export default function ChecklistDetails({
   checklist,
@@ -13,8 +13,10 @@ export default function ChecklistDetails({
   setActiveChecklistId,
   deleteChecklist,
   setChecklists,
-  navigate,
 }) {
+  const { setLoading, navigate } = useContext(NavContext);
+  const { user } = useContext(AuthContext);
+
   const [formValues, setFormValues] = useState({
     title: checklist.title,
     elements: checklist.elements,
@@ -23,9 +25,6 @@ export default function ChecklistDetails({
   });
 
   const [validationErrors, setValidationErrors] = useState(() => initialState(checklistValidation.FORM_ERROR_FIELDS));
-  const { user } = useContext(AuthContext);
-  const { setLoading } = useContext(NavContext);
-
   const { inputRef, spanRef } = formUtils.useAutoResizeInput(formValues.element);
 
   const changeHandler = (event) => {

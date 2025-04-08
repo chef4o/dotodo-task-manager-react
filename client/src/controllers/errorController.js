@@ -1,4 +1,4 @@
-import capitalize from "../util/capitalize";
+import { formUtils } from "../util/formUtils";
 
 export const formEmptyFieldsHandler = (formInitialState, formValues, addintionalFields, setValidationErrors) => {
   if (emptyField(formValues)) {
@@ -20,7 +20,7 @@ const emptyFieldsErrorHandler = (formValues, setValidationErrors) => {
     formValues[key].trim() == ""
       ? setValidationErrors((state) => ({
           ...state,
-          [key]: `${capitalize(key)} is required`,
+          [key]: `${formUtils.capitalize(key)} is required`,
         }))
       : setValidationErrors((state) => ({ ...state, [key]: "" }));
   });

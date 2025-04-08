@@ -315,3 +315,7 @@
     background: none;
     border: none;
 }
+
+.content.checklists .checklists-list.empty {
+    justify-content: center;
+}

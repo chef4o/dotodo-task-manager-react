@@ -1,19 +1,19 @@
 import { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { findUserById } from "../../services/userService";
 import { getSomeNotesByDueDateDesc } from "../../services/noteService";
 import ProfileDetails from "./ProfileDetails";
 import ProfileNoteDetails from "./ProfileNoteDetails";
 import ProfileNotes from "./ProfileNotes";
-import AuthContext from "../../contexts/authContext";
-import NavContext from "../../contexts/navContext";
 import NoAccess from "../error/NoAccess";
-import { useParams } from "react-router-dom";
 import ProfileEditDetails from "./ProfileEditDetails";
+import AuthContext from "../../contexts/authContext.jsx";
+import NavContext from "../../contexts/navContext.jsx";
 
 export default function Profile() {
+  const { setLoading } = useContext(NavContext);
   const { user } = useContext(AuthContext);
   const { id } = useParams();
-  const { handleNavigationClick, setLoading } = useContext(NavContext);
 
   const initialData = sessionStorage.getItem("profile") ? JSON.parse(sessionStorage.getItem("profile")) : [];
   const [profileDetails, setProfileDetails] = useState(initialData);
@@ -60,7 +60,7 @@ export default function Profile() {
   return (
     <div className="content profile">
       {!user?.id ? (
-        <NoAccess onItemClick={handleNavigationClick} />
+        <NoAccess />
       ) : (
         <>
           {activeNoteId ? (

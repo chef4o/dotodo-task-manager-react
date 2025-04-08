@@ -1,16 +1,17 @@
 import { useContext, useState } from "react";
-import AuthContext from "../../contexts/authContext";
 import { addArticle, getAllArticlesSorted } from "../../services/newsService";
 import { initialState, validationIsEmpty } from "../../util/validation/commonValidation";
 import { newsValidation } from "../../util/validation/newsValidation.js";
-import NavContext from "../../contexts/navContext";
+import AuthContext from "../../contexts/authContext.jsx";
+import NavContext from "../../contexts/navContext.jsx";
 import NoAccess from "../error/NoAccess.jsx";
 
 export default function NewArticleItem() {
+  const { setLoading, navigate } = useContext(NavContext);
+  const { user } = useContext(AuthContext);
+
   const [formValues, setFormValues] = useState(() => initialState(newsValidation.FORM_REQUIRED_FIELDS));
   const [validationErrors, setValidationErrors] = useState(() => initialState(newsValidation.FORM_REQUIRED_FIELDS));
-  const { user } = useContext(AuthContext);
-  const { handleNavigationClick, setLoading, navigate } = useContext(NavContext);
 
   const changeHandler = (event) => {
     const { name, value } = event.target;
@@ -36,13 +37,13 @@ export default function NewArticleItem() {
     const news = await getAllArticlesSorted("uploadDate", "desc");
     sessionStorage.setItem("news", JSON.stringify(news));
     setLoading(false);
-    navigate("/news")
+    navigate("/news");
   }
 
   return (
     <div className="content news">
       {!user?.id ? (
-        <NoAccess onItemClick={handleNavigationClick} />
+        <NoAccess />
       ) : (
         <form className="news new">
           <h3>New article</h3>

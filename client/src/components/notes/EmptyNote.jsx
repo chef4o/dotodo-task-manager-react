@@ -1,15 +1,16 @@
 import { useContext, useState } from "react";
-import AuthContext from "../../contexts/authContext";
 import { addNote, getAllNotesSorted } from "../../services/noteService";
 import { initialState, validationIsEmpty } from "../../util/validation/commonValidation";
 import { noteValidation } from "../../util/validation/noteValidation";
-import NavContext from "../../contexts/navContext";
+import AuthContext from "../../contexts/authContext.jsx";
+import NavContext from "../../contexts/navContext.jsx";
 
 export default function EmptyNote({ setNotes, setMakeNew }) {
+  const { setLoading } = useContext(NavContext);
+  const { user } = useContext(AuthContext);
+
   const [formValues, setFormValues] = useState(() => initialState(noteValidation.FORM_REQUIRED_FIELDS));
   const [validationErrors, setValidationErrors] = useState(() => initialState(noteValidation.FORM_ERROR_FIELDS));
-  const { user } = useContext(AuthContext);
-  const { setLoading } = useContext(NavContext);
 
   const changeHandler = (event) => {
     const { name, value } = event.target;

@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react";
-import AuthContext from "../contexts/authContext";
 import { contactForm } from "../services/contactService";
-import NavContext from "../contexts/navContext";
+import NavContext from "../contexts/navContext.jsx";
+import AuthContext from "../contexts/authContext.jsx";
 
 export default function Contacts() {
-  const { user } = useContext(AuthContext);
   const { setLoading } = useContext(NavContext);
+  const { user } = useContext(AuthContext);
 
   const [error, setError] = useState("");
   const [messageSent, setMessageSent] = useState(false);

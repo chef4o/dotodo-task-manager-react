@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import Calendar from "./Calendar";
 import NoAccess from "../error/NoAccess";
-import NavContext from "../../contexts/navContext";
-import AuthContext from "../../contexts/authContext";
 import HolidaysInfo from "./HolidayInfo";
+import NavContext from "../../contexts/navContext.jsx";
+import AuthContext from "../../contexts/authContext.jsx";
 
 export default function Events() {
-  const { handleNavigationClick, setLoading, navigate } = useContext(NavContext);
+  const { handleNavigationClick, navigate } = useContext(NavContext);
   const { user } = useContext(AuthContext);
 
   return (

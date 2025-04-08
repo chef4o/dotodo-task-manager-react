@@ -3,14 +3,13 @@ import { registerAuthUser, validateNewUser } from "../../services/userService";
 import { validationIsEmpty, initialState } from "../../util/validation/commonValidation";
 import { registerValidation } from "../../util/validation/registerModalValidation";
 import { formUtils } from "../../util/formUtils";
-import AuthContext from "../../contexts/authContext";
+import AuthContext from "../../contexts/authContext.jsx";
 
 export default function RegisterModal() {
   const { setUser, hideAuthModal } = useContext(AuthContext);
+
   const [formValues, setFormValues] = useState(() => initialState(registerValidation.FORM_FIELDS));
-  const [validationErrors, setValidationErrors] = useState(() =>
-    initialState(registerValidation.FORM_FIELDS)
-  );
+  const [validationErrors, setValidationErrors] = useState(() => initialState(registerValidation.FORM_FIELDS));
   const [formReadyForSubmit, isFormReadyForSubmit] = useState(false);
 
   const changeHandler = formUtils.handleInputChange(setFormValues, setValidationErrors);

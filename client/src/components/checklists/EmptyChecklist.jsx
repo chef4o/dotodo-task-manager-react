@@ -1,19 +1,20 @@
 import { useContext, useState } from "react";
 import { addChecklist, getAllChecklistsSorted } from "../../services/checklistService";
-import AuthContext from "../../contexts/authContext";
 import { checklistValidation } from "../../util/validation/checklistValidation";
-import NavContext from "../../contexts/navContext";
 import { initialState, validationIsEmpty } from "../../util/validation/commonValidation";
 import { formUtils } from "../../util/formUtils";
+import AuthContext from "../../contexts/authContext.jsx";
+import NavContext from "../../contexts/navContext.jsx";
 
 export default function EmptyChecklist({ setChecklists, setMakeNew }) {
+  const { setLoading } = useContext(NavContext);
+  const { user } = useContext(AuthContext);
+
   const [formValues, setFormValues] = useState(() => {
     const initial = initialState(checklistValidation.FORM_REQUIRED_FIELDS);
     return { ...initial, elements: [] };
   });
   const [validationErrors, setValidationErrors] = useState(() => initialState(checklistValidation.FORM_ERROR_FIELDS));
-  const { setLoading } = useContext(NavContext);
-  const { user } = useContext(AuthContext);
 
   const containerRef = formUtils.useAutoScroll(formValues.elements);
   const { inputRef, spanRef } = formUtils.useAutoResizeInput(formValues.element);

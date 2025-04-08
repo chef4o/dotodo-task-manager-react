@@ -1,16 +1,16 @@
 import { deleteChecklist, getAllChecklistsSorted } from "../../services/checklistService";
-import Checklist from "./Checklist";
 import { useContext, useEffect, useState } from "react";
+import { getDataFromStorageOrServer } from "../../services/cacheService";
 import NoAccess from "../error/NoAccess";
 import NoContent from "../error/NoContent";
+import Checklist from "./Checklist";
 import EmptyChecklist from "./EmptyChecklist";
 import ChecklistDetails from "./ChecklistDetails";
-import NavContext from "../../contexts/navContext";
-import AuthContext from "../../contexts/authContext";
-import { getDataFromStorageOrServer } from "../../services/cacheService";
+import NavContext from "../../contexts/navContext.jsx";
+import AuthContext from "../../contexts/authContext.jsx";
 
 export default function Checklists() {
-  const { handleNavigationClick, setLoading, navigate } = useContext(NavContext);
+  const { setLoading, navigate } = useContext(NavContext);
   const { user } = useContext(AuthContext);
 
   const initialChecklists = JSON.parse(sessionStorage.getItem("checklists")) || [];
@@ -34,14 +34,16 @@ export default function Checklists() {
 
   useEffect(() => {
     setLoading(true);
-    if (user?.id) {
-      getDataFromStorageOrServer(
-        "checklists",
-        () => getAllChecklistsSorted(user.id, "startDate", "desc"),
-        setChecklists
-      );
-    }
-    navigate("/checklists");
+    const fetchChecklists = async () => {
+      if (user?.id) {
+        await getDataFromStorageOrServer(
+          "checklists",
+          () => getAllChecklistsSorted(user.id, "startDate", "desc"),
+          setChecklists
+        );
+      }
+    };
+    fetchChecklists();
     setLoading(false);
   }, [user]);
 
@@ -57,7 +59,7 @@ export default function Checklists() {
   return (
     <div className="content checklists">
       {!user.id ? (
-        <NoAccess onItemClick={handleNavigationClick} />
+        <NoAccess />
       ) : (
         <>
           <div className="header-menu">

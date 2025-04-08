@@ -2,12 +2,13 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { initialState } from "../../util/validation/commonValidation";
 import { loginValidation } from "../../util/validation/loginModalValidation";
 import { formUtils } from "../../util/formUtils";
-import AuthContext from "../../contexts/authContext";
-import NavContext from "../../contexts/navContext";
+import AuthContext from "../../contexts/authContext.jsx";
+import NavContext from "../../contexts/navContext.jsx";
 
 export default function LoginModal() {
-  const { setUser, hideAuthModal } = useContext(AuthContext);
   const { setLoading } = useContext(NavContext);
+  const { setUser, hideAuthModal } = useContext(AuthContext);
+
   const [formValues, setFormValues] = useState(initialState(loginValidation.FORM_FIELDS));
   const [validationErrors, setValidationErrors] = useState(initialState(loginValidation.ERROR_FIELDS));
   const changeHandler = formUtils.handleInputChange(setFormValues, setValidationErrors);

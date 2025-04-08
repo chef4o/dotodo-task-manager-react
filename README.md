@@ -11,6 +11,7 @@ Available online at https://dotodo.dev-apps.eu/
 - [Cloudinary](https://cloudinary.com/) (file upload cloud service)
 - [Mailtrap](https://mailtrap.io/home) (email delivery service)
 - [BingMaps](https://www.bingmapsportal.com/) (contact location service)
+- [Nager.Date](https://date.nager.at/) (public holidays service)
 
 ## Local Installation
 To install the app, clone the repository and run npm install to load the necessary dependencies.

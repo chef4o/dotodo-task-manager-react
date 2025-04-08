@@ -1,14 +1,9 @@
+import { useContext } from "react";
 import { useParams } from "react-router-dom";
+import NavContext from "../../contexts/navContext";
 
-export default function NoteItem({
-  note,
-  setEditNoteId,
-  activeNoteId,
-  setActiveNoteId,
-  deleteNote,
-  setMakeNew,
-  navigate,
-}) {
+export default function NoteItem({ note, setEditNoteId, activeNoteId, setActiveNoteId, deleteNote, setMakeNew }) {
+  const { navigate } = useContext(NavContext);
   const { id } = useParams();
 
   const handleXmarkClick = (event) => {

@@ -1,6 +1,10 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import NavContext from "../../contexts/navContext";
 
-export default function NoteItem({ note, setActiveNoteId, setEditNoteId, deleteNote, setMakeNew, navigate }) {
+export default function NoteItem({ note, setActiveNoteId, setEditNoteId, deleteNote, setMakeNew }) {
+  const { navigate } = useContext(NavContext);
+
   return (
     <div className="note inactive">
       <Link

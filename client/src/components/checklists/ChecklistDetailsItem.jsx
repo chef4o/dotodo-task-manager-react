@@ -1,6 +1,5 @@
 import { formUtils } from "../../util/formUtils";
 
-
 export default function ChecklistDetailsItem({ task, index, setFormValues }) {
   const { inputRef, spanRef } = formUtils.useAutoResizeInput(task.content, 10, 40);
 

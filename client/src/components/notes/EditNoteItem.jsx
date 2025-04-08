@@ -2,22 +2,23 @@ import { Link, useParams } from "react-router-dom";
 import { noteValidation } from "../../util/validation/noteValidation";
 import { initialState, validationIsEmpty } from "../../util/validation/commonValidation";
 import { useContext, useState } from "react";
-import AuthContext from "../../contexts/authContext";
-import NavContext from "../../contexts/navContext";
 import { editNote, getAllNotesSorted } from "../../services/noteService";
+import AuthContext from "../../contexts/authContext.jsx";
+import NavContext from "../../contexts/navContext.jsx";
 
-export default function EditNoteItem({ note, editNoteId, setEditNoteId, setNotes, setActiveNoteId, deleteNote, navigate }) {
+export default function EditNoteItem({ note, editNoteId, setEditNoteId, setNotes, setActiveNoteId, deleteNote }) {
+  const { setLoading, navigate } = useContext(NavContext);
+  const { user } = useContext(AuthContext);
+  const { id } = useParams();
+
   const [formValues, setFormValues] = useState({
     title: note.title,
     content: note.content,
     dueDate: note.dueDate || "",
     dueTime: note.dueTime || "",
   });
-  const { id } = useParams();
 
   const [validationErrors, setValidationErrors] = useState(() => initialState(noteValidation.FORM_ERROR_FIELDS));
-  const { user } = useContext(AuthContext);
-  const { setLoading } = useContext(NavContext);
 
   const changeHandler = (event) => {
     const { name, value } = event.target;
@@ -88,7 +89,6 @@ export default function EditNoteItem({ note, editNoteId, setEditNoteId, setNotes
 
         <label className="due-time" htmlFor="dueTime">
           <input id="dueTime" type="time" name="dueTime" value={formValues.dueTime} onChange={changeHandler} />
-          {/* <i className="fa-regular fa-clock"></i> */}
         </label>
 
         {!validationIsEmpty(validationErrors) && (

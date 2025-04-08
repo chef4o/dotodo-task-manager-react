@@ -1,14 +1,14 @@
 import { useContext, useState } from "react";
 import { profileValidation } from "../../util/validation/profileValidation";
 import { initialState, validationIsEmpty } from "../../util/validation/commonValidation";
-import AuthContext from "../../contexts/authContext";
-import NavContext from "../../contexts/navContext";
-import { editUser, getUsersWithLowerRole } from "../../services/userService";
+import { editUser } from "../../services/userService";
 import { UserRoles, getPossibleRoles } from "../../assets/userRoles";
+import AuthContext from "../../contexts/authContext.jsx";
+import NavContext from "../../contexts/navContext.jsx";
 
 export default function AdminEditUserForm({ setUsers, currentUser, setUserToEditId }) {
-  const { user } = useContext(AuthContext);
   const { setLoading } = useContext(NavContext);
+  const { user } = useContext(AuthContext);
 
   const [formValues, setFormValues] = useState({
     email: currentUser.email,

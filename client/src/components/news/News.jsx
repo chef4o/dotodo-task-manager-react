@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import ArticleItem from "./ArticleItem";
-import NavContext from "../../contexts/navContext";
 import { getDataFromStorageOrServer } from "../../services/cacheService";
 import { getAllNews } from "../../services/newsService";
-import AuthContext from "../../contexts/authContext";
+import ArticleItem from "./ArticleItem";
+import NavContext from "../../contexts/navContext.jsx";
+import AuthContext from "../../contexts/authContext.jsx";
 
 export default function News() {
   const { setLoading, navigate } = useContext(NavContext);

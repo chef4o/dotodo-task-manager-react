@@ -1,18 +1,17 @@
 import { useContext, useEffect, useState } from "react";
 import { deleteNote, getAllNotesSorted } from "../../services/noteService";
 import { getDataFromStorageOrServer } from "../../services/cacheService";
-
 import NoteItem from "./NoteItem";
 import EditNoteItem from "./EditNoteItem";
 import NoteItemDetails from "./NoteItemDetails";
 import NoAccess from "../error/NoAccess";
-import NavContext from "../../contexts/navContext";
-import AuthContext from "../../contexts/authContext";
 import NoContent from "../error/NoContent";
 import EmptyNote from "./EmptyNote";
+import NavContext from "../../contexts/navContext.jsx";
+import AuthContext from "../../contexts/authContext.jsx";
 
 export default function Notes() {
-  const { handleNavigationClick, setLoading, navigate } = useContext(NavContext);
+  const { setLoading, navigate } = useContext(NavContext);
   const { user } = useContext(AuthContext);
 
   const initialNotes = JSON.parse(sessionStorage.getItem("notes")) || [];
@@ -36,17 +35,20 @@ export default function Notes() {
   };
 
   useEffect(() => {
-    setLoading(true);
-    if (user?.id) {
-      getDataFromStorageOrServer("notes", () => getAllNotesSorted(user.id, "startDate", "desc"), setNotes);
-    }
-    setLoading(false);
+    const fetchNotes = async () => {
+      setLoading(true);
+      if (user?.id) {
+        await getDataFromStorageOrServer("notes", () => getAllNotesSorted(user.id, "startDate", "desc"), setNotes);
+      }
+      setLoading(false);
+    };
+    fetchNotes();
   }, [user]);
 
   return (
     <div className="content notes">
       {!user?.id ? (
-        <NoAccess onItemClick={handleNavigationClick} />
+        <NoAccess />
       ) : (
         <>
           <div className="header-menu">
@@ -91,7 +93,6 @@ export default function Notes() {
                     setActiveNoteId={setActiveNoteId}
                     deleteNote={deleteNoteHandler}
                     setMakeNew={setMakeNew}
-                    navigate={navigate}
                   />
                 ) : null
               )}
@@ -106,7 +107,6 @@ export default function Notes() {
                     setActiveNoteId={setActiveNoteId}
                     deleteNote={deleteNoteHandler}
                     setMakeNew={setMakeNew}
-                    navigate={navigate}
                   />
                 ) : null
               )}
@@ -121,7 +121,6 @@ export default function Notes() {
                     setEditNoteId={setEditNoteId}
                     deleteNote={deleteNoteHandler}
                     setMakeNew={setMakeNew}
-                    navigate={navigate}
                   />
                 ))}
             </ul>

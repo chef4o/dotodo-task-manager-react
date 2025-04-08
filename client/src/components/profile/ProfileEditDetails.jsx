@@ -1,13 +1,16 @@
 import { useContext, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { initialState, validationIsEmpty } from "../../util/validation/commonValidation";
-import NavContext from "../../contexts/navContext";
-import AuthContext from "../../contexts/authContext";
 import { editUser } from "../../services/userService";
 import { profileValidation } from "../../util/validation/profileValidation";
 import { uploadImage } from "../../services/cloudService";
+import NavContext from "../../contexts/navContext.jsx";
+import AuthContext from "../../contexts/authContext.jsx";
 
 export default function ProfileEditDetails({ setEditProfile, profileDetails, setProfileDetails }) {
+  const { setLoading } = useContext(NavContext);
+  const { user } = useContext(AuthContext);
+
   const [formValues, setFormValues] = useState({
     username: profileDetails.username,
     email: profileDetails.email,
@@ -24,8 +27,6 @@ export default function ProfileEditDetails({ setEditProfile, profileDetails, set
   const navigate = useNavigate();
 
   const [validationErrors, setValidationErrors] = useState(() => initialState(profileValidation.FORM_ERROR_FIELDS));
-  const { user } = useContext(AuthContext);
-  const { setLoading } = useContext(NavContext);
 
   const changeHandler = (event) => {
     const { name, value } = event.target;

@@ -1,14 +1,11 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import ChecklistItem from "./ChecklistItem";
+import NavContext from "../../contexts/navContext";
 
-export default function Checklist({
-  checklist,
-  activeChecklistId,
-  setActiveChecklistId,
-  deleteChecklist,
-  setMakeNew,
-  navigate,
-}) {
+export default function Checklist({ checklist, activeChecklistId, setActiveChecklistId, deleteChecklist, setMakeNew }) {
+  const { navigate } = useContext(NavContext);
+
   const handleXmarkClick = (event) => {
     event.stopPropagation();
     setActiveChecklistId("");
@@ -16,7 +13,7 @@ export default function Checklist({
   };
 
   return (
-    <div className={activeChecklistId === checklist.id ? "checklist active" : "checklist"}>
+    <li className={activeChecklistId === checklist.id ? "checklist active" : "checklist"}>
       <Link
         to={`/checklists/${checklist.id}`}
         onClick={() => {
@@ -50,6 +47,6 @@ export default function Checklist({
       <button className="delete-btn" onClick={() => deleteChecklist(checklist.id)}>
         Delete
       </button>
-    </div>
+    </li>
   );
 }

@@ -1,14 +1,15 @@
 import { useContext, useEffect, useState } from "react";
-import AuthContext from "../../contexts/authContext";
-import NavContext from "../../contexts/navContext";
+import { getUsersWithLowerRole } from "../../services/userService";
 import NoAccess from "../error/NoAccess";
+import LimitedAccess from "../error/LimitedAccess";
 import AdminUserForm from "../admin-panel/AdminUserForm";
 import AdminEditUserForm from "../admin-panel/AdminEditUserForm";
-import { getUsersWithLowerRole } from "../../services/userService";
+import AuthContext from "../../contexts/authContext.jsx";
+import NavContext from "../../contexts/navContext.jsx";
 
 export default function Profile() {
+  const { setLoading } = useContext(NavContext);
   const { user } = useContext(AuthContext);
-  const { handleNavigationClick, setLoading } = useContext(NavContext);
 
   const [users, setUsers] = useState([]);
   const [userToEditId, setUserToEditId] = useState("");
@@ -27,8 +28,10 @@ export default function Profile() {
 
   return (
     <div className="content admin-panel">
-      {!user?.role >= 4 ? (
-        <NoAccess onItemClick={handleNavigationClick} />
+      {!user.id ? (
+        <NoAccess />
+      ) : user.role < 4 ? (
+        <LimitedAccess />
       ) : (
         <>
           <div className="header-menu">
@@ -51,7 +54,12 @@ export default function Profile() {
 
               {users.map((item) =>
                 userToEditId === item.id ? (
-                  <AdminEditUserForm key={item.id} setUsers={setUsers} currentUser={item} setUserToEditId={setUserToEditId} />
+                  <AdminEditUserForm
+                    key={item.id}
+                    setUsers={setUsers}
+                    currentUser={item}
+                    setUserToEditId={setUserToEditId}
+                  />
                 ) : (
                   <AdminUserForm key={item.id} currentUser={item} setUserToEditId={setUserToEditId} />
                 )

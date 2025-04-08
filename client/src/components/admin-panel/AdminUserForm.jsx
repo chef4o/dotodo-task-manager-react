@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { deleteUser } from "../../services/userService";
-import NavContext from "../../contexts/navContext";
 import { getRoleName } from "../../assets/userRoles";
+import NavContext from "../../contexts/navContext.jsx";
 
 export default function AdminUserForm({ currentUser, setUserToEditId }) {
   const { setLoading } = useContext(NavContext);

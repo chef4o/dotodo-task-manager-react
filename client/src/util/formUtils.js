@@ -43,9 +43,14 @@ function useAutoScroll(dependency) {
   return containerRef;
 }
 
+function capitalize(word) {
+  return word[0].toUpperCase() + word.substring(1);
+}
+
 export const formUtils = {
   handleInputChange,
   focusHandler,
   useAutoScroll,
   useAutoResizeInput,
+  capitalize,
 };

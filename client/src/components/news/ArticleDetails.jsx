@@ -1,17 +1,17 @@
 import { useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import AuthContext from "../../contexts/authContext";
-import NavContext from "../../contexts/navContext";
-import { editArticle, getAllNews, getArticleById } from "../../services/newsService";
-import { formatToDateTime, processData } from "../../util/dataUtils";
-import ArticleComment from "./ArticleComment";
 import { initialState } from "../../util/validation/commonValidation";
+import { editArticle, getAllNews, getArticleById } from "../../services/newsService";
+import { formatToDateTime } from "../../util/dataUtils";
+import ArticleComment from "./ArticleComment";
+import AuthContext from "../../contexts/authContext.jsx";
+import NavContext from "../../contexts/navContext.jsx";
 
 export default function ArticleDetails() {
   const { setLoading, navigate } = useContext(NavContext);
-
   const { user } = useContext(AuthContext);
   const { id } = useParams();
+
   const [article, setArticle] = useState(null);
   const [showComments, setShowComments] = useState(false);
   const [newComment, setNewComment] = useState(false);

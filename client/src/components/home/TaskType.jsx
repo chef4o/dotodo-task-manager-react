@@ -1,7 +1,7 @@
-import PropTypes from "prop-types";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import NavContext from "../../contexts/navContext";
+import PropTypes from "prop-types";
+import NavContext from "../../contexts/navContext.jsx";
 
 export default function TaskType({ name, headerText }) {
 
