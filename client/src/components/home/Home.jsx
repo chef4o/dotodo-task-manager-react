@@ -20,11 +20,11 @@ export default function Home({ taskTypes }) {
           ensuring you never forget a thing or miss a deadline again. To unlock the full potential of our platform and
           enjoy personalized features, we invite you to
           <Link className="register" onClick={() => setShowAuthModal({ login: false, register: true })}>
-            create an account
+            {` create an account `}
           </Link>
           or simply
           <Link className="login" onClick={() => setShowAuthModal({ login: true, register: false })}>
-            log in
+            {` log in `}
           </Link>
           if you&apos;re already a registered member.
         </p>
