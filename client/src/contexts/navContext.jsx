@@ -20,6 +20,7 @@ export const NavProvider = ({ children }) => {
       value={{
         handleNavigationClick,
         selectedPageBg,
+        loading,
         setLoading,
         navigate,
         topNav,
