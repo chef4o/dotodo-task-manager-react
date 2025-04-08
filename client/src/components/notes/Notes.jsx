@@ -11,7 +11,7 @@ import NavContext from "../../contexts/navContext.jsx";
 import AuthContext from "../../contexts/authContext.jsx";
 
 export default function Notes() {
-  const { setLoading, navigate } = useContext(NavContext);
+  const { loading, setLoading, navigate } = useContext(NavContext);
   const { user } = useContext(AuthContext);
 
   const initialNotes = JSON.parse(sessionStorage.getItem("notes")) || [];
@@ -30,7 +30,11 @@ export default function Notes() {
     await deleteNote(id);
     sessionStorage.removeItem("notes");
     navigate(`/notes`);
-    getDataFromStorageOrServer("notes", () => getAllNotesSorted(user.id, "startDate", "desc"), setNotes);
+    getDataFromStorageOrServer(
+      "notes",
+      () => getAllNotesSorted(user.id, "startDate", "desc"),
+      setNotes
+    );
     setLoading(false);
   };
 
@@ -38,12 +42,16 @@ export default function Notes() {
     const fetchNotes = async () => {
       setLoading(true);
       if (user?.id) {
-        await getDataFromStorageOrServer("notes", () => getAllNotesSorted(user.id, "startDate", "desc"), setNotes);
+        await getDataFromStorageOrServer(
+          "notes",
+          () => getAllNotesSorted(user.id, "startDate", "desc"),
+          setNotes
+        );
       }
       setLoading(false);
     };
     fetchNotes();
-  }, [user]);
+  }, [user, setLoading]);
 
   return (
     <div className="content notes">
@@ -64,77 +72,78 @@ export default function Notes() {
                     setActiveNoteId("");
                     setEditNoteId("");
                     setMakeNew(true);
-                  }}>
+                  }}
+                >
                   Create new note
                 </button>
               </form>
             )}
           </div>
 
-          {notes.length > 0 || makeNew ? (
-            <ul className="notes-list">
-              {makeNew && (
-                <EmptyNote
-                  setMakeNew={setMakeNew}
-                  setEditNoteId={setEditNoteId}
-                  setActiveNoteId={setActiveNoteId}
-                  setNotes={setNotes}
-                />
-              )}
-
-              {notes.map((item) =>
-                editNoteId && editNoteId === item.id ? (
-                  <EditNoteItem
-                    key={item.id}
-                    note={item}
-                    editNoteId={editNoteId}
+          {/* Render notes list only when not loading */}
+          {!loading &&
+            (notes.length > 0 || makeNew ? (
+              <ul className="notes-list">
+                {makeNew && (
+                  <EmptyNote
+                    setMakeNew={setMakeNew}
+                    setEditNoteId={setEditNoteId}
+                    setActiveNoteId={setActiveNoteId}
                     setNotes={setNotes}
-                    setEditNoteId={setEditNoteId}
-                    setActiveNoteId={setActiveNoteId}
-                    deleteNote={deleteNoteHandler}
-                    setMakeNew={setMakeNew}
                   />
-                ) : null
-              )}
+                )}
 
-              {notes.map((item) =>
-                activeNoteId && activeNoteId === item.id ? (
-                  <NoteItemDetails
-                    key={item.id}
-                    note={item}
-                    setEditNoteId={setEditNoteId}
-                    activeNoteId={activeNoteId}
-                    setActiveNoteId={setActiveNoteId}
-                    deleteNote={deleteNoteHandler}
-                    setMakeNew={setMakeNew}
-                  />
-                ) : null
-              )}
+                {notes.map((item) =>
+                  editNoteId && editNoteId === item.id ? (
+                    <EditNoteItem
+                      key={item.id}
+                      note={item}
+                      editNoteId={editNoteId}
+                      setNotes={setNotes}
+                      setEditNoteId={setEditNoteId}
+                      setActiveNoteId={setActiveNoteId}
+                      deleteNote={deleteNoteHandler}
+                      setMakeNew={setMakeNew}
+                    />
+                  ) : null
+                )}
 
-              {notes
-                .filter((item) => item.id !== activeNoteId && item.id !== editNoteId)
-                .map((item) => (
-                  <NoteItem
-                    key={item.id}
-                    note={item}
-                    setActiveNoteId={setActiveNoteId}
-                    setEditNoteId={setEditNoteId}
-                    deleteNote={deleteNoteHandler}
-                    setMakeNew={setMakeNew}
-                  />
-                ))}
-            </ul>
-          ) : (
-            <>
-              {!makeNew && (
+                {notes.map((item) =>
+                  activeNoteId && activeNoteId === item.id ? (
+                    <NoteItemDetails
+                      key={item.id}
+                      note={item}
+                      setEditNoteId={setEditNoteId}
+                      activeNoteId={activeNoteId}
+                      setActiveNoteId={setActiveNoteId}
+                      deleteNote={deleteNoteHandler}
+                      setMakeNew={setMakeNew}
+                    />
+                  ) : null
+                )}
+
+                {notes
+                  .filter((item) => item.id !== activeNoteId && item.id !== editNoteId)
+                  .map((item) => (
+                    <NoteItem
+                      key={item.id}
+                      note={item}
+                      setActiveNoteId={setActiveNoteId}
+                      setEditNoteId={setEditNoteId}
+                      deleteNote={deleteNoteHandler}
+                      setMakeNew={setMakeNew}
+                    />
+                  ))}
+              </ul>
+            ) : (
+              !makeNew && (
                 <ul className="notes-list empty">
                   <div className="new-note">
                     <NoContent />
                   </div>
                 </ul>
-              )}
-            </>
-          )}
+              )
+            ))}
         </>
       )}
     </div>
