@@ -1,19 +1,20 @@
 import * as request from "../api/request";
 import { url } from "../api/url";
 import { computeDueDaysHours, processData } from "../util/dataUtils";
+import { ServiceError } from "./serviceErrorMessages";
 
 export const getAllNotes = async (userId) => {
   if (!userId) {
-    console.error("User ID is required to fetch notes.");
-    return { error: "User ID is required." };
+    console.error(ServiceError.USER_ID_REQUIRED_TO_GET_NOTES);
+    return { error: ServiceError.USER_ID_REQUIRED };
   }
 
   try {
     const response = await request.get(`${url.notes}/${userId}`);
     return response;
   } catch (error) {
-    console.error("Error fetching notes:", error);
-    return { error: "Failed to fetch notes." };
+    console.error(ServiceError.ERROR_GETTING_ELEMENT, error);
+    return { error: ServiceError.ERROR_GETTING_ELEMENT };
   }
 };
 
@@ -40,61 +41,61 @@ export const getAllNotesSorted = async (userId, sortKey, sortOrder) => {
 
 export const getNoteById = async (noteId) => {
   if (!noteId) {
-    console.error("Note ID is required.");
-    return { error: "Note ID is required." };
+    console.error(ServiceError.ELEMENT_ID_REQUIRED);
+    return { error: ServiceError.ELEMENT_ID_REQUIRED };
   }
 
   try {
     const response = await request.get(`${url.notes}/${noteId}`);
     return response;
   } catch (error) {
-    console.error("Error fetching note:", error);
-    return { error: "Failed to fetch note." };
+    console.error(ServiceError.ERROR_GETTING_ELEMENT, error);
+    return { error: ServiceError.ERROR_GETTING_ELEMENT };
   }
 };
 
 export const addNote = async (noteData) => {
   if (!noteData.ownerId || !noteData.title || !noteData.content) {
-    console.error("User ID, title and content are required.");
-    return { error: "Missing required fields." };
+    console.error(ServiceError.USER_TITLE_CONTENT_REQUIRED);
+    return { error: ServiceError.MISSING_FIELDS };
   }
 
   try {
     const response = await request.post(url.addNote, noteData);
     return response;
   } catch (error) {
-    console.error("Error creating note:", error);
-    return { error: "Failed to create note." };
+    console.error(ServiceError.ERROR_CREATING_ELEMENT, error);
+    return { error: ServiceError.ERROR_CREATING_ELEMENT };
   }
 };
 
 export const editNote = async (noteId, updatedData) => {
   if (!noteId || !updatedData) {
-    console.error("Note ID and update data are required.");
-    return { error: "Missing required fields." };
+    console.error(ServiceError.ELEMENT_UPDATE_DATA_REQUIRED);
+    return { error: ServiceError.MISSING_FIELDS };
   }
 
   try {
     const response = await request.put(`${url.editNote}/${noteId}`, updatedData);
     return response;
   } catch (error) {
-    console.error("Error updating note:", error);
-    return { error: "Failed to update note." };
+    console.error(ServiceError.ERROR_UPDATING_ELEMENT, error);
+    return { error: ServiceError.ERROR_UPDATING_ELEMENT };
   }
 };
 
 export const deleteNote = async (noteId) => {
   try {
     if (!noteId) {
-      console.error("Note ID is required.");
-      return { error: "Note ID is required." };
+      console.error(ServiceError.ELEMENT_ID_REQUIRED);
+      return { error: ServiceError.ELEMENT_ID_REQUIRED };
     }
 
     const response = await request.remove(`${url.deleteNote}/${noteId}`);
     return response;
   } catch (error) {
-    console.error("Error deleting note:", error);
-    return { error: "Failed to delete note." };
+    console.error(ServiceError.ERROR_DELETING_ELEMENT, error);
+    return { error: ServiceError.ERROR_DELETING_ELEMENT };
   }
 };
 

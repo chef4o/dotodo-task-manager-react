@@ -1,14 +1,15 @@
 import * as request from "../api/request";
 import { url } from "../api/url";
 import { processData } from "../util/dataUtils";
+import { ServiceError } from "./serviceErrorMessages";
 
 export const getAllNews = async () => {
   try {
     const response = await request.get(url.news);
     return response;
   } catch (error) {
-    console.error("Error fetching articles:", error);
-    return { error: "Failed to fetch articles." };
+    console.error(ServiceError.ERROR_GETTING_ELEMENT, error);
+    return { error: ServiceError.ERROR_GETTING_ELEMENT };
   }
 };
 
@@ -28,8 +29,8 @@ export const getAllArticlesSorted = async (sortKey, sortOrder) => {
 
 export const getArticleById = async (articleId) => {
   if (!articleId) {
-    console.error("Article ID is required.");
-    return { error: "Article ID is required." };
+    console.error(ServiceError.ELEMENT_ID_REQUIRED);
+    return { error: ServiceError.ELEMENT_ID_REQUIRED };
   }
 
   try {
@@ -43,37 +44,37 @@ export const getArticleById = async (articleId) => {
     response.comments = sortedComments;
     return response;
   } catch (error) {
-    console.error("Error fetching article:", error);
-    return { error: "Failed to fetch article." };
+    console.error(ServiceError.ERROR_GETTING_ELEMENT, error);
+    return { error: ServiceError.ERROR_GETTING_ELEMENT };
   }
 };
 
 export const addArticle = async (articleData) => {
   if (!articleData.ownerId || !articleData.title || !articleData.content) {
-    console.error("User ID, title and content are required.");
-    return { error: "Missing required fields." };
+    console.error(ServiceError.USER_TITLE_CONTENT_REQUIRED);
+    return { error: ServiceError.MISSING_FIELDS };
   }
 
   try {
     const response = await request.post(url.addArticle, articleData);
     return response;
   } catch (error) {
-    console.error("Error creating article:", error);
-    return { error: "Failed to create article." };
+    console.error(ServiceError.ERROR_CREATING_ELEMENT, error);
+    return { error: ServiceError.ERROR_CREATING_ELEMENT };
   }
 };
 
 export const editArticle = async (articleId, updatedData) => {
   if (!articleId || !updatedData) {
-    console.error("Article ID and update data are required.");
-    return { error: "Missing required fields." };
+    console.error(ServiceError.ELEMENT_UPDATE_DATA_REQUIRED);
+    return { error: ServiceError.MISSING_FIELDS };
   }
 
   try {
     const response = await request.put(`${url.editArticle}/${articleId}`, updatedData);
     return response;
   } catch (error) {
-    console.error("Error updating article:", error);
-    return { error: "Failed to update article." };
+    console.error(ServiceError.ERROR_UPDATING_ELEMENT, error);
+    return { error: ServiceError.ERROR_UPDATING_ELEMENT };
   }
 };

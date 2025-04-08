@@ -1,4 +1,5 @@
 import { isEmail, isMobilePhone } from "validator";
+import { ValidationError } from "./validationErrorMessages";
 
 const FORM_REQUIRED_FIELDS = {
   username: "username",
@@ -21,15 +22,15 @@ const getValidationErrors = (formValues) => {
   const errors = {};
 
   if (!formValues.username.trim() || formValues.username.trim().length < 3) {
-    errors.title = "Username must be at least 3 characters long";
+    errors.username = ValidationError.MIN_USERNAME_LENGTH;
   }
 
   if (!formValues.email.trim() || !isEmail(formValues.email)) {
-    errors.content = "Email must be valid";
+    errors.email = ValidationError.INVALID_EMAIL;
   }
 
   if (formValues.phoneNumber && !isMobilePhone(formValues.phoneNumber)) {
-    errors.content = "Phone number must be valid";
+    errors.phoneNumber = ValidationError.INVALID_PHONE_NUM;
   }
 
   return errors;

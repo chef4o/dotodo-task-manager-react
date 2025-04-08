@@ -1,5 +1,6 @@
 import * as request from "../api/request";
 import { url } from "../api/url";
+import { ServiceError } from "./serviceErrorMessages";
 
 export const getAllUsers = async () => {
   const response = await request.get(url.users);
@@ -28,8 +29,8 @@ export const findUserByUsername = async (username) => {
 
 export const deleteUser = async (userId) => {
   if (!userId) {
-    console.error("User ID is required for deleting a user.");
-    return { error: "User ID is required." };
+    console.error(ServiceError.USER_ID_REQUIRED_TO_DELETE);
+    return { error: ServiceError.USER_ID_REQUIRED };
   }
 
   const response = await request.remove(`${url.deleteUser}/${userId}`);
@@ -46,14 +47,14 @@ export const registerAuthUser = async (email, username, password) => {
 
     return response;
   } catch (error) {
-    console.error("Error validating new user:", error);
+    console.error(ServiceError.ERROR_VALIDATIONG_NEW_USER, error);
   }
 };
 
 export const editUser = async (id, body) => {
   if (!id) {
-    console.error("User ID is required for updating a user.");
-    return { error: "User ID is required." };
+    console.error(ServiceError.USER_ID_REQUIRED_TO_UPDATE);
+    return { error: ServiceError.USER_ID_REQUIRED };
   }
 
   const response = await request.put(`${url.editUser}/${id}`, body);
@@ -70,17 +71,17 @@ export const validateNewUser = async (username, email, setValidationErrors) => {
     if (username && currentUserExists.usernameExists) {
       setValidationErrors((state) => ({
         ...state,
-        username: "This username is already registered",
+        username: ServiceError.USERNAME_EXISTS,
       }));
     }
 
     if (email.trim() && currentUserExists.emailExists) {
       setValidationErrors((state) => ({
         ...state,
-        email: "This email is already registered",
+        email: ServiceError.EMAIL_EXISTS,
       }));
     }
   } catch (error) {
-    console.error("Error validating new user:", error);
+    console.error(ServiceError.ERROR_VALIDATIONG_NEW_USER, error);
   }
 };

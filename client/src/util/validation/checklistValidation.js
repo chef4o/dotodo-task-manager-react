@@ -1,7 +1,9 @@
+import { ValidationError } from "./validationErrorMessages";
+
 const FORM_REQUIRED_FIELDS = {
   title: "title",
   elements: "elements",
-  element: "element"
+  element: "element",
 };
 
 const FORM_ERROR_FIELDS = {
@@ -14,15 +16,15 @@ const getValidationErrors = (formValues) => {
   const errors = {};
 
   if (!formValues.title || formValues.title.trim().length < 3) {
-    errors.title = "Title must be at least 3 characters long";
+    errors.title = ValidationError.MIN_TITLE_LENGTH;
   }
 
   if (!formValues.elements || formValues.elements.length === 0) {
-    errors.content = "The checklist must have at least one item";
+    errors.content = ValidationError.CHECKLIST_NO_ELEMENTS;
   }
 
   if (formValues.dueDate && formValues.dueDate < new Date()) {
-    errors.dueDate = "The due date must not be in the past";
+    errors.dueDate = ValidationError.DATE_TIME_IN_PAST;
   }
 
   return errors;

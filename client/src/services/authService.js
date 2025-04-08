@@ -1,8 +1,9 @@
-import { signInWithEmailAndPassword, signInWithCustomToken } from "firebase/auth";
-import { firebaseAuth } from "../../firebaseConfig";
+import Cookies from "js-cookie";
 import * as request from "../api/request";
 import { url } from "../api/url";
-import Cookies from "js-cookie";
+import { signInWithEmailAndPassword, signInWithCustomToken } from "firebase/auth";
+import { firebaseAuth } from "../../firebaseConfig";
+import { ServiceError } from "./serviceErrorMessages";
 
 export const createToken = async (email, password) => {
   const auth = firebaseAuth;
@@ -14,7 +15,7 @@ export const createToken = async (email, password) => {
     const { customToken } = await request.post(url.customToken, { idToken });
 
     if (!customToken) {
-      throw new Error("Failed to get custom token");
+      throw new Error(ServiceError.ERROR_CREATING_TOKEN);
     }
 
     await signInWithCustomToken(firebaseAuth, customToken);
@@ -24,7 +25,7 @@ export const createToken = async (email, password) => {
     return customToken;
   } catch (error) {
     if (error.code === "auth/invalid-credential") {
-      throw new Error("Wrong username or password");
+      throw new Error(ServiceError.WRONG_USERNAME_OR_PASSWORD);
     }
 
     throw error;
@@ -32,6 +33,6 @@ export const createToken = async (email, password) => {
 };
 
 export const handleLogout = () => {
-  Cookies.remove('authToken');
+  Cookies.remove("authToken");
   sessionStorage.clear();
-}
+};
