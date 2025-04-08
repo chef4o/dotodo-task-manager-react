@@ -107,7 +107,6 @@ export default function EditNoteItem({ note, editNoteId, setEditNoteId, setNotes
           Save
         </button>
       </form>
-      <Link>
         <button
           className="cancel-btn"
           onClick={() => {
@@ -116,7 +115,6 @@ export default function EditNoteItem({ note, editNoteId, setEditNoteId, setNotes
           }}>
           Cancel
         </button>
-      </Link>
       <button className="delete-btn" onClick={() => deleteNote(note.id)}>
         Delete
       </button>

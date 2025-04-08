@@ -53,15 +53,6 @@
     overflow: hidden;
 }
 
-.content.notes .notes-list .note a {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-}
-
 .note h3 {
     font-size: 1.8vw;
     height: 2.4vw;
