@@ -16,7 +16,7 @@
 .content.news h3 {
     font-size: 2.2vw;
     color: var(--color-body-background);
-    margin: 1vw 0 1.2vw;
+    margin: 1vw 8vw 1.2vw 0;
 }
 
 .content.news .articles {
