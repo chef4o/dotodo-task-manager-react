@@ -56,16 +56,28 @@ export function computeDueDaysHours(dueDate, dueTime) {
     return null;
   }
 
-  const dueDateTime = dueTime ? new Date(`${dueDate}T${dueTime}`) : new Date(dueDate);
-  const now = new Date();
-  const diffMs = dueDateTime - now;
+  let dueDateTime;
+  if (dueTime) {
+    dueDateTime = new Date(`${dueDate}T${dueTime}`);
+  } else {
+    const due = new Date(dueDate);
+    const now = new Date();
 
-  if (diffMs < 0) {
+    if (due.toDateString() === now.toDateString()) {
+      return { days: 0, hours: 0, expired: false };
+    }
+    dueDateTime = due;
+  }
+
+  const now = new Date();
+  const diffMinutes = Math.floor((dueDateTime - now) / (1000 * 60));
+
+  if (diffMinutes < 0) {
     return { days: 0, hours: 0, expired: true };
   }
 
-  const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diffMs / (1000 * 60 * 60)) % 24);
+  const days = Math.floor(diffMinutes / (60 * 24));
+  const hours = Math.floor((diffMinutes % (60 * 24)) / 60);
 
   return { days, hours, expired: false };
 }
