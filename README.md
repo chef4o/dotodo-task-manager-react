@@ -67,13 +67,16 @@ Start the app* from the root folder using:
 > The API calls will be accessible at [localhost:5000](http://localhost:5000/)
 
 *Note: The server and client can be started separately.
-> To start the server from root navigate to the /server folder and run `npm start`
+> To start the server from root navigate to the /server folder and execute `npm start`
 > To debug the server** use the Run Script: start configuration
 
-> To start the client from root navigate to the /client folder and run `npm run dev`
-> To debug the client  use the Launch Chrome against localhost configuration
+> To start the client from root navigate to the /client folder and execute `npm run dev`
+> To start the client tests navigate to the /client folder and execute `npm run test` 
+> To debug the client use the Launch Chrome against localhost configuration
 
 **To start the debug the main server connection sholud be killed.  
+
+
 
 ## Concept
 
