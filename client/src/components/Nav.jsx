@@ -19,19 +19,15 @@ export default function Nav() {
         <ul className="top-bar-controls">
           {topNav
             .filter((item) => {
-              // For login and register, show only if there's no user id.
               if (item.name === "login" || item.name === "register") {
                 return !user.id;
               }
-              // For logout, show only if there is a user id.
               if (item.name === "logout") {
                 return Boolean(user.id);
               }
-              // For administration, show only if there is a user and user.role > 4.
               if (item.name === "administration") {
                 return user.id && user.role > 4;
               }
-              // Otherwise, show the item.
               return true;
             })
             .map((item) => (
