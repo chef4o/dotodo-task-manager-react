@@ -47,6 +47,14 @@ export const getNoteById = async (noteId) => {
 
   try {
     const response = await request.get(`${url.notes}/${noteId}`);
+    if (response.comments && Array.isArray(response.comments)) {
+      response.comments = processData({
+        data: response.comments,
+        sortKey: "createdAt",
+        sortOrder: "desc",
+      });
+    }
+    
     return response;
   } catch (error) {
     console.error(ServiceError.ERROR_GETTING_ELEMENT, error);
