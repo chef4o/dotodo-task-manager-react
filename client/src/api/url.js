@@ -1,4 +1,4 @@
-const baseUrl = import.meta.env.DEV ? "http://localhost:5000" : "https://dotodo-server-eu-80910eb8e52a.herokuapp.com";
+const baseUrl = import.meta.env.DEV ? "http://localhost:5000" : "https://dotodo-task-manager-react.onrender.com";
 
 const users = `${baseUrl}/users`;
 const editUser = `${users}/edit`;

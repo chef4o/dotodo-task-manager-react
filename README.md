@@ -7,7 +7,7 @@ Available online at https://dotodo.dev-apps.eu/
 ## Used external services
 
 - [Firebase](https://console.firebase.google.com/) (client-side, database and authentication services)
-- [Heroku](https://dashboard.heroku.com/apps) (server-side cloud service)
+- [Render](https://render.com/) (server-side cloud service)
 - [Cloudinary](https://cloudinary.com/) (file upload cloud service)
 - [Mailtrap](https://mailtrap.io/home) (email delivery service)
 - [BingMaps](https://www.bingmapsportal.com/) (contact location service)
