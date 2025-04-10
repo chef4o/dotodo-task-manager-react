@@ -15,8 +15,8 @@ const buildOptions = (data, idToken) => {
 
 const request = async (method, url, data) => {
   const options = {
-      ...buildOptions(data),
-      method,
+    ...buildOptions(data),
+    method,
   };
 
   const response = await fetch(url, options);
