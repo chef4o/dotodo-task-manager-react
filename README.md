@@ -2,7 +2,9 @@
 
 **Created with React + Vite**
 
-Available online at https://dotodo.dev-apps.eu/
+Available online* at https://dotodo.dev-apps.eu/
+
+*Due to inactivity, the server-side might be in sleep mode which can delay any initial request by 50 seconds or more.
 
 ## Used external services
 
