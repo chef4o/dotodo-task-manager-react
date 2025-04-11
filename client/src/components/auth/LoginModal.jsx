@@ -23,7 +23,14 @@ export default function LoginModal() {
   };
 
   return (
-    <form method="post" className={`auth-form login`} action="/login">
+    <form
+      method="post"
+      className="auth-form login"
+      action="/login"
+      onSubmit={(e) => {
+        e.preventDefault();
+        submitFormHandler();
+      }}>
       <a className="xmark" onClick={() => hideAuthModal()} role="button">
         <i className="fa-solid fa-xmark" />
       </a>
@@ -76,7 +83,7 @@ export default function LoginModal() {
         <label htmlFor="remember-me">Remember me</label>
       </div> */}
 
-      <button type="button" className="login" onClick={() => submitFormHandler()}>
+      <button type="submit" className="login">
         Login
       </button>
     </form>

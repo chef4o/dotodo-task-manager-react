@@ -4,9 +4,11 @@ import { validationIsEmpty, initialState } from "../../util/validation/commonVal
 import { registerValidation } from "../../util/validation/registerModalValidation";
 import { formUtils } from "../../util/formUtils";
 import AuthContext from "../../contexts/authContext.jsx";
+import NavContext from "../../contexts/navContext.jsx";
 
 export default function RegisterModal() {
   const { setUser, hideAuthModal } = useContext(AuthContext);
+  const { setLoading } = useContext(NavContext);
 
   const [formValues, setFormValues] = useState(() => initialState(registerValidation.FORM_FIELDS));
   const [validationErrors, setValidationErrors] = useState(() => initialState(registerValidation.FORM_FIELDS));
@@ -33,6 +35,8 @@ export default function RegisterModal() {
       }
 
       try {
+        setLoading(true);
+
         const currentUser = await registerAuthUser(formValues.email, formValues.username, formValues.password);
 
         setUser({
@@ -43,6 +47,7 @@ export default function RegisterModal() {
         });
 
         hideAuthModal();
+        setLoading(false);
       } catch (error) {
         console.error("Error adding user:", error);
       }
@@ -54,7 +59,14 @@ export default function RegisterModal() {
   }, [formReadyForSubmit, validationErrors, setUser, hideAuthModal, formValues]);
 
   return (
-    <form method="post" className={`auth-form register`} action="/register">
+    <form
+      method="post"
+      className={`auth-form register`}
+      action="/register"
+      onSubmit={(e) => {
+        e.preventDefault();
+        submitFormHandler();
+      }}>
       <a className="xmark" onClick={() => hideAuthModal("register")} role="button" tabIndex="0">
         <i className="fa-solid fa-xmark" />
       </a>
@@ -151,7 +163,7 @@ export default function RegisterModal() {
         </div>
       </div>
 
-      <button type="button" className="register" onClick={submitFormHandler}>
+      <button type="submit" className="register">
         Register
       </button>
     </form>
