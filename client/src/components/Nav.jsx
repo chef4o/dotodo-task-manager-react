@@ -60,16 +60,19 @@ export default function Nav() {
             <img src="/images/logo.png" alt="DOTODO" />
           </Link>
           <ul className="menu">
-            {sideNav.map((item) => (
-              <li key={item.name} className={selectedPageBg === item.name ? `${item.name} active` : item.name}>
-                <Link
-                  to={item.name === "profile" ? `${item.href}/${user.id}` : item.href}
-                  onClick={() => handleNavigationClick(item.name)}>
-                  <i className={item.icon}></i>
-                  <p>{item.name}</p>
-                </Link>
-              </li>
-            ))}
+            {sideNav.map(
+              (item) =>
+                (item.name != "profile" || (item.name === "profile" && user?.id)) && (
+                  <li key={item.name} className={selectedPageBg === item.name ? `${item.name} active` : item.name}>
+                    <Link
+                      to={item.name === "profile" ? `${item.href}/${user.id}` : item.href}
+                      onClick={() => handleNavigationClick(item.name)}>
+                      <i className={item.icon}></i>
+                      <p>{item.name}</p>
+                    </Link>
+                  </li>
+                )
+            )}
           </ul>
         </div>
 
