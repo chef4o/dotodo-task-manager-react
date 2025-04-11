@@ -1,4 +1,3 @@
-// News.jsx
 import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { getDataFromStorageOrServer } from "../../services/cacheService";
@@ -13,16 +12,13 @@ export default function News() {
 
   const location = useLocation();
   
-  // State to hold articles
   const [articles, setArticles] = useState([]);
-  // Local flag to ensure that we only render after fetching is complete.
   const [fetchComplete, setFetchComplete] = useState(false);
 
   useEffect(() => {
     async function fetchNews() {
       setLoading(true);
       try {
-        // Use a lazy getter so that caching works properly.
         await getDataFromStorageOrServer(
           "news",
           async () => {
